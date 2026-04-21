@@ -1602,7 +1602,7 @@ function render() {
             <div>
               <a href="${p.url}" target="_blank" rel="noopener">
                 <img src="${p.ortho}" alt="HiRISE orthoimage ${p.img[0]}"
-                  style="width:100%;max-height:340px;object-fit:cover;border-radius:4px;border:1px solid #e0e0e0;display:block;cursor:pointer"
+                  style="width:100%;height:auto;object-fit:contain;display:block;border-radius:4px;border:1px solid #e0e0e0;cursor:pointer;background:#000"
                   loading="lazy"
                   onerror="this.style.display='none';var s=this.nextElementSibling;if(s)s.style.display='block'">
                 <div style="display:none;padding:12px;background:#fafafa;border:1px solid #e8e8e8;border-radius:4px;font-size:0.7rem;color:#aaa;text-align:center">
