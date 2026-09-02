@@ -2092,12 +2092,48 @@ function initMarsMap() {
     return lon.toFixed(3) + '°E · ' + lat;
   }
   const MARS_R_M = 3396190;
+  const MARS_RP_M = 3376200;
+  function isNorthPolarProject(p){ return p && (p.region==='North Polar' || p.lat>=65); }
+  function isSouthPolarProject(p){ return p && (p.region==='South Polar' || p.lat<=-65); }
   function projectedXY(p) {
     const lon360=((p.lon%360)+360)%360;
+    const lonRad=lon360*Math.PI/180;
+    const latRad=p.lat*Math.PI/180;
+    if (isNorthPolarProject(p)) {
+      const t=Math.tan(Math.PI/4 - latRad/2);
+      return {x:(2*(MARS_RP_M/1000)*t*Math.sin(lonRad)), y:(-2*(MARS_RP_M/1000)*t*Math.cos(lonRad)), mode:'north_polar'};
+    }
+    if (isSouthPolarProject(p)) {
+      const t=Math.tan(Math.PI/4 + latRad/2);
+      return {x:(2*(MARS_RP_M/1000)*t*Math.sin(lonRad)), y:(2*(MARS_RP_M/1000)*t*Math.cos(lonRad)), mode:'south_polar'};
+    }
     const signedLon=lon360>180?lon360-360:lon360;
     const x=MARS_R_M*(signedLon*Math.PI/180)/1000;
     const y=MARS_R_M*(p.lat*Math.PI/180)/1000;
-    return {x,y};
+    return {x,y,mode:'cylindrical'};
+  }
+  function cartographyMeta(p){
+    if (isNorthPolarProject(p)) return {
+      projection:'North Polar Stereographic<br>HiRISE polar product · poleward of 65°N',
+      body:'IAU 2000 Mars polar cartography<br>LatTS = 90°N · Rp = 3,376.2 km',
+      vertical:'MOLA areoid (GMM‑2B reference)<br>elevation in meters relative to areoid',
+      orientation:'North polar product<br>180° at top · 0° meridian toward bottom',
+      xy:'Polar stereographic X/Y in km<br>origin at the north pole'
+    };
+    if (isSouthPolarProject(p)) return {
+      projection:'South Polar Stereographic<br>HiRISE polar product · poleward of 65°S',
+      body:'IAU 2000 Mars polar cartography<br>LatTS = 90°S · Rp = 3,376.2 km',
+      vertical:'MOLA areoid (GMM‑2B reference)<br>elevation in meters relative to areoid',
+      orientation:'South polar product<br>0° at top · 180° meridian toward bottom',
+      xy:'Polar stereographic X/Y in km<br>origin at the south pole'
+    };
+    return {
+      projection:'Simple Cylindrical (Equirectangular)<br>λ₀ = 0°E · φ₀ = 0°',
+      body:'IAU 2000 Mars sphere<br>R = 3,396,190 m · MOLA control',
+      vertical:'MOLA areoid (GMM‑2B reference)<br>elevation in meters relative to areoid',
+      orientation:'North ↑ · East →<br>180°E seam · 0°/360°E center',
+      xy:'X east of 0°E · Y north of equator'
+    };
   }
   function latitudeZone(lat) {
     if(lat>=60) return 'North Polar Zone';
@@ -2257,6 +2293,7 @@ function initMarsMap() {
     layer.querySelectorAll('.mars-marker').forEach(m=>m.classList.toggle('selected',Number(m.dataset.mapIndex)===i));
     const p=PUBS[i];
     const color=RC[p.region]||'#111';
+    const carto=cartographyMeta(p);
     if(projectSelect) projectSelect.value=String(i);
     const xy=projectedXY(p);
     const midElev=(Number.isFinite(p.min)&&Number.isFinite(p.max))?(p.min+p.max)/2:null;
@@ -2282,13 +2319,13 @@ function initMarsMap() {
         <div class="mars-project-module-badge"><i style="background:${color}"></i>${latitudeZone(p.lat)}</div>
       </div>
       <div class="mars-cartography-panel" aria-label="Selected project cartographic and DTM data">
-        <div class="mars-cart-cell"><div class="mars-cart-k">Map projection</div><div class="mars-cart-v">Simple Cylindrical (Equirectangular)<br>λ₀ = 0°E · φ₀ = 0°</div></div>
-        <div class="mars-cart-cell"><div class="mars-cart-k">Horizontal datum / body model</div><div class="mars-cart-v">IAU 2000 Mars sphere<br>R = 3,396,190 m · MOLA control</div></div>
-        <div class="mars-cart-cell"><div class="mars-cart-k">Vertical datum</div><div class="mars-cart-v">MOLA areoid (GMM‑2B reference)<br>elevation in meters relative to areoid</div></div>
-        <div class="mars-cart-cell"><div class="mars-cart-k">Orientation</div><div class="mars-cart-v">North ↑ · East →<br>180°E seam · 0°/360°E center</div></div>
+        <div class="mars-cart-cell"><div class="mars-cart-k">Map projection</div><div class="mars-cart-v">${carto.projection}</div></div>
+        <div class="mars-cart-cell"><div class="mars-cart-k">Horizontal datum / body model</div><div class="mars-cart-v">${carto.body}</div></div>
+        <div class="mars-cart-cell"><div class="mars-cart-k">Vertical datum</div><div class="mars-cart-v">${carto.vertical}</div></div>
+        <div class="mars-cart-cell"><div class="mars-cart-k">Orientation</div><div class="mars-cart-v">${carto.orientation}</div></div>
 
         <div class="mars-cart-cell"><div class="mars-cart-k">Longitude / Latitude</div><div class="mars-cart-v"><strong>${fmtCoord(p)}</strong><br>planetocentric latitude · positive-east longitude</div></div>
-        <div class="mars-cart-cell"><div class="mars-cart-k">Projected coordinates</div><div class="mars-cart-v"><strong>${fmtXY(p)}</strong><br>X east of 0°E · Y north of equator</div></div>
+        <div class="mars-cart-cell"><div class="mars-cart-k">Projected coordinates</div><div class="mars-cart-v"><strong>${fmtXY(p)}</strong><br>${carto.xy}</div></div>
         <div class="mars-cart-cell"><div class="mars-cart-k">DTM sampling</div><div class="mars-cart-v"><strong>${Number.isFinite(p.post)?p.post+' m/post':'—'}</strong><br>Project ${String(i+1).padStart(2,'0')} · ${p.dstr}</div></div>
         <div class="mars-cart-cell"><div class="mars-cart-k">Mars project zone</div><div class="mars-cart-v"><span class="mars-zone-item"><i class="mars-zone-swatch" style="background:${color}"></i><strong>${p.region}</strong></span><br>${latitudeZone(p.lat)}</div></div>
 
