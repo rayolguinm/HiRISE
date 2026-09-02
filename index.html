@@ -318,6 +318,64 @@ header {
   color:#777;
   pointer-events:none;
 }
+
+/* ── CARTOGRAPHIC FRAME / MOLA REFERENCE ── */
+.mars-map-axis-x{
+  position:absolute;z-index:19;left:38px;right:38px;top:6px;
+  display:grid;grid-template-columns:repeat(7,1fr);align-items:start;
+  pointer-events:none;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.8);
+  font:600 .52rem 'Courier New',monospace;
+}
+.mars-map-axis-x span{text-align:center;white-space:nowrap}
+.mars-map-axis-y{
+  position:absolute;z-index:19;left:6px;top:22px;bottom:34px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  pointer-events:none;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.8);
+  font:600 .52rem 'Courier New',monospace;
+}
+.mars-map-viewport.mars-zoomed .mars-map-axis-x,
+.mars-map-viewport.mars-zoomed .mars-map-axis-y{display:none}
+.mars-north-arrow{
+  position:absolute;z-index:22;right:10px;top:10px;width:34px;height:54px;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  background:rgba(255,255,255,.90);border:1px solid rgba(210,210,210,.95);
+  color:#111;pointer-events:none;font:700 .62rem 'Courier New',monospace;
+}
+.mars-north-arrow .n{padding-top:4px;line-height:1}
+.mars-north-arrow .shaft{width:1px;height:27px;background:#111;margin-top:4px;position:relative}
+.mars-north-arrow .shaft:before{
+  content:'';position:absolute;left:50%;top:-2px;transform:translateX(-50%);
+  width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid #111;
+}
+.mars-cartography-panel{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:1px solid #e8e8e8;background:#fbfbfb;
+}
+.mars-cart-cell{padding:10px 12px;border-right:1px solid #ececec;border-bottom:1px solid #ececec;min-width:0}
+.mars-cart-cell:nth-child(4n){border-right:0}
+.mars-cart-k{font-size:.50rem;letter-spacing:.09em;text-transform:uppercase;color:#aaa;font-weight:600}
+.mars-cart-v{margin-top:4px;font:.61rem/1.45 'Courier New',monospace;color:#333;overflow-wrap:anywhere}
+.mars-cart-wide{grid-column:span 2}
+.mars-altimetry-bar{
+  height:9px;margin-top:7px;border:1px solid rgba(0,0,0,.14);
+  background:linear-gradient(90deg,#29175f 0%,#263f9b 13%,#1677b8 27%,#35a6a0 39%,#76b857 51%,#d2c34f 63%,#d9923b 74%,#b75132 85%,#eee6d5 100%);
+}
+.mars-altimetry-ticks{display:flex;justify-content:space-between;gap:5px;margin-top:3px;font:.49rem 'Courier New',monospace;color:#777}
+.mars-zone-legend{display:flex;flex-wrap:wrap;gap:6px 10px;margin-top:5px}
+.mars-zone-item{display:inline-flex;align-items:center;gap:4px;font:.54rem 'Courier New',monospace;color:#555}
+.mars-zone-swatch{width:7px;height:7px;border-radius:50%;flex:0 0 auto}
+@media (max-width:900px){
+  .mars-cartography-panel{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mars-cart-cell:nth-child(4n){border-right:1px solid #ececec}
+  .mars-cart-cell:nth-child(2n){border-right:0}
+}
+@media (max-width:560px){
+  .mars-map-axis-x{left:28px;right:28px;font-size:.46rem}
+  .mars-map-axis-y{font-size:.46rem}
+  .mars-cartography-panel{grid-template-columns:1fr}
+  .mars-cart-cell,.mars-cart-cell:nth-child(2n),.mars-cart-cell:nth-child(4n){border-right:0}
+  .mars-cart-wide{grid-column:auto}
+}
 .mars-map-detail {
   min-height: 82px;
   padding: 11px 14px 12px;
@@ -413,6 +471,42 @@ header {
 .mars-marker-count { font: .56rem 'Courier New',monospace; color:#888; margin-left:4px; }
 @media (max-width:1050px){ .mars-detail-grid{grid-template-columns:repeat(4,minmax(0,1fr));}.mars-detail-cell:nth-child(6n){border-right:1px solid #eee}.mars-detail-cell:nth-child(4n){border-right:0}.mars-detail-context{grid-template-columns:1fr}.mars-detail-ortho img{max-height:260px}.mars-map-jump{order:3;width:100%}.mars-map-jump select{flex:1;max-width:none;} }
 @media (max-width:620px){ .mars-map-viewport{min-height:320px}.mars-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.mars-detail-cell:nth-child(4n){border-right:1px solid #eee}.mars-detail-cell:nth-child(2n){border-right:0}.mars-detail-head{flex-direction:column}.mars-detail-actions{justify-content:flex-start}.mars-map-jump{display:block}.mars-map-jump label{display:block;margin-bottom:4px}.mars-map-jump select{width:100%;min-width:0}.mars-quality-chip{font-size:.59rem;} }
+.mars-map-detail.mars-map-callout{position:absolute;z-index:34;display:none;left:10px;top:10px;width:min(280px,calc(100% - 16px));max-height:min(320px,calc(100% - 16px));overflow:auto;background:rgba(255,255,255,.988);border:1px solid #d5d5d5;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,.22);padding:0;pointer-events:auto;}
+.mars-map-detail.mars-map-callout.mars-map-detail-empty{display:none!important;}
+.mars-mini-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:11px 11px 8px;border-bottom:1px solid #ececec;background:#fff;}
+.mars-mini-title{min-width:0;}
+.mars-mini-title strong{display:block;font-size:.82rem;color:#111;line-height:1.32;overflow-wrap:anywhere;}
+.mars-mini-title span{display:block;margin-top:4px;color:#888;font-size:.59rem;line-height:1.42;}
+.mars-callout-close{border:1px solid #d5d5d5;background:#fff;color:#555;font:700 .8rem/1 'Helvetica Neue',Helvetica,Arial,sans-serif;border-radius:999px;width:28px;height:28px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
+.mars-callout-close:hover{color:#111;border-color:#aaa;background:#fafafa;}
+.mars-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:9px 11px;}
+.mars-mini-cell{background:#fafafa;border:1px solid #ececec;border-radius:10px;padding:7px 8px;min-width:0;}
+.mars-mini-k{font-size:.50rem;letter-spacing:.08em;text-transform:uppercase;color:#999;}
+.mars-mini-v{margin-top:3px;color:#222;font:.67rem/1.33 'Courier New',monospace;overflow-wrap:anywhere;}
+.mars-mini-ids{padding:0 11px 9px;}
+.mars-mini-ids .mars-mini-k{margin-bottom:6px;display:block;}
+.mars-mini-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.mars-mini-tag{border:1px solid #e2e2e2;border-radius:999px;background:#fff;padding:4px 7px;color:#444;font:.60rem 'Courier New',monospace;}
+.mars-mini-actions{display:flex;gap:6px;flex-wrap:wrap;padding:0 11px 11px;}
+.mars-mini-actions a,.mars-mini-actions button{flex:1;min-width:0;border:1px solid #d5d5d5;background:#fff;color:#555;font:.58rem inherit;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;padding:7px 8px;cursor:pointer;white-space:nowrap;border-radius:10px;text-align:center;}
+@media (max-width:760px){.mars-map-detail.mars-map-callout{width:min(92vw,280px);max-height:min(68vh,300px);}}
+.mars-map-detail.mars-project-module{display:block;position:relative;left:auto;top:auto;width:auto;max-height:none;overflow:visible;background:#fbfbfb;border:0;border-top:1px solid #e8e8e8;border-radius:0;box-shadow:none;padding:0;}
+.mars-project-module-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:12px 14px 10px;background:#fff;border-bottom:1px solid #e8e8e8;}
+.mars-project-module-title{min-width:0;}
+.mars-project-module-title strong{display:block;font-size:.82rem;color:#111;line-height:1.35;overflow-wrap:anywhere;}
+.mars-project-module-title span{display:block;margin-top:4px;color:#888;font:.60rem/1.45 'Courier New',monospace;overflow-wrap:anywhere;}
+.mars-project-module-badge{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;border:1px solid #ddd;background:#fafafa;padding:6px 8px;font:.58rem 'Courier New',monospace;color:#555;text-transform:uppercase;letter-spacing:.05em;}
+.mars-project-module-badge i{width:8px;height:8px;border-radius:50%;display:inline-block;}
+.mars-project-module .mars-cartography-panel{border-top:0;}
+.mars-project-module .mars-cart-v strong{font-weight:700;color:#111;}
+.mars-project-module .mars-project-actions{display:flex;gap:6px;flex-wrap:wrap;padding:9px 12px 12px;background:#fff;border-top:1px solid #ececec;}
+.mars-project-module .mars-project-actions a,.mars-project-module .mars-project-actions button{border:1px solid #d5d5d5;background:#fff;color:#555;font:.58rem inherit;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;padding:7px 9px;cursor:pointer;white-space:nowrap;}
+.mars-project-module-empty{padding:16px 14px;background:#fff;}
+.mars-project-module-empty strong{display:block;font-size:.78rem;color:#111;}
+.mars-project-module-empty span{display:block;margin-top:4px;color:#888;font-size:.63rem;line-height:1.5;}
+.mars-altimetry-project-ticks{display:flex;justify-content:space-between;gap:6px;margin-top:4px;font:.50rem 'Courier New',monospace;color:#777;}
+@media (max-width:560px){.mars-project-module-head{flex-direction:column}.mars-project-module-badge{align-self:flex-start}.mars-project-module .mars-project-actions a,.mars-project-module .mars-project-actions button{flex:1;text-align:center;}}
+
 
 /* ── CONTROLS ── */
 .controls {
@@ -1912,10 +2006,10 @@ function buildStats() {
       <div class="mars-map-shell" id="marsMapShell">
         <div class="mars-map-head">
           <div>
-            <div class="mars-map-kicker">Mars Planisphere — 30 HiRISE DTM Projects</div>
-            <div class="mars-map-source">NASA Mars Trek / USGS Astrogeology · MGS MOLA + Mars Express HRSC Color Hillshade Blend · 200 m/pixel · Simple Cylindrical · Planetocentric (areocentric) latitude · Positive-East longitude</div>
+            <div class="mars-map-kicker">Mars MOLA / HRSC Global Topography — 30 HiRISE DTM Projects</div>
+            <div class="mars-map-source">NASA Mars Trek / USGS Astrogeology · MGS MOLA + Mars Express HRSC color hillshade · 200 m/pixel · Simple Cylindrical · Planetocentric latitude · Positive-East longitude · source domain −180° to +180°</div>
           </div>
-          <div class="mars-map-head-right">0°E → 360°E<br>90°N → 90°S</div>
+          <div class="mars-map-head-right">180°E SEAM · 0°/360°E CENTER<br>90°N → 90°S</div>
         </div>
         <div class="mars-map-toolbar">
           <div class="mars-map-regions" aria-label="Filter map markers by latitude class">
@@ -1949,15 +2043,20 @@ function buildStats() {
             <div id="marsMarkerLayer"></div>
           </div>
           <div class="mars-map-tooltip" id="marsMapTooltip" role="status"></div>
-          <div class="mars-map-coordbar"><span id="marsCursorCoords">Move cursor over map</span><span>·</span><span>0–360°E / planetocentric</span></div>
+          <div class="mars-map-axis-x" aria-hidden="true"><span>180°E</span><span>240°E</span><span>300°E</span><span>0° / 360°E</span><span>60°E</span><span>120°E</span><span>180°E</span></div>
+          <div class="mars-map-axis-y" aria-hidden="true"><span>90°N</span><span>60°N</span><span>30°N</span><span>0°</span><span>30°S</span><span>60°S</span><span>90°S</span></div>
+          <div class="mars-north-arrow" aria-label="North is up"><span class="n">N</span><span class="shaft"></span></div>
+          <div class="mars-map-coordbar"><span id="marsCursorCoords">Cursor: longitude · latitude · projected X/Y</span><span>·</span><span>north up · east right</span></div>
           <div class="mars-map-dataset">MOLA + HRSC · 200 m/px</div>
         </div>
-        <div class="mars-map-detail mars-map-detail-empty" id="marsMapDetail">
-          <div class="mars-detail-empty-title">Select any of the 30 HiRISE DTM projects</div>
-          <div class="mars-detail-empty-copy">Each selection shows the complete README-derived elevation range, post spacing, bundle-adjustment residuals, MOLA tie statistics, source observations, ORTHO preview, geological context, and APA reference.</div>
+        <div class="mars-map-detail mars-project-module" id="marsMapDetail" aria-live="polite">
+          <div class="mars-project-module-empty">
+            <strong>Select any of the 30 HiRISE DTM projects</strong>
+            <span>The module below the map will update with that project’s cartography, coordinates, MOLA elevation range, zone, DTM spacing, source images, and quality metrics.</span>
+          </div>
         </div>
         <div class="mars-map-foot">
-          <span>Drag to pan · wheel / ± to zoom · click any marker to lock the complete README record · overlapping markers are automatically spread while the anchor dot preserves the exact coordinate.</span>
+          <span>Drag to pan · wheel / ± to zoom · click any marker to update the project module below the map · overlapping markers are automatically spread while the anchor dot preserves the exact coordinate.</span>
           <span>Basemap: NASA Mars Trek <span style="font-family:'Courier New',monospace">Mars_MOLA_blend200ppx_HRSC_ClrShade_clon0dd_200mpp_lzw</span> · MOLA 463 m fallback.</span>
         </div>
       </div>
@@ -1978,6 +2077,8 @@ function initMarsMap() {
   const detail = document.getElementById('marsMapDetail');
   const projectSelect = document.getElementById('marsProjectSelect');
   if (!viewport || !scene || !tiles || !layer || !tooltip || !detail) return;
+  detail.classList.add('mars-project-module');
+  detail.style.display = 'block';
 
   const RC = {'South Polar':'#1d4ed8','North Polar':'#0ea5e9','Equatorial':'#111111','Mid-Latitude':'#15803d','High-Latitude':'#7c3aed'};
   marsMapState = {scale:1, x:0, y:0, region:'all', selected:null, dragging:false, startX:0, startY:0, originX:0, originY:0, tileKey:''};
@@ -1989,6 +2090,27 @@ function initMarsMap() {
     const lon = ((p.lon % 360) + 360) % 360;
     const lat = Math.abs(p.lat).toFixed(3) + '°' + (p.lat >= 0 ? 'N' : 'S');
     return lon.toFixed(3) + '°E · ' + lat;
+  }
+  const MARS_R_M = 3396190;
+  function projectedXY(p) {
+    const lon360=((p.lon%360)+360)%360;
+    const signedLon=lon360>180?lon360-360:lon360;
+    const x=MARS_R_M*(signedLon*Math.PI/180)/1000;
+    const y=MARS_R_M*(p.lat*Math.PI/180)/1000;
+    return {x,y};
+  }
+  function latitudeZone(lat) {
+    if(lat>=60) return 'North Polar Zone';
+    if(lat>=30) return 'Northern Mid-Latitude Zone';
+    if(lat>-30) return 'Equatorial Zone';
+    if(lat>-60) return 'Southern Mid-Latitude Zone';
+    return 'South Polar Zone';
+  }
+  function fmtXY(p) {
+    const q=projectedXY(p);
+    const sx=(q.x>=0?'+':'')+q.x.toFixed(1)+' km';
+    const sy=(q.y>=0?'+':'')+q.y.toFixed(1)+' km';
+    return 'X '+sx+' · Y '+sy;
   }
   function fmtElev(v) { return Number.isFinite(v) ? (v >= 0 ? '+' : '') + v.toFixed(2) + ' m' : '—'; }
   function fmtFixed(v,d=3,suffix='') { return Number.isFinite(v) ? v.toFixed(d) + suffix : '—'; }
@@ -2028,8 +2150,8 @@ function initMarsMap() {
     const pieces=[];
     for(let r=win.r0;r<=win.r1;r++){
       for(let c=win.c0;c<=win.c1;c++){
-        // Mars Trek source is -180..+180. Shift half a world to display 0..360°E.
-        const srcCol=(c+win.cols/2)%win.cols;
+        // Preserve the native USGS/MOLA -180°..+180° longitude seam: Tharsis/Olympus Mons left, Hellas Planitia right.
+        const srcCol=c;
         const left=c/win.cols*100, top=r/win.rows*100;
         const width=100/win.cols, height=100/win.rows;
         const hi=`${hiBase}${z}/${r}/${srcCol}.jpg`;
@@ -2049,7 +2171,7 @@ function initMarsMap() {
   }
 
   function baseScreenPos(p) {
-    const lon=((p.lon%360)+360)%360;
+    const lon=((((p.lon%360)+360)%360)+180)%360;
     return {
       x:(lon/360*viewport.clientWidth)*st.scale+st.x,
       y:((90-p.lat)/180*viewport.clientHeight)*st.scale+st.y,
@@ -2060,7 +2182,7 @@ function initMarsMap() {
 
   function makeMarkers() {
     layer.innerHTML=PUBS.map((p,i)=>{
-      const lon=((p.lon%360)+360)%360;
+      const lon=((((p.lon%360)+360)%360)+180)%360;
       const x=lon/360*100, y=(90-p.lat)/180*100;
       const color=RC[p.region]||'#111';
       return `<span class="mars-anchor" data-anchor-index="${i}" data-region="${p.region}" style="left:${x}%;top:${y}%"></span>`+
@@ -2073,7 +2195,7 @@ function initMarsMap() {
       marker.addEventListener('pointermove',positionTip);
       marker.addEventListener('pointerleave',hideTip);
       marker.addEventListener('pointerdown',e=>e.stopPropagation());
-      marker.addEventListener('click',e=>{e.stopPropagation();selectProject(i);});
+      marker.addEventListener('click',e=>{e.stopPropagation();hideTip();selectProject(i);});
       marker.addEventListener('dblclick',e=>{e.preventDefault();e.stopPropagation();focusProject(i,Math.max(3,st.scale*1.45));});
     });
     updateMarkerLayout();
@@ -2131,46 +2253,56 @@ function initMarsMap() {
 
   function selectProject(i) {
     st.selected=i;
+    hideTip();
     layer.querySelectorAll('.mars-marker').forEach(m=>m.classList.toggle('selected',Number(m.dataset.mapIndex)===i));
     const p=PUBS[i];
+    const color=RC[p.region]||'#111';
     if(projectSelect) projectSelect.value=String(i);
-    const q=[
-      qualityChip('Total RMS',Number.isFinite(p.rms_px)?p.rms_px.toFixed(5)+' px':'—'),
-      qualityChip('RMS (m)',Number.isFinite(p.rms_m)?fmtResidual(p.rms_m):'—'),
-      qualityChip('σ_x',fmtResidual(p.rms_x)),
-      qualityChip('σ_y',fmtResidual(p.rms_y)),
-      qualityChip('σ_z',fmtResidual(p.rms_z)),
-      qualityChip('Δ MOLA',fmtSigned(p.mola_d,3,' m')),
-      qualityChip('Std Dev',Number.isFinite(p.mola_s)?'±'+p.mola_s.toFixed(3)+' m':'—')
-    ].join('');
-    const ortho=p.ortho?`<div class="mars-detail-ortho"><div class="mars-detail-section-title">Orthorectified image</div><a href="${p.url}" target="_blank" rel="noopener"><img src="${p.ortho}" alt="Orthorectified HiRISE image for ${p.name}" loading="lazy" onerror="this.style.display='none'"><div class="cap">${orthoLabel(p)} · NASA/JPL-Caltech/UArizona · HiROC</div></a></div>`:'';
-    detail.classList.remove('mars-map-detail-empty');
+    const xy=projectedXY(p);
+    const midElev=(Number.isFinite(p.min)&&Number.isFinite(p.max))?(p.min+p.max)/2:null;
+    const minLabel=Number.isFinite(p.min)?fmtElev(p.min):'—';
+    const midLabel=Number.isFinite(midElev)?fmtElev(midElev):'—';
+    const maxLabel=Number.isFinite(p.max)?fmtElev(p.max):'—';
+    const rmsMeters=Number.isFinite(p.rms_m)?fmtResidual(p.rms_m):'—';
+    const molaDelta=Number.isFinite(p.mola_d)?fmtSigned(p.mola_d,3,' m'):'—';
+    const molaStd=Number.isFinite(p.mola_s)?'±'+p.mola_s.toFixed(3)+' m':'—';
+    const residuals=[
+      `RMS px ${Number.isFinite(p.rms_px)?p.rms_px.toFixed(5):'—'}`,
+      `σx ${fmtResidual(p.rms_x)}`,
+      `σy ${fmtResidual(p.rms_y)}`,
+      `σz ${fmtResidual(p.rms_z)}`
+    ].join('<br>');
+
     detail.innerHTML=`
-      <div class="mars-detail-head">
-        <div class="mars-detail-head-main"><strong>${String(i+1).padStart(2,'0')} · ${p.name}</strong><span>${p.img.join(' · ')} · ${p.region} · ${p.dstr}</span></div>
-        <div class="mars-detail-actions"><a href="${p.url}" target="_blank" rel="noopener">HiRISE DTM ↗</a><button type="button" id="marsFocusProject">Center / zoom</button><button type="button" id="marsShowProject">Show in list</button></div>
+      <div class="mars-project-module-head">
+        <div class="mars-project-module-title">
+          <strong>${String(i+1).padStart(2,'0')} · ${p.name}</strong>
+          <span>${p.img.join(' · ')} · ${p.region} · ${p.dstr}</span>
+        </div>
+        <div class="mars-project-module-badge"><i style="background:${color}"></i>${latitudeZone(p.lat)}</div>
       </div>
-      <div class="mars-detail-grid">
-        <div class="mars-detail-cell"><div class="k">Coordinates</div><div class="v">${fmtCoord(p)}</div></div>
-        <div class="mars-detail-cell"><div class="k">Valid minimum</div><div class="v">${fmtElev(p.min)}</div></div>
-        <div class="mars-detail-cell"><div class="k">Valid maximum</div><div class="v">${fmtElev(p.max)}</div></div>
-        <div class="mars-detail-cell"><div class="k">Vertical relief</div><div class="v">${fmtFixed(p.relief,2,' m')}</div></div>
-        <div class="mars-detail-cell"><div class="k">DTM post spacing</div><div class="v">${Number.isFinite(p.post)?p.post+' m':'—'}</div></div>
-        <div class="mars-detail-cell"><div class="k">README source images</div><div class="v">${p.img.join('<br>')}</div></div>
+      <div class="mars-cartography-panel" aria-label="Selected project cartographic and DTM data">
+        <div class="mars-cart-cell"><div class="mars-cart-k">Map projection</div><div class="mars-cart-v">Simple Cylindrical (Equirectangular)<br>λ₀ = 0°E · φ₀ = 0°</div></div>
+        <div class="mars-cart-cell"><div class="mars-cart-k">Horizontal datum / body model</div><div class="mars-cart-v">IAU 2000 Mars sphere<br>R = 3,396,190 m · MOLA control</div></div>
+        <div class="mars-cart-cell"><div class="mars-cart-k">Vertical datum</div><div class="mars-cart-v">MOLA areoid (GMM‑2B reference)<br>elevation in meters relative to areoid</div></div>
+        <div class="mars-cart-cell"><div class="mars-cart-k">Orientation</div><div class="mars-cart-v">North ↑ · East →<br>180°E seam · 0°/360°E center</div></div>
+
+        <div class="mars-cart-cell"><div class="mars-cart-k">Longitude / Latitude</div><div class="mars-cart-v"><strong>${fmtCoord(p)}</strong><br>planetocentric latitude · positive-east longitude</div></div>
+        <div class="mars-cart-cell"><div class="mars-cart-k">Projected coordinates</div><div class="mars-cart-v"><strong>${fmtXY(p)}</strong><br>X east of 0°E · Y north of equator</div></div>
+        <div class="mars-cart-cell"><div class="mars-cart-k">DTM sampling</div><div class="mars-cart-v"><strong>${Number.isFinite(p.post)?p.post+' m/post':'—'}</strong><br>Project ${String(i+1).padStart(2,'0')} · ${p.dstr}</div></div>
+        <div class="mars-cart-cell"><div class="mars-cart-k">Mars project zone</div><div class="mars-cart-v"><span class="mars-zone-item"><i class="mars-zone-swatch" style="background:${color}"></i><strong>${p.region}</strong></span><br>${latitudeZone(p.lat)}</div></div>
+
+        <div class="mars-cart-cell mars-cart-wide"><div class="mars-cart-k">Project color altimetry / elevation range</div><div class="mars-cart-v"><strong>${minLabel} → ${maxLabel}</strong> · vertical relief ${fmtFixed(p.relief,2,' m')}<br>MOLA color ramp shown over this project’s valid DTM elevation range.</div><div class="mars-altimetry-bar"></div><div class="mars-altimetry-project-ticks"><span>${minLabel}</span><span>${midLabel}</span><span>${maxLabel}</span></div></div>
+        <div class="mars-cart-cell mars-cart-wide"><div class="mars-cart-k">HiRISE source images</div><div class="mars-zone-legend">${p.img.map(id=>`<span class="mars-zone-item"><i class="mars-zone-swatch" style="background:${color}"></i>${id}</span>`).join('')}</div><div class="mars-cart-v">Official DTM: ${p.img[0]}</div></div>
+
+        <div class="mars-cart-cell mars-cart-wide"><div class="mars-cart-k">Bundle adjustment residuals</div><div class="mars-cart-v">${residuals}</div></div>
+        <div class="mars-cart-cell mars-cart-wide"><div class="mars-cart-k">MOLA alignment / DTM quality</div><div class="mars-cart-v">RMS (m): <strong>${rmsMeters}</strong><br>Δ MOLA: <strong>${molaDelta}</strong> · Std Dev: <strong>${molaStd}</strong></div></div>
       </div>
-      <div class="mars-detail-quality"><div class="mars-detail-section-title">DTM Quality (Bundle Adjustment Residuals)</div><div class="mars-quality-chips">${q}</div></div>
-      <div class="mars-detail-context">
-        <div class="mars-detail-context-copy"><div class="mars-detail-section-title">Geological context</div><p>${p.geo||'—'}</p><div class="mars-detail-cite"><strong style="color:#555">APA reference</strong><br>${p.cite||'—'}</div></div>
-        ${ortho}
+      <div class="mars-project-actions">
+        <button type="button" id="marsFocusProject">Center / zoom selected project</button>
+        <a href="${p.url}" target="_blank" rel="noopener">Open official HiRISE DTM ↗</a>
       </div>`;
     document.getElementById('marsFocusProject')?.addEventListener('click',()=>focusProject(i,Math.max(2.8,st.scale)));
-    document.getElementById('marsShowProject')?.addEventListener('click',()=>{
-      currentFilter='all';
-      const input=document.getElementById('searchInput');if(input)input.value=p.name;
-      document.querySelectorAll('.filter-btn').forEach((b,idx)=>b.classList.toggle('active',idx===0));
-      render();
-      document.getElementById('resultCount')?.scrollIntoView({behavior:'smooth',block:'start'});
-    });
   }
 
   function constrain(){
@@ -2182,6 +2314,7 @@ function initMarsMap() {
     scene.style.transform=`translate(${st.x}px,${st.y}px) scale(${st.scale})`;
     scene.style.setProperty('--mars-inv',(1/st.scale).toFixed(6));
     zoomRead.textContent=st.scale.toFixed(1)+'×';
+    viewport.classList.toggle('mars-zoomed',st.scale>1.01||Math.abs(st.x)>.5||Math.abs(st.y)>.5);
     renderTiles();updateMarkerLayout();
   }
   function zoomAtClient(clientX,clientY,newScale){
@@ -2193,7 +2326,7 @@ function initMarsMap() {
   function zoomCenter(factor){const vr=viewport.getBoundingClientRect();zoomAtClient(vr.left+vr.width/2,vr.top+vr.height/2,st.scale*factor);}
   function resetMap(){st.scale=1;st.x=0;st.y=0;st.tileKey='';applyTransform();}
   function focusProject(i,newScale=3){
-    const p=PUBS[i],lon=((p.lon%360)+360)%360,w=viewport.clientWidth,h=viewport.clientHeight;
+    const p=PUBS[i],lon=((((p.lon%360)+360)%360)+180)%360,w=viewport.clientWidth,h=viewport.clientHeight;
     st.scale=Math.max(1,Math.min(12,newScale));
     const wx=lon/360*w,wy=(90-p.lat)/180*h;
     st.x=w/2-wx*st.scale;st.y=h/2-wy*st.scale;st.tileKey='';applyTransform();selectProject(i);
@@ -2202,14 +2335,21 @@ function initMarsMap() {
   function pointerToMars(e){
     const vr=viewport.getBoundingClientRect(),px=e.clientX-vr.left,py=e.clientY-vr.top;
     const wx=(px-st.x)/st.scale,wy=(py-st.y)/st.scale;
-    const lon=wx/viewport.clientWidth*360,lat=90-wy/viewport.clientHeight*180;
-    if(lon<0||lon>360||lat<-90||lat>90)return null;return {lon,lat};
+    const displayLon=wx/viewport.clientWidth*360,lat=90-wy/viewport.clientHeight*180;
+    if(displayLon<0||displayLon>360||lat<-90||lat>90)return null;
+    const lon=(displayLon+180)%360;
+    return {lon,lat,displayLon};
   }
   viewport.addEventListener('pointermove',e=>{
     if(st.dragging){st.x=st.originX+(e.clientX-st.startX);st.y=st.originY+(e.clientY-st.startY);applyTransform();}
-    const c=pointerToMars(e);if(c)coords.textContent=c.lon.toFixed(3)+'°E · '+Math.abs(c.lat).toFixed(3)+'°'+(c.lat>=0?'N':'S');
+    const c=pointerToMars(e);
+    if(c){
+      const xkm=MARS_R_M*((c.displayLon-180)*Math.PI/180)/1000;
+      const ykm=MARS_R_M*(c.lat*Math.PI/180)/1000;
+      coords.textContent=`Lon ${c.lon.toFixed(2)}°E · Lat ${Math.abs(c.lat).toFixed(2)}°${c.lat>=0?'N':'S'} · X ${xkm>=0?'+':''}${xkm.toFixed(1)} km · Y ${ykm>=0?'+':''}${ykm.toFixed(1)} km · ${latitudeZone(c.lat).replace(' Zone','')}`;
+    }
   });
-  viewport.addEventListener('pointerleave',()=>{if(!st.dragging)coords.textContent='Move cursor over map';});
+  viewport.addEventListener('pointerleave',()=>{if(!st.dragging)coords.textContent='Cursor: longitude · latitude · projected X/Y';});
   viewport.addEventListener('pointerdown',e=>{if(e.button!==0||e.target.closest('.mars-marker'))return;st.dragging=true;st.startX=e.clientX;st.startY=e.clientY;st.originX=st.x;st.originY=st.y;viewport.classList.add('dragging');viewport.setPointerCapture(e.pointerId);});
   viewport.addEventListener('pointerup',e=>{st.dragging=false;viewport.classList.remove('dragging');try{viewport.releasePointerCapture(e.pointerId)}catch(_){}});
   viewport.addEventListener('pointercancel',()=>{st.dragging=false;viewport.classList.remove('dragging');});
