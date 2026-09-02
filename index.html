@@ -129,7 +129,7 @@ header {
 
 
 
-/* ── SCIENTIFIC INTERACTIVE MARS MAP ── */
+/* ── SCIENTIFIC MARS PLANISPHERE / TERRAIN PRODUCT MAP ── */
 .mars-map-shell {
   border: 1px solid #dedede;
   background: #fff;
@@ -280,6 +280,15 @@ header {
 }
 .mars-map-tooltip strong { display:block; font-size:.71rem; margin-bottom:3px; }
 .mars-map-tooltip .mono { font-family:'Courier New',monospace; color:#777; }
+.mars-tip-head{font-size:.71rem;font-weight:600;color:#111;margin-bottom:7px;overflow-wrap:anywhere}
+.mars-tip-grid{display:grid;grid-template-columns:repeat(3,minmax(72px,1fr));gap:6px;margin-bottom:7px}
+.mars-tip-cell{border:1px solid #e1e1e1;background:#fafafa;padding:6px 7px;min-width:0}
+.mars-tip-k{font-size:.50rem;letter-spacing:.08em;text-transform:uppercase;color:#aaa;margin-bottom:2px}
+.mars-tip-v{font:.63rem/1.25 'Courier New',monospace;color:#222;white-space:nowrap}
+.mars-tip-images{border-top:1px solid #e7e7e7;padding-top:6px}
+.mars-tip-images .mars-tip-k{margin-bottom:3px}
+.mars-tip-id{display:inline-block;margin:2px 4px 0 0;border:1px solid #ddd;background:#fff;padding:3px 5px;font:.58rem 'Courier New',monospace;color:#444}
+
 .mars-map-coordbar {
   position: absolute;
   z-index: 20;
@@ -727,6 +736,42 @@ footer {
   padding: 0.75rem 0;
   border-bottom: 1px solid #ebebeb;
 }
+
+/* ===== RAY PLANETARY SCIENCE / MISSION SYSTEMS ARCHITECTURE ===== */
+html{scroll-behavior:smooth}
+.rv-section-nav{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 18px}
+.rv-section-nav a{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid #dcdcdc;border-radius:999px;background:#fff;color:#666;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:.01em}
+.rv-section-nav a:hover{border-color:#111;color:#111}
+.rv-viz-panel{border:1px solid #e0e0e0;border-radius:6px;background:#fff;overflow:hidden;margin:0 0 1.25rem}
+.rv-viz-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;background:#fafafa;border-bottom:1px solid #ececec}
+.rv-viz-title{font-size:.72rem;font-weight:700;color:#111;letter-spacing:.02em;text-transform:uppercase}
+.rv-viz-meta{font-size:.6rem;color:#aaa;font-family:'Courier New',monospace}
+.rv-viz-flow{display:flex;flex-wrap:wrap;gap:18px;padding:14px 14px 10px;align-items:center}
+.rv-viz-node{appearance:none;-webkit-appearance:none;position:relative;border:1px solid #d8d8d8;background:#fff;color:#666;border-radius:999px;padding:8px 12px;font-size:.66rem;font-weight:700;line-height:1;cursor:pointer;transition:.18s ease}
+.rv-viz-node:not(:last-child)::after{content:'→';position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:12px;color:#c7c7c7;pointer-events:none}
+.rv-viz-node:hover{border-color:#999;color:#111}
+.rv-viz-node.active{border-color:#111;color:#111;box-shadow:0 0 0 1px #111 inset;background:#fff}
+.rv-viz-detail{padding:14px;border-top:1px solid #ececec;background:#fcfcfc}
+.rv-viz-kicker{font-size:.58rem;color:#AB0520;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:5px}
+.rv-viz-detail h4{margin:0 0 6px;font-size:.9rem;letter-spacing:-.02em;color:#111}
+.rv-viz-detail p{margin:0 0 9px;font-size:.68rem;line-height:1.65;color:#555}
+.rv-viz-statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-top:8px}
+.rv-viz-stat{background:#fff;border:1px solid #ececec;border-radius:4px;padding:8px 10px}
+.rv-viz-stat .lbl{font-size:.54rem;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.rv-viz-stat .val{font-size:.72rem;color:#111;font-weight:700;line-height:1.35}
+.rv-viz-miniflow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.rv-viz-box{background:#fff;border:1px solid #ececec;border-radius:4px;padding:8px 10px}
+.rv-viz-box .lbl{font-size:.54rem;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.rv-viz-box .val{font-size:.68rem;color:#111;font-weight:700;line-height:1.35}
+.rv-mini-note{font-size:.62rem;color:#888;line-height:1.6;margin-top:10px}
+.rv-arch-wrap{border-top:1px solid #e0e0e0;padding:2rem 0}
+.rv-arch-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.rv-arch-grid .rv-viz-panel{margin-bottom:0}
+
+.rv-about-shell{margin-top:14px}
+.rv-about-shell p{margin:0 0 12px;font-size:.72rem;color:#555;line-height:1.8}
+@media(max-width:980px){.rv-arch-grid{grid-template-columns:1fr}.rv-viz-miniflow{grid-template-columns:1fr}.rv-viz-flow{gap:14px}.rv-viz-node:not(:last-child)::after{display:none}}
+
 </style>
 </head>
 <body>
@@ -849,7 +894,7 @@ footer {
   <div class="pub-list" id="pubList"></div>
 
   <!-- ABOUT -->
-  <div class="eng-note" style="border-top:1px solid #e0e0e0;padding-top:2rem">
+  <div class="eng-note" id="aboutSection" style="border-top:1px solid #e0e0e0;padding-top:2rem">
     <div class="eng-block" style="grid-column:1/-1;margin-bottom:0.5rem">
       <div class="eng-title">About</div>
     </div>
@@ -857,13 +902,22 @@ footer {
       <div class="eng-text" style="line-height:1.8">
         Ray Olguin is a Research Engineering Technician with the High Resolution Imaging Science Experiment (HiRISE) at the University of Arizona's Lunar and Planetary Laboratory (LPL), a world-leading center for planetary science and space mission research. He supports Science Operations at HiROC — the U.S. facility for NASA's HiRISE instrument on the Mars Reconnaissance Orbiter (MRO) — leading the HiRISE XR Development Program, producing HiRISE and CTX DTMs, and contributing to validation of planetary datasets for NASA's PDS in collaboration with senior planetary scientists at the PSI.
         <br><br>
-        Pursuing a B.S. in Electrical Engineering (EE) — Sophomore with minors in Planetary Science, Mathematics, and Computer Engineering at the University of Arizona. Combined training in project management, architectural &amp; landscape design, XR simulations, and 3D visualization positions him at the intersection of satellite systems engineering, planetary science, and applied engineering. Pursuing an Accelerated M.S. in EE with a planetary science instrumentation focus, emphasizing electrical systems engineering, electronics design, and hardware integration for flight instruments.
+        Currently a sophomore pursuing a B.S. in Electrical Engineering (EE) at the University of Arizona, with planned interdisciplinary minors in Planetary Science, Mathematics, and Computer Engineering. Combined training in project management, architectural &amp; landscape design, XR simulations, and 3D visualization positions him at the intersection of satellite systems engineering, planetary science, and applied engineering. A future academic objective is an Accelerated M.S. in EE with a planetary science instrumentation focus, emphasizing electrical systems engineering, electronics design, and hardware integration for flight instruments.
         <br><br>
         Member: Wildcat Rocket Engineering Club · IEEE · AIAA. Goal: contribute to and ultimately lead large-scale planetary exploration programs, advancing U.S. leadership in space science hardware while enabling the exploration of new worlds across the solar system and beyond.
       </div>
     </div>
   </div>
 
+
+
+  <div class="rv-section-nav rv-about-shell">
+    <a href="#aboutSection">About</a>
+    <a href="#expSection">Experience</a>
+    <a href="#eduSection">Education</a>
+    <a href="#contextSection">E&amp;S Context</a>
+    <a href="#mapViewport">Mars DTM Map</a>
+  </div>
   <!-- EXPERIENCE DASHBOARD -->
   <div style="border-top:1px solid #e0e0e0;padding:2rem 0" id="expSection">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.25rem">
@@ -871,6 +925,78 @@ footer {
       <div style="font-size:0.65rem;color:#aaa;font-family:'Courier New',monospace">Lunar &amp; Planetary Laboratory · 11 mos total</div>
     </div>
 
+
+    <div class="rv-viz-panel" id="desktopExpViz">
+      <div class="rv-viz-head">
+        <div class="rv-viz-title">Planetary Terrain Data Processing Chain</div>
+        <div class="rv-viz-meta">instrument data → geodetic control → science products</div>
+      </div>
+      <div class="rv-viz-flow">
+        <button class="rv-viz-node active" data-target="dexp1">Stereo Inputs</button>
+        <button class="rv-viz-node" data-target="dexp2">SOCET SET</button>
+        <button class="rv-viz-node" data-target="dexp3">QA + MOLA</button>
+        <button class="rv-viz-node" data-target="dexp4">DTM Production</button>
+        <button class="rv-viz-node" data-target="dexp5">XR Library</button>
+        <button class="rv-viz-node" data-target="dexp6">Mission Impact</button>
+      </div>
+      <div class="rv-viz-detail"></div>
+      <div class="rv-viz-bank" style="display:none">
+        <div id="dexp1">
+          <div class="rv-viz-kicker">Input layer</div><h4>HiRISE and CTX stereo imagery</h4>
+          <p>Operations begin with orbital stereo image pairs used to extract terrain geometry for Mars topographic products.</p>
+          <div class="rv-viz-statgrid">
+            <div class="rv-viz-stat"><div class="lbl">HiRISE</div><div class="val">25–50 cm/pixel</div></div>
+            <div class="rv-viz-stat"><div class="lbl">CTX</div><div class="val">~6 m/pixel</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Use case</div><div class="val">Stereo photogrammetry</div></div>
+          </div>
+        </div>
+        <div id="dexp2">
+          <div class="rv-viz-kicker">Processing core</div><h4>SOCET SET NGATE correlation pipeline</h4>
+          <p>Least-squares image correlation is used to solve elevation at scale, forming the computational heart of DTM generation and QA workflows.</p>
+          <div class="rv-viz-statgrid">
+            <div class="rv-viz-stat"><div class="lbl">Algorithm</div><div class="val">NGATE</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Methods</div><div class="val">Image matching · bundle adj.</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Outputs</div><div class="val">DTM + orthoimage products</div></div>
+          </div>
+        </div>
+        <div id="dexp3">
+          <div class="rv-viz-kicker">Validation</div><h4>Residual analysis against MOLA control</h4>
+          <p>README-derived residuals, RMS x/y/z, mean MOLA difference, and standard deviation quantify terrain solution quality and geodetic control.</p>
+          <div class="rv-viz-statgrid">
+            <div class="rv-viz-stat"><div class="lbl">Residuals</div><div class="val">RMS x · y · z</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Reference</div><div class="val">MOLA reference surface</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Quality</div><div class="val">README audited values</div></div>
+          </div>
+        </div>
+        <div id="dexp4">
+          <div class="rv-viz-kicker">Production output</div><h4>Published HiRISE DTM portfolio</h4>
+          <p>The portfolio shown on the map represents Ray’s audited set of 30 HiRISE DTM projects and a total production record of more than 50 DTMs.</p>
+          <div class="rv-viz-statgrid">
+            <div class="rv-viz-stat"><div class="lbl">Featured here</div><div class="val">30 projects</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Produced</div><div class="val">&gt;50 DTMs</div></div>
+            <div class="rv-viz-stat"><div class="lbl">HiRISE hours</div><div class="val">1,550 hrs</div></div>
+          </div>
+        </div>
+        <div id="dexp5">
+          <div class="rv-viz-kicker">XR pipeline</div><h4>1,308-project XR terrain product system architecture</h4>
+          <p>DTMs are organized into a scalable visualization library for VR, AR, and future planetary analysis interfaces.</p>
+          <div class="rv-viz-statgrid">
+            <div class="rv-viz-stat"><div class="lbl">Library size</div><div class="val">1,308 DTM projects</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Modes</div><div class="val">VR · AR · 3D viz</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Goal</div><div class="val">Immersive science ops</div></div>
+          </div>
+        </div>
+        <div id="dexp6">
+          <div class="rv-viz-kicker">Mission outcome</div><h4>Terrain products to mission science operations</h4>
+          <p>The work supports MRO/HiRISE science operations and completed Europa Clipper terrain simulation work, integrating engineering, mapping, and planetary science.</p>
+          <div class="rv-viz-statgrid">
+            <div class="rv-viz-stat"><div class="lbl">Efficiency</div><div class="val">2,350% throughput gain</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Mission support</div><div class="val">MRO · Europa Clipper</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Europa hours</div><div class="val">300 hrs completed</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- KPI SUMMARY BAR -->
     <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:#e0e0e0;border:1px solid #e0e0e0;border-radius:4px;overflow:hidden;margin-bottom:1.5rem">
       <div style="background:#fff;padding:12px 14px;text-align:center">
@@ -912,6 +1038,47 @@ footer {
     </div>
 
     <!-- EXP CARDS GRID -->
+
+    <div class="rv-arch-grid" style="margin-bottom:1.25rem">
+      <div class="rv-viz-panel" id="desktopEduViz">
+        <div class="rv-viz-head"><div class="rv-viz-title">Technical Education & Competency Architecture</div><div class="rv-viz-meta">EE · planetary science · computation</div></div>
+        <div class="rv-viz-flow">
+          <button class="rv-viz-node active" data-target="dedu1">B.S. EE</button>
+          <button class="rv-viz-node" data-target="dedu2">Planetary Sci.</button>
+          <button class="rv-viz-node" data-target="dedu3">Math</button>
+          <button class="rv-viz-node" data-target="dedu4">Comp. Eng.</button>
+          <button class="rv-viz-node" data-target="dedu5">Accelerated M.S.</button>
+          <button class="rv-viz-node" data-target="dedu6">46 Certs</button>
+        </div>
+        <div class="rv-viz-detail"></div>
+        <div class="rv-viz-bank" style="display:none">
+          <div id="dedu1"><div class="rv-viz-kicker">Degree core</div><h4>University of Arizona · B.S. Electrical Engineering</h4><p>Current undergraduate training centered on electrical engineering, systems thinking, and technical problem solving; the B.S. remains in progress.</p><div class="rv-viz-statgrid"><div class="rv-viz-stat"><div class="lbl">Standing</div><div class="val">Sophomore</div></div><div class="rv-viz-stat"><div class="lbl">Honors</div><div class="val">Dean’s List ×3</div></div><div class="rv-viz-stat"><div class="lbl">Clubs</div><div class="val">IEEE · AIAA · ACM</div></div></div></div>
+          <div id="dedu2"><div class="rv-viz-kicker">Planned minor track</div><h4>Planetary Science · In Progress</h4><p>Provides geologic and planetary context for terrain interpretation, surface processes, and mission relevance.</p><div class="rv-viz-miniflow"><div class="rv-viz-box"><div class="lbl">Context</div><div class="val">Mars geomorphology</div></div><div class="rv-viz-box"><div class="lbl">Products</div><div class="val">DTMs · orthos</div></div><div class="rv-viz-box"><div class="lbl">Application</div><div class="val">Mission science</div></div></div></div>
+          <div id="dedu3"><div class="rv-viz-kicker">Planned minor track</div><h4>Mathematics · In Progress</h4><p>Supports bundle adjustment theory, residual interpretation, numerical reasoning, and modeling accuracy.</p><div class="rv-viz-miniflow"><div class="rv-viz-box"><div class="lbl">Topics</div><div class="val">Linear algebra</div></div><div class="rv-viz-box"><div class="lbl">Methods</div><div class="val">Least squares</div></div><div class="rv-viz-box"><div class="lbl">Metrics</div><div class="val">RMS · std. dev.</div></div></div></div>
+          <div id="dedu4"><div class="rv-viz-kicker">Planned minor track</div><h4>Computer Engineering · Planned / In Progress</h4><p>Connects hardware logic, systems integration, and computation to XR pipelines and future instrument development.</p><div class="rv-viz-miniflow"><div class="rv-viz-box"><div class="lbl">Domains</div><div class="val">Embedded thinking</div></div><div class="rv-viz-box"><div class="lbl">Output</div><div class="val">Automation pipelines</div></div><div class="rv-viz-box"><div class="lbl">Goal</div><div class="val">Flight systems readiness</div></div></div></div>
+          <div id="dedu5"><div class="rv-viz-kicker">Future graduate objective</div><h4>Accelerated M.S. EE · Planetary instrumentation focus · Future Goal</h4><p>Long-term direction toward electrical systems engineering, electronics design, and hardware integration for flight instruments.</p><div class="rv-viz-statgrid"><div class="rv-viz-stat"><div class="lbl">Focus</div><div class="val">Planetary instrumentation</div></div><div class="rv-viz-stat"><div class="lbl">Goal</div><div class="val">Lead exploration hardware</div></div><div class="rv-viz-stat"><div class="lbl">Bridge</div><div class="val">Research + engineering</div></div></div></div>
+          <div id="dedu6"><div class="rv-viz-kicker">Credential-development roadmap</div><h4>Professional-development credentials · In Progress</h4><p>Planned and in-progress professional development spans Harvard CS50 coursework, professional memberships, institutional training, and AI/project-management study.</p><div class="rv-viz-statgrid"><div class="rv-viz-stat"><div class="lbl">Harvard CS50</div><div class="val">4-course track · In Progress</div></div><div class="rv-viz-stat"><div class="lbl">Membership pathway</div><div class="val">AIAA · IEEE · ACM · OpenPlanetary</div></div><div class="rv-viz-stat"><div class="lbl">Additional credentials</div><div class="val">37 roadmap items</div></div></div></div>
+        </div>
+      </div>
+      <div class="rv-viz-panel" id="desktopCredViz">
+        <div class="rv-viz-head"><div class="rv-viz-title">Academic &amp; Credential Development</div><div class="rv-viz-meta">sophomore · pathway in progress</div></div>
+        <div class="rv-viz-detail" style="border-top:none">
+          <div class="rv-viz-kicker">Current status / planned pathway</div><h4>Technical education &amp; credential roadmap</h4>
+          <p>Current sophomore-level academic development combines an in-progress B.S. in Electrical Engineering with planned interdisciplinary minors, a future accelerated M.S. objective, and an expanding professional-development portfolio.</p>
+          <div class="rv-viz-statgrid">
+            <div class="rv-viz-stat"><div class="lbl">Core degree</div><div class="val">B.S. EE · In Progress</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Planned minors</div><div class="val">3 · In Progress</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Future graduate objective</div><div class="val">Accelerated M.S. EE · Future Objective</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Credential development</div><div class="val">46-item roadmap · In Progress</div></div>
+          </div>
+          <div class="rv-viz-miniflow">
+            <div class="rv-viz-box"><div class="lbl">Engineering</div><div class="val">EE current · CompE planned</div></div>
+            <div class="rv-viz-box"><div class="lbl">Science</div><div class="val">Planetary Science · planned</div></div>
+            <div class="rv-viz-box"><div class="lbl">Methods</div><div class="val">Mathematics · CS50 · PM development</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem">
 
       <!-- SE5 -->
@@ -1189,7 +1356,7 @@ footer {
   </div>
 
   <!-- EDUCATION & CERTIFICATIONS -->
-  <div style="border-top:1px solid #e0e0e0;padding:2rem 0">
+  <div style="border-top:1px solid #e0e0e0;padding:2rem 0" id="eduSection">
     <div class="eng-title" style="margin-bottom:1.25rem">Education</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem">
 
@@ -1201,24 +1368,24 @@ footer {
         </div>
         <div style="padding:14px 16px">
           <div style="font-size:1rem;font-weight:700;color:#111;letter-spacing:-0.02em">University of Arizona</div>
-          <div style="font-size:0.7rem;color:#555;margin-top:2px;margin-bottom:12px">B.S. Electrical Engineering (EE)</div>
+          <div style="font-size:0.7rem;color:#555;margin-top:2px;margin-bottom:12px">B.S. Electrical Engineering (EE) · Current / In Progress</div>
 
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px">
             <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Minor</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Planetary Science</div>
+              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Planned Minor</div>
+              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Planetary Science · In Progress</div>
             </div>
             <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Minor</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Mathematics</div>
+              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Planned Minor</div>
+              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Mathematics · In Progress</div>
             </div>
             <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Minor</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Computer Engineering</div>
+              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Planned Minor</div>
+              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Computer Engineering · In Progress</div>
             </div>
             <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Graduate Goal</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Accelerated M.S. EE</div>
+              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Future Goal</div>
+              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Accelerated M.S. EE · Future Objective</div>
               <div style="font-size:0.63rem;color:#888">Planetary Instrumentation</div>
             </div>
           </div>
@@ -1236,8 +1403,8 @@ footer {
       <!-- CERTIFICATIONS MODULE -->
       <div style="border:1px solid #e0e0e0;border-radius:4px;overflow:hidden">
         <div style="background:#111;padding:10px 14px;display:flex;justify-content:space-between;align-items:center">
-          <div style="font-size:0.6rem;color:#888;text-transform:uppercase;letter-spacing:0.12em">Licenses &amp; Certifications</div>
-          <div style="font-size:0.6rem;color:#888;font-family:'Courier New',monospace">46 total</div>
+          <div style="font-size:0.6rem;color:#888;text-transform:uppercase;letter-spacing:0.12em">Credentials &amp; Professional Development Roadmap</div>
+          <div style="font-size:0.6rem;color:#888;font-family:'Courier New',monospace">Pathway in progress</div>
         </div>
         <div style="padding:14px 16px">
           <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
@@ -1279,7 +1446,7 @@ footer {
             </div>
           </div>
           <div style="border-top:1px solid #f0f0f0;padding-top:9px;font-size:0.6rem;color:#bbb;font-family:'Courier New',monospace">
-            + 37 additional certifications · ACM · AIAA · IEEE Student Member
+            Additional coursework, memberships, and certifications · portfolio in progress
           </div>
         </div>
       </div>
@@ -1288,8 +1455,23 @@ footer {
   </div>
 
   <!-- ECE CONTEXT -->
-  <div style="border-top:1px solid #e0e0e0;padding:2rem 0">
+  <div style="border-top:1px solid #e0e0e0;padding:2rem 0" id="contextSection">
     <div class="eng-title" style="margin-bottom:1.25rem">Engineering &amp; Science Context</div>
+
+    <div class="rv-viz-panel" id="desktopContextViz" style="margin-bottom:1.25rem">
+      <div class="rv-viz-head"><div class="rv-viz-title">Planetary Science–Engineering Integration</div><div class="rv-viz-meta">remote sensing · geodesy · mission data systems</div></div>
+      <div class="rv-viz-flow">
+        <button class="rv-viz-node active" data-target="dctx1">Signal Processing</button>
+        <button class="rv-viz-node" data-target="dctx2">Mathematics</button>
+        <button class="rv-viz-node" data-target="dctx3">Planetary Science</button>
+      </div>
+      <div class="rv-viz-detail"></div>
+      <div class="rv-viz-bank" style="display:none">
+        <div id="dctx1"><div class="rv-viz-kicker">ECE application</div><h4>Signal processing interpretation of stereo photogrammetry</h4><p>HiRISE stereo imagery is processed through correlation logic and converted into elevation solutions, analogous to estimation and convergence in signal-processing workflows.</p><div class="rv-viz-miniflow"><div class="rv-viz-box"><div class="lbl">Input</div><div class="val">HiRISE stereo imagery</div></div><div class="rv-viz-box"><div class="lbl">Algorithm</div><div class="val">SOCET SET NGATE</div></div><div class="rv-viz-box"><div class="lbl">Output</div><div class="val">Sub-pixel elevation solutions</div></div></div></div>
+        <div id="dctx2"><div class="rv-viz-kicker">Least-squares &amp; RMS</div><h4>Mathematical quality architecture</h4><p>Bundle adjustment, residual budgeting, and MOLA comparison provide the formal mathematical structure behind DTM quality assurance.</p><div class="rv-viz-miniflow"><div class="rv-viz-box"><div class="lbl">Error budget</div><div class="val">RMS x · y · z</div></div><div class="rv-viz-box"><div class="lbl">Validation</div><div class="val">MOLA reference surface</div></div><div class="rv-viz-box"><div class="lbl">Theory</div><div class="val">Bundle adjustment</div></div></div></div>
+        <div id="dctx3"><div class="rv-viz-kicker">Cross-disciplinary integration</div><h4>Planetary science linked to computer engineering</h4><p>Terrain categories, pipeline orchestration, and automated integration connect geomorphology to computation and future instrumentation workflows.</p><div class="rv-viz-miniflow"><div class="rv-viz-box"><div class="lbl">Coverage</div><div class="val">Polar · volcanic · chaos</div></div><div class="rv-viz-box"><div class="lbl">Pipeline</div><div class="val">Python · ISIS3 · MOLA</div></div><div class="rv-viz-box"><div class="lbl">Integration</div><div class="val">CE + geomorphology</div></div></div></div>
+      </div>
+    </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem">
 
       <div style="border:1px solid #e0e0e0;border-radius:4px;overflow:hidden">
@@ -1661,6 +1843,16 @@ const PUBS = [
     url:"https://www.uahirise.org/dtm/ESP_072540_2105", ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_072500_072599/ESP_072540_2105_ESP_072461_2105/ESP_072461_2105_RED_D_01_ORTHO.br.jpg",
     geo:"Utopia Planitia occupies a giant Noachian impact basin in the northern lowlands whose present morphology reflects extensive sedimentary and volcanic infilling as well as later tectonic modification. Mesas and other remnant relief within the plains preserve local stratigraphic and structural information that helps constrain the basin's long post-impact resurfacing history.",
     cite:"Thomson, B. J., & Head, J. W. (2001). Utopia Basin, Mars: Characterization of topography and morphology and assessment of the origin and evolution of basin internal structure. <em>Journal of Geophysical Research: Planets</em>, <em>106</em>(E10), 23209–23230. https://doi.org/10.1029/2000JE001355" }
+,
+  { name:"Guilled_Crater_2226E_438S", dstr:"Date not in README", date:"", lon:222.623, lat:-43.888, img:["ESP_012904_1360","ESP_012759_1360"], min:1122.11, max:2242.44, relief:1120.33, post:2, rms_px:0.29163, rms_x:0.22408, rms_y:0.018333, rms_z:3.1482, rms_m:null, mola_d:-1.030, mola_s:10.706, credit:true, region:"High-Latitude",
+    url:"https://www.uahirise.org/dtm/ESP_012904_1360", ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_012900_012999/ESP_012904_1360_ESP_012759_1360/ESP_012759_1360_RED_D_01_ORTHO.br.jpg",
+    geo:"This southern mid-latitude crater contains well-developed gullies on steep interior slopes. Martian gullies commonly consist of alcoves, channels, and depositional aprons, and repeat HiRISE imaging has shown that present-day modification at many mid- and high-latitude sites is strongly associated with seasonal carbon-dioxide frost processes.",
+    cite:"Dundas, C. M., Diniega, S., Hansen, C. J., Byrne, S., & McEwen, A. S. (2012). Seasonal activity and morphological changes in Martian gullies. <em>Icarus</em>, <em>220</em>(1), 124–143. https://doi.org/10.1016/j.icarus.2012.04.005" },
+
+  { name:"USGS_Dune_2308E_692S", dstr:"Date not in README", date:"", lon:230.8, lat:-69.2, img:["ESP_032024_1105","ESP_031945_1105"], min:622.60, max:1122.45, relief:499.85, post:1, rms_px:0.22078, rms_x:0.08651, rms_y:0.11159, rms_z:10.503, rms_m:null, mola_d:-4.83, mola_s:83.10, credit:true, region:"South Polar",
+    url:"https://www.uahirise.org/dtm/ESP_032024_1105", ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_032000_032099/ESP_032024_1105_ESP_031945_1105/ESP_032024_1105_RED_C_01_ORTHO.br.jpg",
+    geo:"This high-southern-latitude dune field provides topographic control on dune morphology in a terrain affected by strong seasonal carbon-dioxide frost cycles. Repeat HiRISE observations of polar and subpolar dunes show that frost-related mass movement can modify dune slopes and gullies on present-day Mars.",
+    cite:"Diniega, S., Byrne, S., Bridges, N. T., Dundas, C. M., & McEwen, A. S. (2010). Seasonality of present-day Martian dune-gully activity. <em>Geology</em>, <em>38</em>(11), 1047–1050. https://doi.org/10.1130/G31287.1" }
 
 ];
 
@@ -1720,20 +1912,20 @@ function buildStats() {
       <div class="mars-map-shell" id="marsMapShell">
         <div class="mars-map-head">
           <div>
-            <div class="mars-map-kicker">Mars Planisphere — 28 HiRISE DTM Projects</div>
+            <div class="mars-map-kicker">Mars Planisphere — 30 HiRISE DTM Projects</div>
             <div class="mars-map-source">NASA Mars Trek / USGS Astrogeology · MGS MOLA + Mars Express HRSC Color Hillshade Blend · 200 m/pixel · Simple Cylindrical · Planetocentric (areocentric) latitude · Positive-East longitude</div>
           </div>
           <div class="mars-map-head-right">0°E → 360°E<br>90°N → 90°S</div>
         </div>
         <div class="mars-map-toolbar">
           <div class="mars-map-regions" aria-label="Filter map markers by latitude class">
-            <button type="button" class="mars-region-btn active" data-map-region="all">All · 28</button>
+            <button type="button" class="mars-region-btn active" data-map-region="all">All · 30</button>
             ${regionButtons}
           </div>
           <div class="mars-map-jump">
             <label for="marsProjectSelect">Project</label>
-            <select id="marsProjectSelect" aria-label="Jump to one of the 28 DTM projects">
-              <option value="">Jump to any of the 28 projects…</option>
+            <select id="marsProjectSelect" aria-label="Jump to one of the 30 DTM projects">
+              <option value="">Jump to any of the 30 projects…</option>
               ${PUBS.map((p,i)=>`<option value="${i}">${String(i+1).padStart(2,'0')} · ${p.name}</option>`).join('')}
             </select>
           </div>
@@ -1744,7 +1936,7 @@ function buildStats() {
             <button type="button" class="mars-map-tool" id="marsReset">Reset</button>
           </div>
         </div>
-        <div class="mars-map-viewport" id="marsMapViewport" aria-label="Interactive MOLA map of Mars with HiRISE DTM locations">
+        <div class="mars-map-viewport" id="marsMapViewport" aria-label="MOLA Mars planisphere with HiRISE DTM project locations">
           <div class="mars-map-scene" id="marsMapScene">
             <div class="mars-map-tiles" id="marsMapTiles"></div>
             <svg class="mars-grid-overlay" viewBox="0 0 360 180" preserveAspectRatio="none" aria-hidden="true">
@@ -1761,7 +1953,7 @@ function buildStats() {
           <div class="mars-map-dataset">MOLA + HRSC · 200 m/px</div>
         </div>
         <div class="mars-map-detail mars-map-detail-empty" id="marsMapDetail">
-          <div class="mars-detail-empty-title">Select any of the 28 HiRISE DTM projects</div>
+          <div class="mars-detail-empty-title">Select any of the 30 HiRISE DTM projects</div>
           <div class="mars-detail-empty-copy">Each selection shows the complete README-derived elevation range, post spacing, bundle-adjustment residuals, MOLA tie statistics, source observations, ORTHO preview, geological context, and APA reference.</div>
         </div>
         <div class="mars-map-foot">
@@ -1917,11 +2109,13 @@ function initMarsMap() {
   }
 
   function showTip(e,p,i) {
-    tooltip.innerHTML=`<strong>${String(i+1).padStart(2,'0')} · ${p.name}</strong>
-      <div class="mono">${fmtCoord(p)}</div>
-      <div>MIN ${fmtElev(p.min)} · MAX ${fmtElev(p.max)} · RELIEF ${fmtFixed(p.relief,2,' m')}</div>
-      <div>${p.img.join(' / ')}</div>
-      <div>Total RMS ${Number.isFinite(p.rms_px)?p.rms_px.toFixed(5)+' px':'—'} · ΔMOLA ${fmtSigned(p.mola_d,3,' m')}</div>`;
+    tooltip.innerHTML=`<div class="mars-tip-head">${String(i+1).padStart(2,'0')} · ${p.name}</div>
+      <div class="mars-tip-grid">
+        <div class="mars-tip-cell"><div class="mars-tip-k">Minimum</div><div class="mars-tip-v">${fmtElev(p.min)}</div></div>
+        <div class="mars-tip-cell"><div class="mars-tip-k">Maximum</div><div class="mars-tip-v">${fmtElev(p.max)}</div></div>
+        <div class="mars-tip-cell"><div class="mars-tip-k">Vertical relief</div><div class="mars-tip-v">${fmtFixed(p.relief,2,' m')}</div></div>
+      </div>
+      <div class="mars-tip-images"><div class="mars-tip-k">HiRISE image IDs</div>${p.img.map(id=>`<span class="mars-tip-id">${id}</span>`).join('')}</div>`;
     tooltip.style.display='block';positionTip(e);
   }
   function positionTip(e) {
@@ -2205,5 +2399,30 @@ buildStats();
 render();
 renderRanking();
 </script>
+
+<script>
+(function(){
+  function initRayViz(){
+    document.querySelectorAll('.rv-viz-panel').forEach(function(panel){
+      var buttons = Array.prototype.slice.call(panel.querySelectorAll('.rv-viz-node'));
+      var detail = panel.querySelector('.rv-viz-detail');
+      var bank = panel.querySelector('.rv-viz-bank');
+      if(!buttons.length || !detail || !bank) return;
+      function activate(btn){
+        buttons.forEach(function(b){ b.classList.toggle('active', b===btn); });
+        var id = btn.getAttribute('data-target');
+        var src = bank.querySelector('#'+id);
+        if(src) detail.innerHTML = src.innerHTML;
+      }
+      buttons.forEach(function(btn){ btn.addEventListener('click', function(){ activate(btn); }); });
+      var active = panel.querySelector('.rv-viz-node.active') || buttons[0];
+      if(active) activate(active);
+    });
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initRayViz);
+  else initRayViz();
+})();
+</script>
+
 </body>
 </html>
