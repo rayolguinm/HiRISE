@@ -127,6 +127,284 @@ header {
 }
 .pl-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 
+
+
+/* ── SCIENTIFIC INTERACTIVE MARS MAP ── */
+.mars-map-shell {
+  border: 1px solid #dedede;
+  background: #fff;
+}
+.mars-map-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid #e8e8e8;
+}
+.mars-map-kicker {
+  font-size: 0.62rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: #333;
+  font-weight: 600;
+}
+.mars-map-source {
+  margin-top: 3px;
+  font-size: 0.58rem;
+  line-height: 1.45;
+  color: #999;
+  letter-spacing: 0.04em;
+}
+.mars-map-head-right {
+  text-align: right;
+  font-family: 'Courier New', monospace;
+  color: #999;
+  font-size: 0.62rem;
+  white-space: nowrap;
+}
+.mars-map-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  border-bottom: 1px solid #e8e8e8;
+  flex-wrap: wrap;
+}
+.mars-map-regions,
+.mars-map-nav {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.mars-region-btn,
+.mars-map-tool {
+  appearance: none;
+  border: 1px solid #d8d8d8;
+  background: #fff;
+  color: #777;
+  font-family: inherit;
+  font-size: 0.61rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 6px 9px;
+  cursor: pointer;
+}
+.mars-region-btn:hover,
+.mars-map-tool:hover { color: #111; border-color: #aaa; }
+.mars-region-btn.active { color: #111; border-color: #777; background: #f5f5f5; }
+.mars-region-btn .rdot {
+  width: 7px; height: 7px; border-radius: 50%; display: inline-block;
+  margin-right: 5px; vertical-align: 0;
+}
+.mars-map-tool { min-width: 32px; font-family: 'Courier New', monospace; font-size: 0.72rem; }
+.mars-map-zoomread {
+  min-width: 46px;
+  text-align: center;
+  color: #777;
+  font: 0.62rem 'Courier New', monospace;
+}
+.mars-map-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  min-height: 330px;
+  max-height: 650px;
+  overflow: hidden;
+  background: linear-gradient(180deg,#6d513e 0%,#8b6647 43%,#805a3e 70%,#d5d2cd 100%);
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+.mars-map-viewport.dragging { cursor: grabbing; }
+.mars-map-scene {
+  position: absolute;
+  inset: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+  --mars-inv: 1;
+}
+.mars-map-tiles { position: absolute; inset: 0; overflow: hidden; }
+.mars-map-tile {
+  position: absolute;
+  display: block;
+  width: auto;
+  height: auto;
+  object-fit: fill;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.mars-map-tint {
+  position: absolute; inset: 0; pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.26);
+}
+.mars-grid-overlay { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.mars-grid-overlay line { vector-effect: non-scaling-stroke; }
+.mars-marker {
+  position: absolute;
+  z-index: 5;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.94);
+  color: #fff;
+  font: 700 10px/26px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,.4);
+  transform: translate(-50%,-50%) scale(var(--mars-inv));
+  transform-origin: center;
+  transition: box-shadow .12s ease, outline-color .12s ease;
+}
+.mars-marker:hover,
+.mars-marker:focus-visible { z-index: 15; box-shadow: 0 0 0 4px rgba(255,255,255,.55),0 2px 7px rgba(0,0,0,.5); outline: none; }
+.mars-marker.selected { z-index: 16; box-shadow: 0 0 0 4px #fff,0 0 0 6px #111,0 2px 8px rgba(0,0,0,.5); }
+.mars-marker.map-hidden { display:none; }
+.mars-map-tooltip {
+  position: absolute;
+  z-index: 40;
+  pointer-events: none;
+  max-width: 330px;
+  background: rgba(255,255,255,.97);
+  border: 1px solid #d5d5d5;
+  padding: 9px 11px;
+  box-shadow: 0 3px 14px rgba(0,0,0,.16);
+  color: #222;
+  font-size: 0.66rem;
+  line-height: 1.45;
+  display: none;
+}
+.mars-map-tooltip strong { display:block; font-size:.71rem; margin-bottom:3px; }
+.mars-map-tooltip .mono { font-family:'Courier New',monospace; color:#777; }
+.mars-map-coordbar {
+  position: absolute;
+  z-index: 20;
+  left: 9px;
+  bottom: 9px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: rgba(255,255,255,.91);
+  border: 1px solid rgba(210,210,210,.95);
+  padding: 5px 7px;
+  font: 0.59rem 'Courier New', monospace;
+  color: #555;
+  pointer-events: none;
+}
+.mars-map-dataset {
+  position:absolute;
+  right:9px;
+  bottom:9px;
+  z-index:20;
+  background:rgba(255,255,255,.91);
+  border:1px solid rgba(210,210,210,.95);
+  padding:5px 7px;
+  font-size:.55rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:#777;
+  pointer-events:none;
+}
+.mars-map-detail {
+  min-height: 82px;
+  padding: 11px 14px 12px;
+  border-top: 1px solid #e8e8e8;
+  display: grid;
+  grid-template-columns: minmax(220px,1.25fr) repeat(4,minmax(90px,.55fr)) auto;
+  gap: 12px;
+  align-items: center;
+}
+.mars-detail-name { min-width:0; }
+.mars-detail-name strong { display:block; font-size:.78rem; color:#111; overflow-wrap:anywhere; }
+.mars-detail-name span { display:block; margin-top:3px; color:#999; font-size:.61rem; line-height:1.4; }
+.mars-detail-metric .k { font-size:.54rem; letter-spacing:.08em; text-transform:uppercase; color:#aaa; }
+.mars-detail-metric .v { margin-top:3px; font: .69rem 'Courier New',monospace; color:#222; }
+.mars-detail-actions { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+.mars-detail-actions a,
+.mars-detail-actions button {
+  border:1px solid #d5d5d5;
+  background:#fff;
+  color:#555;
+  font: .58rem inherit;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  text-decoration:none;
+  padding:7px 9px;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.mars-map-foot {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:7px 10px 8px;
+  border-top:1px solid #eee;
+  color:#aaa;
+  font-size:.55rem;
+  line-height:1.45;
+}
+@media (max-width: 900px) {
+  .stats-left { grid-template-columns: repeat(3,1fr); }
+  .mars-map-head { align-items:flex-start; flex-direction:column; }
+  .mars-map-head-right { text-align:left; white-space:normal; }
+  .mars-map-detail { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .mars-detail-name,.mars-detail-actions { grid-column:1/-1; }
+  .mars-detail-actions { justify-content:flex-start; }
+}
+@media (max-width: 560px) {
+  .stats-left { grid-template-columns: repeat(2,1fr); }
+  .mars-map-viewport { min-height: 260px; }
+  .mars-map-detail { grid-template-columns:1fr 1fr; }
+  .mars-map-dataset { display:none; }
+  .mars-map-foot { flex-direction:column; }
+}
+
+
+/* ── HIGH-RES / COMPLETE MAP UPGRADE ── */
+.mars-map-viewport { min-height: 410px; max-height: 760px; background:#111; }
+.mars-map-tile { image-rendering:auto; backface-visibility:hidden; }
+.mars-map-jump { display:flex; align-items:center; gap:6px; min-width:min(360px,100%); }
+.mars-map-jump label { font-size:.55rem; letter-spacing:.08em; text-transform:uppercase; color:#999; }
+.mars-map-jump select { min-width:250px; max-width:420px; height:31px; border:1px solid #d8d8d8; background:#fff; color:#555; font: .61rem 'Helvetica Neue',Helvetica,Arial,sans-serif; padding:0 28px 0 8px; }
+.mars-marker { width:28px; height:28px; font-size:9px; line-height:24px; }
+.mars-anchor { position:absolute; z-index:4; width:5px; height:5px; border-radius:50%; background:#fff; border:1px solid rgba(0,0,0,.88); box-shadow:0 0 0 1px rgba(255,255,255,.75); pointer-events:none; transform:translate(-50%,-50%) scale(var(--mars-inv)); transform-origin:center; }
+.mars-anchor.map-hidden { display:none; }
+.mars-marker.spread { box-shadow:0 1px 4px rgba(0,0,0,.55),0 0 0 1px rgba(0,0,0,.08); }
+.mars-map-detail { display:block; min-height:0; padding:0; }
+.mars-map-detail-empty { padding:18px 16px; }
+.mars-detail-empty-title { font-size:.82rem; font-weight:600; color:#111; }
+.mars-detail-empty-copy { margin-top:5px; max-width:900px; color:#888; font-size:.64rem; line-height:1.55; }
+.mars-detail-head { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; padding:14px 16px 12px; border-bottom:1px solid #ececec; }
+.mars-detail-head-main { min-width:0; }
+.mars-detail-head-main strong { display:block; color:#111; font-size:.86rem; overflow-wrap:anywhere; }
+.mars-detail-head-main span { display:block; margin-top:4px; color:#888; font-size:.62rem; line-height:1.5; }
+.mars-detail-actions { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+.mars-detail-actions a,.mars-detail-actions button { border:1px solid #d5d5d5; background:#fff; color:#555; font: .58rem inherit; text-transform:uppercase; letter-spacing:.05em; text-decoration:none; padding:7px 9px; cursor:pointer; white-space:nowrap; }
+.mars-detail-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); }
+.mars-detail-cell { min-width:0; padding:10px 12px 11px; border-right:1px solid #eee; border-bottom:1px solid #eee; }
+.mars-detail-cell:nth-child(6n) { border-right:0; }
+.mars-detail-cell .k { font-size:.52rem; letter-spacing:.08em; text-transform:uppercase; color:#aaa; }
+.mars-detail-cell .v { margin-top:4px; color:#222; font: .66rem/1.35 'Courier New',monospace; overflow-wrap:anywhere; }
+.mars-detail-quality { padding:12px 16px 14px; border-bottom:1px solid #ececec; }
+.mars-detail-section-title { font-size:.56rem; letter-spacing:.1em; text-transform:uppercase; color:#999; margin-bottom:8px; }
+.mars-quality-chips { display:flex; flex-wrap:wrap; gap:6px; }
+.mars-quality-chip { border:1px solid #ddd; background:#fff; padding:7px 9px; color:#333; font: .64rem 'Courier New',monospace; }
+.mars-detail-context { display:grid; grid-template-columns:minmax(0,1.6fr) minmax(220px,.7fr); gap:14px; padding:14px 16px 16px; }
+.mars-detail-context-copy { min-width:0; }
+.mars-detail-context-copy p { margin:0; color:#333; font-size:.68rem; line-height:1.65; }
+.mars-detail-cite { margin-top:10px; padding-left:10px; border-left:2px solid #e2e2e2; color:#777; font-size:.62rem; line-height:1.55; overflow-wrap:anywhere; }
+.mars-detail-ortho { min-width:0; }
+.mars-detail-ortho a { display:block; text-decoration:none; color:inherit; }
+.mars-detail-ortho img { display:block; width:100%; max-height:180px; object-fit:cover; border:1px solid #ddd; background:#111; }
+.mars-detail-ortho .cap { margin-top:5px; color:#999; font: .54rem/1.4 'Courier New',monospace; overflow-wrap:anywhere; }
+.mars-marker-count { font: .56rem 'Courier New',monospace; color:#888; margin-left:4px; }
+@media (max-width:1050px){ .mars-detail-grid{grid-template-columns:repeat(4,minmax(0,1fr));}.mars-detail-cell:nth-child(6n){border-right:1px solid #eee}.mars-detail-cell:nth-child(4n){border-right:0}.mars-detail-context{grid-template-columns:1fr}.mars-detail-ortho img{max-height:260px}.mars-map-jump{order:3;width:100%}.mars-map-jump select{flex:1;max-width:none;} }
+@media (max-width:620px){ .mars-map-viewport{min-height:320px}.mars-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.mars-detail-cell:nth-child(4n){border-right:1px solid #eee}.mars-detail-cell:nth-child(2n){border-right:0}.mars-detail-head{flex-direction:column}.mars-detail-actions{justify-content:flex-start}.mars-map-jump{display:block}.mars-map-jump label{display:block;margin-bottom:4px}.mars-map-jump select{width:100%;min-width:0}.mars-quality-chip{font-size:.59rem;} }
+
 /* ── CONTROLS ── */
 .controls {
   display: flex;
@@ -1228,7 +1506,7 @@ const PUBS = [
     geo:"The South Polar Layered Deposits (SPLD) are a ~3 km-thick stack of alternating ice-rich and dust-laden layers recording obliquity-driven Martian climate cycles over tens of millions of years. SHARAD radar soundings resolved the internal stratigraphy and confirmed near-pure water ice composition.",
     cite:"Plaut, J. J., Picardi, G., Safaeinili, A., Ivanov, A. B., Milkovich, S. M., Cicchetti, A., Kofman, W., Mouginot, J., Farrell, W. M., Phillips, R. J., Clifford, S. M., Frigeri, A., Orosei, R., Federico, C., Williams, I. P., Gurnett, D. A., Nielsen, E., Hagfors, T., Heggy, E., … Seu, R. (2007). Subsurface radar sounding of the south polar layered deposits of Mars. <em>Science</em>, <em>316</em>(5821), 92–95. https://doi.org/10.1126/science.1139672" },
 
-  { name:"South_Polar_Deposits_2180E_887S",        dstr:"Feb 4, 2026",  date:"2026-02-04", lon:218.0, lat:-88.7, img:["PSP_005721_0910","PSP_005735_0890"],   min:2511.61,  max:3309.36,  relief:797.75,  post:2,    rms_px:0.19885,  rms_x:null,      rms_y:null,       rms_z:null,     rms_m:0.19885, mola_d:null,   mola_s:null,  credit:true,  region:"South Polar",
+  { name:"South_Polar_Deposits_2180E_887S",        dstr:"Feb 4, 2026",  date:"2026-02-04", lon:218.0, lat:-88.7, img:["PSP_005721_0910","PSP_005735_0890"],   min:2511.61,  max:3309.36,  relief:797.75,  post:1,    rms_px:0.19885,  rms_x:null,      rms_y:null,       rms_z:null,     rms_m:0.19885, mola_d:null,   mola_s:null,  credit:true,  region:"South Polar",
     url:"https://www.uahirise.org/dtm/PSP_005721_0910",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/PSP/ORB_005700_005799/PSP_005721_0910_PSP_005735_0890/PSP_005721_0910_RED_C_01_ORTHO.br.jpg",
     geo:"Near 89°S the SPLD residual cap hosts active CO₂ slab sublimation features ('swiss-cheese terrain') documenting present-day volatile transport. HiRISE multi-temporal imaging revealed annual changes in these features, providing a direct record of modern Martian climate.",
@@ -1240,19 +1518,19 @@ const PUBS = [
     geo:"North Polar Layered Deposit bench scarps expose ~2 km of stratigraphy spanning ~5 Myr of obliquity-paced accumulation. SHARAD detected internal unconformities interpreted as high-obliquity erosional episodes. Individual layers 1–10 m thick serve as a Martian equivalent of ice-core climate proxies.",
     cite:"Putzig, N. E., Phillips, R. J., Campbell, B. A., Mellon, M. T., Holt, J. W., & Brothers, T. C. (2009). Subsurface structure of Planum Boreum from Mars Reconnaissance Orbiter Shallow Radar soundings. <em>Icarus</em>, <em>204</em>(2), 443–457. https://doi.org/10.1016/j.icarus.2009.07.034" },
 
-  { name:"Coogoon_Valles_3357E_170N",              dstr:"Jan 6, 2026",  date:"2026-01-06", lon:335.7, lat:17.0,  img:["ESP_070883_1970","ESP_062547_1970"],   min:-3042.62, max:-2544.09, relief:498.53,  post:2,    rms_px:null,     rms_x:null,      rms_y:null,       rms_z:null,     rms_m:null,    mola_d:null,   mola_s:null,  credit:true,  region:"Equatorial",
+  { name:"Coogoon_Valles_3357E_170N",              dstr:"Jan 6, 2026",  date:"2026-01-06", lon:335.7, lat:17.0,  img:["ESP_070883_1970","ESP_062547_1970"],   min:-3042.62, max:-2544.09, relief:498.53,  post:2,    rms_px:0.26247,     rms_x:0.086341,      rms_y:0.026186,       rms_z:0.63108,     rms_m:0.63144,    mola_d:-0.452,   mola_s:10.621,  credit:true,  region:"Equatorial",
     url:"https://www.uahirise.org/dtm/ESP_070883_1970",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_070800_070899/ESP_070883_1970_ESP_062547_1970/ESP_070883_1970_RED_D_01_ORTHO.br.jpg",
     geo:"Coogoon Valles is a sinuous valley system draining into Oxia Planum — the ExoMars Rosalind Franklin landing site. Its delta fan at the basin outlet preserves Noachian fluvial and lacustrine sediments rich in Fe/Mg phyllosilicates, making it a key astrobiological target.",
     cite:"Quantin-Nataf, C., Carter, J., Mandon, L., Thollot, P., Balme, M., Volat, M., Pan, L., Loizeau, D., Millot, C., Breton, S., Dehouck, E., Alexis, J., Goujon, L., Besserer, J., Ralston, S., Vago, J. L., Sefton-Nash, E., & Davis, J. M. (2021). Oxia Planum: The landing site for the ExoMars Rosalind Franklin rover mission. <em>Astrobiology</em>, <em>21</em>(3), 345–366. https://doi.org/10.1089/ast.2019.2191" },
 
-  { name:"Aram_Chaos_3393E_293N",                  dstr:"Jan 6, 2026",  date:"2026-01-06", lon:339.3, lat:29.3,  img:["ESP_059382_1830","ESP_059237_1830"],   min:-2972.77, max:-2279.69, relief:693.08,  post:1,    rms_px:null,     rms_x:null,      rms_y:null,       rms_z:null,     rms_m:null,    mola_d:null,   mola_s:null,  credit:true,  region:"Mid-Latitude",
+  { name:"Aram_Chaos_3393E_293N",                  dstr:"Jan 6, 2026",  date:"2026-01-06", lon:339.3, lat:29.3,  img:["ESP_059382_1830","ESP_059237_1830"],   min:-2972.77, max:-2279.69, relief:693.08,  post:1,    rms_px:0.25639,     rms_x:0.37841,      rms_y:0.35307,       rms_z:0.67112,     rms_m:0.69294,    mola_d:-2.211,   mola_s:11.150,  credit:true,  region:"Mid-Latitude",
     url:"https://www.uahirise.org/dtm/ESP_059382_1830",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_059300_059399/ESP_059382_1830_ESP_059237_1830/ESP_059382_1830_RED_C_01_ORTHO.br.jpg",
     geo:"Aram Chaos is a ~280 km crater that collapsed catastrophically following destabilization of a subsurface cryosphere. TES grey hematite detections indicate past aqueous mineralization. The chaotic knobby interior records some of Mars' most violent water-release events.",
     cite:"Glotch, T. D., & Christensen, P. R. (2005). Geologic and mineralogic mapping of Aram Chaos: Evidence for a water-rich history. <em>Journal of Geophysical Research: Planets</em>, <em>110</em>(E9), E09006. https://doi.org/10.1029/2004JE002389" },
 
-  { name:"Oxia_Colles_3317E_188N",                 dstr:"Nov 6, 2025",  date:"2025-11-06", lon:331.7, lat:18.8,  img:["ESP_065725_1990","ESP_065857_1990"],   min:-3099.14, max:-2846.61, relief:252.53,  post:1,    rms_px:0.52355,  rms_x:0.032211,  rms_y:0.10654,    rms_z:0.87351,  rms_m:0.87351, mola_d:-0.153, mola_s:5.416, credit:true,  region:"Equatorial",
+  { name:"Oxia_Colles_3317E_188N",                 dstr:"Nov 6, 2025",  date:"2025-11-06", lon:331.7, lat:18.8,  img:["ESP_065725_1990","ESP_065857_1990"],   min:-3099.14, max:-2846.61, relief:252.53,  post:1,    rms_px:0.52355,  rms_x:0.032211,  rms_y:0.10654,    rms_z:0.87209,  rms_m:0.87351, mola_d:-0.153, mola_s:5.416, credit:true,  region:"Equatorial",
     url:"https://www.uahirise.org/dtm/ESP_065725_1990",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_065700_065799/ESP_065725_1990_ESP_065857_1990/ESP_065725_1990_RED_C_01_ORTHO.br.jpg",
     geo:"Oxia Colles forms the knobby highland remnant terrain on the western margin of the clay-bearing Oxia Planum plain. These erosional remnants of Noachian crust at the crustal dichotomy boundary expose Fe/Mg smectite-bearing bedrock detected by CRISM and OMEGA spectrometers.",
@@ -1264,79 +1542,79 @@ const PUBS = [
     geo:"Olympus Mons is the largest shield volcano in the Solar System, rising ~22 km above the surrounding plains with a basal escarpment exceeding 8 km. Lava flow systems on the flanks preserve primary Amazonian volcanic stratigraphy; the summit caldera records multiple collapse episodes from complex magmatic evolution.",
     cite:"Mouginis-Mark, P. J., & Rowland, S. K. (2001). The geomorphology of planetary calderas. <em>Geomorphology</em>, <em>37</em>(3–4), 201–223. https://doi.org/10.1016/S0169-555X(00)00083-0" },
 
-  { name:"Argyre_Planitia_Valley_3348E_297S",      dstr:"Nov 4, 2025",  date:"2025-11-04", lon:334.8, lat:-29.7, img:["ESP_066886_1500","ESP_067018_1500"],   min:-464.63,  max:237.42,   relief:702.05,  post:null, rms_px:null,     rms_x:null,      rms_y:null,       rms_z:null,     rms_m:null,    mola_d:null,   mola_s:null,  credit:false, region:"Mid-Latitude",
+  { name:"Argyre_Planitia_Valley_3348E_297S",      dstr:"Nov 4, 2025",  date:"2025-11-04", lon:334.8, lat:-29.7, img:["ESP_066886_1500","ESP_067018_1500"],   min:-464.53,  max:237.42,   relief:701.95,  post:1, rms_px:0.28477,     rms_x:0.044983,      rms_y:0.071402,       rms_z:0.26188,     rms_m:0.26458,    mola_d:0.038,   mola_s:3.208,  credit:false, region:"Mid-Latitude",
     url:"https://www.uahirise.org/dtm/ESP_066886_1500",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_066800_066899/ESP_066886_1500_ESP_067018_1500/ESP_066886_1500_RED_C_01_ORTHO.br.jpg",
     geo:"Argyre Planitia is a 1,800 km impact basin reaching −5.2 km — the deepest on Mars. Valley networks on its rim record late Noachian fluvial incision, and glacial flow indicators including lobate debris aprons suggest Late Amazonian ice sheet occupation of the basin interior.",
     cite:"Hiesinger, H., & Head, J. W. (2002). Topography and morphology of the Argyre Basin, Mars: Implications for its geologic and hydrologic history. <em>Planetary and Space Science</em>, <em>50</em>(10–11), 939–981. https://doi.org/10.1016/S0032-0633(02)00054-5" },
 
-  { name:"Noachis_Terra_Craters_3524E_351S",       dstr:"Aug 28, 2025", date:"2025-08-28", lon:352.4, lat:-35.1, img:["ESP_084570_1445","ESP_066516_1445"],   min:1422.29,  max:2121.72,  relief:699.43,  post:null, rms_px:null,     rms_x:null,      rms_y:null,       rms_z:null,     rms_m:null,    mola_d:null,   mola_s:null,  credit:false, region:"High-Latitude",
+  { name:"Noachis_Terra_Craters_3524E_3510S",       dstr:"Aug 28, 2025", date:"2025-08-28", lon:352.4, lat:-35.1, img:["ESP_084570_1445","ESP_066516_1445"],   min:1422.29,  max:2121.72,  relief:699.43,  post:1, rms_px:0.36409,     rms_x:0.043158,      rms_y:0.081212,       rms_z:0.67819,     rms_m:0.68027,    mola_d:2.645,   mola_s:8.511,  credit:false, region:"High-Latitude",
     url:"https://www.uahirise.org/dtm/ESP_084570_1445",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_084500_084599/ESP_084570_1445_ESP_066516_1445/ESP_066516_1445_RED_C_01_ORTHO.br.jpg",
     geo:"Noachis Terra is among the oldest preserved terrains on Mars (~4.0 Ga), densely cratered and dissected by Noachian valley networks. Impact craters preserve phyllosilicate-bearing ejecta blankets, and the valley network density records peak fluvial activity during the late Noachian–early Hesperian transition.",
     cite:"Fassett, C. I., & Head, J. W. (2008). Valley network-fed, open-basin lakes on Mars: Distribution and implications for Noachian surface and subsurface hydrology. <em>Icarus</em>, <em>198</em>(1), 37–56. https://doi.org/10.1016/j.icarus.2008.06.016" },
 
-  { name:"Arcadia_Planitia_1975E_406N",            dstr:"Aug 28, 2025", date:"2025-08-28", lon:197.5, lat:40.6,  img:["ESP_042996_2210","ESP_043273_2210"],   min:-3976.42, max:-3933.99, relief:42.43,   post:null, rms_px:null,     rms_x:null,      rms_y:null,       rms_z:null,     rms_m:null,    mola_d:null,   mola_s:null,  credit:false, region:"High-Latitude",
+  { name:"Arcadia_Planitia_1975E_406N",            dstr:"Aug 28, 2025", date:"2025-08-28", lon:197.5, lat:40.6,  img:["ESP_042996_2210","ESP_043273_2210"],   min:-3976.42, max:-3933.99, relief:42.43,   post:2, rms_px:0.23358,     rms_x:0.00082365,      rms_y:0.0002484,       rms_z:2.0198,     rms_m:2.0198,    mola_d:-2.536,   mola_s:4.433,  credit:false, region:"High-Latitude",
     url:"https://www.uahirise.org/dtm/ESP_042996_2210",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_042900_042999/ESP_042996_2210_ESP_043273_2210/ESP_042996_2210_RED_D_01_ORTHO.br.jpg",
     geo:"Arcadia Planitia in the northern lowlands hosts some of the highest near-surface ice content inferred on Mars from neutron spectrometry. Scalloped depressions, polygon networks, and layered ejecta craters record active periglacial processes driven by Amazonian ground ice.",
     cite:"Kadish, S. J., Head, J. W., Parsons, R. L., & Marchant, D. R. (2008). The Ascraeus Mons fan-shaped deposit: Volcano-ice interactions and the climatic implications of cold-based tropical mountain glaciation. <em>Icarus</em>, <em>197</em>(1), 84–109. https://doi.org/10.1016/j.icarus.2008.03.019" },
 
-  { name:"Chaos_Terrain_3195E_168S",               dstr:"Aug 28, 2025", date:"2025-08-28", lon:319.5, lat:-16.8, img:["ESP_082989_1630","ESP_083055_1630"],   min:-228.54,  max:382.09,   relief:610.63,  post:null, rms_px:null,     rms_x:null,      rms_y:null,       rms_z:null,     rms_m:null,    mola_d:null,   mola_s:null,  credit:false, region:"Equatorial",
+  { name:"Chaos_Terrain_3195E_168S",               dstr:"Aug 28, 2025", date:"2025-08-28", lon:319.5, lat:-16.8, img:["ESP_082989_1630","ESP_083055_1630"],   min:-228.54,  max:382.09,   relief:610.63,  post:2, rms_px:0.23323,     rms_x:0.05382,      rms_y:0.00011103,       rms_z:1.9367,     rms_m:1.9369,    mola_d:0.921,   mola_s:4.426,  credit:false, region:"Equatorial",
     url:"https://www.uahirise.org/dtm/ESP_082989_1630",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_082900_082999/ESP_082989_1630_ESP_083055_1630/ESP_082989_1630_RED_D_01_ORTHO.br.jpg",
     geo:"Martian chaotic terrain forms through catastrophic subsidence following drainage of subsurface volatiles — ice or pressurized groundwater. The resulting knobby remnant mesas and intervening depressions are genetically linked to outflow channel initiation and some of the largest known flood events in the Solar System.",
     cite:"Rodríguez, J. A. P., Sasaki, S., Kuzmin, R. O., Dohm, J. M., Tanaka, K. L., Miyamoto, H., Kurita, K., Komatsu, G., Fairen, A. G., & Ferris, J. C. (2005). Outflow channel sources, reactivation, and chaos formation, Xanthe Terra, Mars. <em>Icarus</em>, <em>175</em>(1), 36–57. https://doi.org/10.1016/j.icarus.2004.10.025" },
 
-  { name:"Gullies_Tempe_Terra_4905E_304N",         dstr:"Aug 28, 2025", date:"2025-08-28", lon:130.5, lat:30.4,  img:["ESP_018518_2295","ESP_018795_2295"],   min:-4044.87, max:-2758.21, relief:1286.66, post:null, rms_px:null,     rms_x:null,      rms_y:null,       rms_z:null,     rms_m:null,    mola_d:null,   mola_s:null,  credit:false, region:"Mid-Latitude",
+  { name:"Gullies_Tempe_Terra_4905E_304N",         dstr:"Aug 28, 2025", date:"2025-08-28", lon:130.5, lat:30.4,  img:["ESP_018518_2295","ESP_018795_2295"],   min:-4044.87, max:-2758.21, relief:1286.66, post:1, rms_px:0.17671,     rms_x:0.69877,      rms_y:0.053112,       rms_z:5.6393,     rms_m:5.6437,    mola_d:2.429,   mola_s:6.762,  credit:false, region:"Mid-Latitude",
     url:"https://www.uahirise.org/dtm/ESP_018518_2295",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_018500_018599/ESP_018518_2295_ESP_018795_2295/ESP_018518_2295_RED_C_01_ORTHO.br.jpg",
     geo:"Tempe Terra hosts one of the densest concentrations of Martian gullies — alcove-channel-apron systems incised into crater walls and hillslopes. Their geologically recent formation age and morphology suggest seasonal CO₂ frost-driven debris flows as the dominant formation mechanism.",
     cite:"Pilorget, C., & Forget, F. (2016). Formation of gullies on Mars by debris flows triggered by CO₂ sublimation. <em>Nature Geoscience</em>, <em>9</em>(1), 65–69. https://doi.org/10.1038/ngeo2619" },
 
-  { name:"Gorgonum_Chaos_1881E_369S",              dstr:"Sep 1, 2025",  date:"2025-09-01", lon:188.1, lat:-36.9, img:["ESP_074396_1425","ESP_074251_1425"],   min:-442.43,  max:-25.64,   relief:416.79,  post:null, rms_px:null,     rms_x:null,      rms_y:null,       rms_z:null,     rms_m:null,    mola_d:null,   mola_s:null,  credit:false, region:"High-Latitude",
+  { name:"Gorgonum_Chaos_1881E_369S",              dstr:"Sep 1, 2025",  date:"2025-09-01", lon:188.1, lat:-36.9, img:["ESP_074396_1425","ESP_074251_1425"],   min:-442.43,  max:-25.64,   relief:416.79,  post:1, rms_px:0.19303,     rms_x:0.00012113,      rms_y:2.225e-005,       rms_z:0.010809,     rms_m:0.010809,    mola_d:-0.941,   mola_s:12.987,  credit:false, region:"High-Latitude",
     url:"https://www.uahirise.org/dtm/ESP_074396_1425",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_074300_074399/ESP_074396_1425_ESP_074251_1425/ESP_074396_1425_RED_C_01_ORTHO.br.jpg",
     geo:"Gorgonum Chaos in Terra Sirenum is a chaotic depression associated with concentrated chloride and sulfate salt deposits — among the largest chloride exposures on Mars. One of the densest gully fields on Mars is also found here, interpreted as evidence of recent episodic liquid water activity.",
     cite:"Osterloo, M. M., Hamilton, V. E., Bandfield, J. L., Glotch, T. D., Baldridge, A. M., Christensen, P. R., Tornabene, L. L., & Anderson, F. S. (2008). Chloride-bearing materials in the southern highlands of Mars. <em>Science</em>, <em>319</em>(5870), 1651–1654. https://doi.org/10.1126/science.1150690" },
 
-  { name:"Uranius_Mons_Crater_2710E_278N",         dstr:"Sep 1, 2025",  date:"2025-09-01", lon:271.0, lat:27.8,  img:["ESP_067363_2080","ESP_067495_2080"],   min:765.87,   max:1155.02,  relief:389.15,  post:null, rms_px:null,     rms_x:null,      rms_y:null,       rms_z:null,     rms_m:null,    mola_d:null,   mola_s:null,  credit:false, region:"Mid-Latitude",
+  { name:"Uranius_Mons_Crater_2710E_278N",         dstr:"Sep 1, 2025",  date:"2025-09-01", lon:271.0, lat:27.8,  img:["ESP_067363_2080","ESP_067495_2080"],   min:765.87,   max:1155.02,  relief:389.15,  post:2, rms_px:0.30466,     rms_x:0.039696,      rms_y:0.021592,       rms_z:0.77563,     rms_m:0.77589,    mola_d:0.267,   mola_s:8.274,  credit:false, region:"Mid-Latitude",
     url:"https://www.uahirise.org/dtm/ESP_067363_2080",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_067300_067399/ESP_067363_2080_ESP_067495_2080/ESP_067363_2080_RED_D_01_ORTHO.br.jpg",
     geo:"Uranius Mons is a low-relief paterae-type shield volcano in the Tharsis region. Impact craters on its flanks record multiple Amazonian resurfacing episodes. Its summit caldera and radial graben system indicate a complex magmatic history distinct from the large Tharsis Montes.",
     cite:"Hauber, E., Bleacher, J., Gwinner, K., Williams, D., & Greeley, R. (2009). The topography and morphology of low shields and associated landforms of plains volcanism in the Tharsis region of Mars. <em>Journal of Volcanology and Geothermal Research</em>, <em>185</em>(1–2), 69–95. https://doi.org/10.1016/j.jvolgeores.2009.04.015" },
 
-  { name:"Aeolis_Planum_1546E_493S",               dstr:"Sep 1, 2025",  date:"2025-09-01", lon:154.6, lat:-49.3, img:["PSP_008621_1750","ESP_016269_1750"],   min:-2477.44, max:-2213.44, relief:264.00,  post:null, rms_px:null,     rms_x:null,      rms_y:null,       rms_z:null,     rms_m:null,    mola_d:null,   mola_s:null,  credit:false, region:"High-Latitude",
+  { name:"Aeolis_Planum_1546E_493S",               dstr:"Sep 1, 2025",  date:"2025-09-01", lon:154.6, lat:-49.3, img:["PSP_008621_1750","ESP_016269_1750"],   min:-2477.44, max:-2213.44, relief:264.00,  post:1, rms_px:0.58055,     rms_x:0.20088,      rms_y:0.018221,       rms_z:4.0232,     rms_m:4.0243,    mola_d:-2.382,   mola_s:10.240,  credit:false, region:"High-Latitude",
     url:"https://www.uahirise.org/dtm/PSP_008621_1750",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/PSP/ORB_008600_008699/PSP_008621_1750_ESP_016269_1750/PSP_008621_1750_RED_C_01_ORTHO.br.jpg",
     geo:"Aeolis Planum flanks Gale Crater and hosts an extensive yardang field — wind-sculpted ridges formed by differential erosion of indurated sedimentary layers. The region records late Hesperian to Amazonian aeolian reworking of lacustrine deposits adjacent to the MSL Curiosity rover field site.",
     cite:"Zimbelman, J. R., & Scheidt, S. P. (2012). Hesperian age for western Medusae Fossae Formation, Mars. <em>Science</em>, <em>336</em>(6089), 1683. https://doi.org/10.1126/science.1221094" },
 
-  { name:"Phlegra_Montes_Valley_1629E_385N",       dstr:"Sep 1, 2025",  date:"2025-09-01", lon:162.9, lat:38.5,  img:["ESP_089007_2190","ESP_069729_2190"],   min:-3042.26, max:-2146.04, relief:896.22,  post:null, rms_px:null,     rms_x:null,      rms_y:null,       rms_z:null,     rms_m:null,    mola_d:null,   mola_s:null,  credit:false, region:"High-Latitude",
+  { name:"Phlegra_Montes_Valley_1629E_385N",       dstr:"Sep 1, 2025",  date:"2025-09-01", lon:162.9, lat:38.5,  img:["ESP_089007_2190","ESP_069729_2190"],   min:-3042.26, max:-2146.04, relief:896.22,  post:2, rms_px:0.25216,     rms_x:0.074653,      rms_y:0.012287,       rms_z:1.085,     rms_m:1.0853,    mola_d:-0.279,   mola_s:10.562,  credit:false, region:"High-Latitude",
     url:"https://www.uahirise.org/dtm/ESP_089007_2190",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_089000_089099/ESP_089007_2190_ESP_069729_2190/ESP_089007_2190_RED_D_01_ORTHO.br.jpg",
     geo:"Phlegra Montes is a NW-trending mountain range bordering the northern lowlands, with valley systems exhibiting lobate debris aprons — the surface expression of debris-covered glaciers. These represent the most direct evidence for extant non-polar ground ice on Mars.",
     cite:"Levy, J. S., Head, J. W., Fountain, A. G., Dickson, J. L., Okal, M. H., Doyle, D. P., & Marchant, D. R. (2014). Sequestered glacial ice contribution to the global Martian water budget: Geometric constraints on the volume of remnant, midlatitude debris-covered glaciers. <em>Journal of Geophysical Research: Planets</em>, <em>119</em>(10), 2188–2196. https://doi.org/10.1002/2014JE004685" },
 
-  { name:"Pasteur_Crater_2440E_192N",              dstr:"Sep 1, 2025",  date:"2025-09-01", lon:244.0, lat:19.2,  img:["ESP_055160_1995","ESP_055437_1995"],   min:-3022.50, max:-2791.02, relief:231.48,  post:null, rms_px:null,     rms_x:null,      rms_y:null,       rms_z:null,     rms_m:null,    mola_d:null,   mola_s:null,  credit:false, region:"Equatorial",
+  { name:"Pasteur_Crater_2440E_192N",              dstr:"Sep 1, 2025",  date:"2025-09-01", lon:244.0, lat:19.2,  img:["ESP_055160_1995","ESP_055437_1995"],   min:-3022.50, max:-2791.02, relief:231.48,  post:1, rms_px:0.43874,     rms_x:0.016467,      rms_y:0.026321,       rms_z:1.0446,     rms_m:1.0447,    mola_d:0.163,   mola_s:6.200,  credit:false, region:"Equatorial",
     url:"https://www.uahirise.org/dtm/ESP_055160_1995",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_055100_055199/ESP_055160_1995_ESP_055437_1995/ESP_055160_1995_RED_C_01_ORTHO.br.jpg",
     geo:"Pasteur Crater in Arabia Terra contains finely-laminated interior layered deposits (ILDs) interpreted as aeolian or lacustrine sedimentary sequences. Arabia Terra hosts one of Mars' largest concentrations of layered sedimentary basins, potentially recording Hesperian hydrological activity.",
     cite:"Edgett, K. S., & Malin, M. C. (2002). Martian sedimentary rock stratigraphy: Outcrops and interbedded craters of northwest Sinus Meridiani and southwest Arabia Terra. <em>Geophysical Research Letters</em>, <em>29</em>(24), 2179. https://doi.org/10.1029/2002gl016515" },
 
-  { name:"Hebes_Mensa_deposit_2848E_013S",         dstr:"Jul 1, 2025",  date:"2025-07-01", lon:284.8, lat:-1.3,  img:["ESP_017319_1785","ESP_017385_1785"],   min:-3497.20, max:-527.24,  relief:2969.96, post:null, rms_px:null,     rms_x:null,      rms_y:null,       rms_z:null,     rms_m:null,    mola_d:null,   mola_s:null,  credit:false, region:"Equatorial",
+  { name:"Hebes_Mensa_deposit_2848E_013S",         dstr:"Jul 1, 2025",  date:"2025-07-01", lon:284.8, lat:-1.3,  img:["ESP_017319_1785","ESP_017385_1785"],   min:-3497.20, max:-527.24,  relief:2969.96, post:2, rms_px:0.31266,     rms_x:0.013406,      rms_y:0.059499,       rms_z:1.3696,     rms_m:1.3701,    mola_d:-8.610,   mola_s:42.747,  credit:false, region:"Equatorial",
     url:"https://www.uahirise.org/dtm/ESP_017319_1785",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_017300_017399/ESP_017319_1785_ESP_017385_1785/ESP_017319_1785_RED_D_01_ORTHO.br.jpg",
     geo:"Hebes Chasma is an enclosed trough in the Valles Marineris system with no outlet. Hebes Mensa, the massive interior layered deposit, rises ~8 km from the chasma floor. Sulfate and phyllosilicate-bearing ILDs record prolonged aqueous diagenesis and are among the thickest sedimentary sequences on Mars.",
     cite:"Schmidt, F., Andrieu, F., Costard, F., Kocifaj, M., & Meresescu, A. G. (2018). Geology of Hebes Chasma, Mars: Structure, stratigraphy, and mineralogy of the interior layered deposits. <em>Journal of Geophysical Research: Planets</em>, <em>124</em>(2), 330–361. https://doi.org/10.1029/2018JE005658" },
 
-  { name:"Landon_Valles_basin_3304E_195S",         dstr:"Jul 1, 2025",  date:"2025-07-01", lon:330.4, lat:-19.5, img:["ESP_034143_1605","ESP_034209_1605"],   min:-1954.19, max:-1819.13, relief:135.06,  post:null, rms_px:null,     rms_x:null,      rms_y:null,       rms_z:null,     rms_m:null,    mola_d:null,   mola_s:null,  credit:false, region:"Equatorial",
+  { name:"Landon_Valles_basin_3304E_195S",         dstr:"Jul 1, 2025",  date:"2025-07-01", lon:330.4, lat:-19.5, img:["ESP_034143_1605","ESP_034209_1605"],   min:-1954.19, max:-1819.13, relief:135.06,  post:1, rms_px:0.68391,     rms_x:0.11524,      rms_y:0.0025609,       rms_z:2.9178,     rms_m:2.9183,    mola_d:-0.485,   mola_s:2.381,  credit:false, region:"Equatorial",
     url:"https://www.uahirise.org/dtm/ESP_034143_1605",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_034100_034199/ESP_034143_1605_ESP_034209_1605/ESP_034143_1605_RED_C_01_ORTHO.br.jpg",
     geo:"Landon Valles is a Noachian valley network system recording peak fluvial activity ~3.7 Ga. Basin-filling lacustrine sediments in the terminal basin potentially preserve a habitability record from early Mars. The global valley network mapping by Hynek et al. classifies this as a second-order tributary system.",
     cite:"Hynek, B. M., Beach, M., & Hoke, M. R. T. (2010). Updated global map of Martian valley networks and implications for climate and hydrologic processes. <em>Journal of Geophysical Research: Planets</em>, <em>115</em>(E9), E09008. https://doi.org/10.1029/2009JE003548" },
 
-  { name:"Brain_Terrain_3093E_436N",               dstr:"May 29, 2026", date:"2026-05-29", lon:309.3, lat:43.6,  img:["ESP_079099_2240","ESP_078954_2240"],   min:-3567.99, max:-3217.73, relief:350.26,  post:1,    rms_px:0.14885,  rms_x:0.023917,  rms_y:0.0019394,  rms_z:0.90941,  rms_m:0.90941, mola_d:0.284,  mola_s:4.465, credit:true,  region:"Mid-Latitude",
+  { name:"Brain_Terrain_3093E_436N",               dstr:"May 29, 2026", date:"2026-05-29", lon:309.3, lat:43.6,  img:["ESP_079099_2240","ESP_078954_2240"],   min:-3567.99, max:-3217.73, relief:350.26,  post:1,    rms_px:0.14885,  rms_x:0.023917,  rms_y:0.0019394,  rms_z:0.90941,  rms_m:null, mola_d:0.284,  mola_s:4.465, credit:true,  region:"Mid-Latitude",
     url:"https://www.uahirise.org/dtm/ESP_079099_2240",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_079000_079099/ESP_079099_2240_ESP_078954_2240/ESP_079099_2240_RED_C_01_ORTHO.br.jpg",
     geo:"Brain terrain is a convoluted ridge-and-cell surface texture, ~3–5 m in relief, formed by the sublimation of buried mid-latitude excess ice. Its closed-cell morphology is a diagnostic marker of subsurface volatile loss and ground-ice degradation in the northern mid-latitudes.",
@@ -1348,11 +1626,42 @@ const PUBS = [
     geo:"Terra Sirenum is a heavily cratered Noachian highland hosting chloride salt deposits and Fe/Mg phyllosilicates. These mineral assemblages record ancient aqueous environments and episodic surface water, making the region a key archive of early Martian habitability in the southern hemisphere.",
     cite:"Osterloo, M. M., Anderson, F. S., Hamilton, V. E., & Hynek, B. M. (2010). Geologic context of proposed chloride-bearing materials on Mars. <em>Journal of Geophysical Research: Planets</em>, <em>115</em>(E10), E10012. https://doi.org/10.1029/2010JE003613" },
 
-  { name:"Cavil_Angusti_South_Polar_2834E_765S",   dstr:"May 5, 2026",  date:"2026-05-05", lon:283.4, lat:-76.5, img:["ESP_013720_1035","ESP_013707_1035"],   min:757.61,   max:2443.03,  relief:1685.42, post:1,    rms_px:5.9165,   rms_x:0.026735,  rms_y:0.11845,    rms_z:5.9161,   rms_m:5.9165,  mola_d:null,   mola_s:null,  credit:true,  region:"South Polar",
+  { name:"Cavil_Angusti_South_Polar_2834E_765S",   dstr:"May 5, 2026",  date:"2026-05-05", lon:283.4, lat:-76.5, img:["ESP_013720_1035","ESP_013707_1035"],   min:757.61,   max:2443.03,  relief:1685.42, post:1,    rms_px:null,   rms_x:0.026735,  rms_y:0.11845,    rms_z:5.9161,   rms_m:5.9165,  mola_d:-2.93,   mola_s:53.12,  credit:true,  region:"South Polar",
     url:"https://www.uahirise.org/dtm/ESP_013720_1035",
     ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_013700_013799/ESP_013720_1035_ESP_013707_1035/ESP_013720_1035_RED_C_01_ORTHO.br.jpg",
     geo:"Cavi Angusti comprises deep collapse pits and arcuate scarps incised into the south polar layered deposits. Carved by CO₂ and H₂O sublimation, the cavi expose ~1.7 km of polar stratigraphy, providing a cross-sectional record of volatile-driven erosion in the south polar region.",
     cite:"Tanaka, K. L., & Kolb, E. J. (2001). Geologic history of the polar regions of Mars based on Mars Global Surveyor data: I. Noachian and Hesperian periods. <em>Icarus</em>, <em>154</em>(1), 3–21. https://doi.org/10.1006/icar.2001.6675" }
+,
+  { name:"Spacex_Starship_Arcadia_1901E_386N", dstr:"Sep 1, 2026", date:"2026-09-01", lon:190.153, lat:38.638, img:["ESP_061128_2190","ESP_061194_2190"], min:-4001.76, max:-3971.75, relief:30.01, post:1, rms_px:0.17888, rms_x:0.018246, rms_y:0.018747, rms_z:0.94159, rms_m:null, mola_d:-1.200, mola_s:1.668, credit:true, region:"Mid-Latitude",
+    url:"https://www.uahirise.org/dtm/ESP_061128_2190", ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_061100_061199/ESP_061128_2190_ESP_061194_2190/ESP_061128_2190_RED_C_01_ORTHO.br.jpg",
+    geo:"Arcadia Planitia is a smooth northern mid-latitude plain underlain in places by a widespread, decameters-thick layer of excess water ice. Terraced impact craters and SHARAD radar reflections indicate that this buried ice is volumetrically significant, making the region important for periglacial stratigraphy, recent climate history, and future landing-site resource assessment.",
+    cite:"Bramson, A. M., Byrne, S., Putzig, N. E., Sutton, S., Plaut, J. J., Brothers, T. C., & Holt, J. W. (2015). Widespread excess ice in Arcadia Planitia, Mars. <em>Geophysical Research Letters</em>, <em>42</em>(16), 6566–6574. https://doi.org/10.1002/2015GL064844" },
+
+  { name:"Protonilus_Mensae_Ridges_0478E_405N", dstr:"Sep 1, 2026", date:"2026-09-01", lon:47.861, lat:40.502, img:["ESP_049766_2210","ESP_049621_2210"], min:-1684.95, max:44.64, relief:1729.59, post:2, rms_px:0.22176, rms_x:0.001159, rms_y:0.0056241, rms_z:0.48642, rms_m:null, mola_d:1.322, mola_s:5.656, credit:true, region:"High-Latitude",
+    url:"https://www.uahirise.org/dtm/ESP_049766_2210", ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_049700_049799/ESP_049766_2210_ESP_049621_2210/ESP_049766_2210_RED_D_01_ORTHO.br.jpg",
+    geo:"Protonilus Mensae lies along the northern dichotomy boundary in classic fretted terrain containing lobate debris aprons and lineated valley fill. These flow-related landforms are widely interpreted as remnants of Late Amazonian debris-covered glacial systems, preserving evidence for substantial mid-latitude ice accumulation and subsequent sublimation beneath protective debris.",
+    cite:"Head, J. W., Marchant, D. R., Dickson, J. L., Kress, A. M., & Baker, D. M. (2010). Northern mid-latitude glaciation in the Late Amazonian period of Mars: Criteria for the recognition of debris-covered glacier and valley glacier landsystem deposits. <em>Earth and Planetary Science Letters</em>, <em>294</em>(3–4), 306–320. https://doi.org/10.1016/j.epsl.2009.06.041" },
+
+  { name:"Phlegra_Dorsa_Cone_Field_1743E_285N", dstr:"Sep 1, 2026", date:"2026-09-01", lon:174.3, lat:28.5, img:["ESP_016479_2090","ESP_016334_2090"], min:-3474.14, max:-3373.41, relief:100.73, post:1, rms_px:0.14488, rms_x:5.2316e-005, rms_y:2.4565e-005, rms_z:4.6707e-005, rms_m:null, mola_d:0.187, mola_s:3.291, credit:true, region:"Mid-Latitude",
+    url:"https://www.uahirise.org/dtm/ESP_016479_2090", ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_016400_016499/ESP_016479_2090_ESP_016334_2090/ESP_016479_2090_RED_C_01_ORTHO.br.jpg",
+    geo:"Phlegra Dorsa contains abundant small-cone morphologies whose spatial patterns contribute to studies of Martian volcanic, sedimentary, and periglacial processes. High-resolution HiRISE mapping of cone fields provides morphometric constraints on cone geometry and distribution, supporting comparison among competing formation mechanisms across Mars.",
+    cite:"Yang, C., Zhang, N., Guan, R., & Zhao, H. (2024). Mapping cones on Mars in high-resolution planetary images with deep learning-based instance segmentation. <em>Remote Sensing</em>, <em>16</em>(2), 227. https://doi.org/10.3390/rs16020227" },
+
+  { name:"High_Latitude_Exposure_1050E_875N", dstr:"Sep 1, 2026", date:"2026-09-01", lon:105.023, lat:87.499, img:["PSP_009280_2675","PSP_009426_2675"], min:-2606.71, max:-2077.69, relief:529.02, post:2, rms_px:0.19412, rms_x:null, rms_y:null, rms_z:null, rms_m:null, mola_d:null, mola_s:null, credit:true, region:"North Polar",
+    url:"https://www.uahirise.org/dtm/PSP_009280_2675", ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/PSP/ORB_009200_009299/PSP_009280_2675_PSP_009426_2675/PSP_009280_2675_RED_D_01_ORTHO.br.jpg",
+    geo:"The north polar layered deposits are a thick sequence of water-ice-rich and dust-bearing strata exposed in troughs near Planum Boreum. HiRISE stereo DTMs resolve the topographic expression of individual layers and permit stratigraphic correlations through hundreds of meters of section, supporting interpretation of the NPLD as a high-resolution archive of recent Martian climate variability.",
+    cite:"Becerra, P., Byrne, S., Sori, M. M., Sutton, S., & Herkenhoff, K. E. (2016). Stratigraphy of the north polar layered deposits of Mars from high-resolution topography. <em>Journal of Geophysical Research: Planets</em>, <em>121</em>(8), 1445–1471. https://doi.org/10.1002/2015JE004992" },
+
+  { name:"Pits_Sinai_Planum_2710E_089S", dstr:"Sep 1, 2026", date:"2026-09-01", lon:271.0, lat:-8.9, img:["ESP_035411_1710","ESP_035266_1710"], min:4628.30, max:5271.70, relief:643.40, post:2, rms_px:0.1834, rms_x:0.00013767, rms_y:1.075e-005, rms_z:0.0078057, rms_m:null, mola_d:0.691, mola_s:3.111, credit:true, region:"Equatorial",
+    url:"https://www.uahirise.org/dtm/ESP_035411_1710", ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_035400_035499/ESP_035411_1710_ESP_035266_1710/ESP_035411_1710_RED_D_01_ORTHO.br.jpg",
+    geo:"Sinai Planum is part of the tectonically fractured plateau surrounding the Valles Marineris–Tharsis region, where pits and troughs commonly occur with extensional structures. Martian pit-crater chains are generally interpreted as collapse features developed above subsurface cavities, and structural associations indicate that dilational normal faults and extension fractures are a major formation mechanism.",
+    cite:"Wyrick, D., Ferrill, D. A., Morris, A. P., Colton, S. L., & Sims, D. W. (2004). Distribution, morphology, and origins of Martian pit crater chains. <em>Journal of Geophysical Research: Planets</em>, <em>109</em>(E6), E06005. https://doi.org/10.1029/2004JE002240" },
+
+  { name:"Mesa_Utopia_Planitia_0892E_301N", dstr:"Sep 1, 2026", date:"2026-09-01", lon:89.278, lat:30.197, img:["ESP_072540_2105","ESP_072461_2105"], min:-3705.82, max:-3463.95, relief:241.87, post:2, rms_px:0.23738, rms_x:4.4198e-006, rms_y:1.7271e-006, rms_z:0.13115, rms_m:null, mola_d:-0.923, mola_s:4.259, credit:true, region:"Mid-Latitude",
+    url:"https://www.uahirise.org/dtm/ESP_072540_2105", ortho:"https://www.uahirise.org/PDS/EXTRAS/DTM/ESP/ORB_072500_072599/ESP_072540_2105_ESP_072461_2105/ESP_072461_2105_RED_D_01_ORTHO.br.jpg",
+    geo:"Utopia Planitia occupies a giant Noachian impact basin in the northern lowlands whose present morphology reflects extensive sedimentary and volcanic infilling as well as later tectonic modification. Mesas and other remnant relief within the plains preserve local stratigraphic and structural information that helps constrain the basin's long post-impact resurfacing history.",
+    cite:"Thomson, B. J., & Head, J. W. (2001). Utopia Basin, Mars: Characterization of topography and morphology and assessment of the origin and evolution of basin internal structure. <em>Journal of Geophysical Research: Planets</em>, <em>106</em>(E10), 23209–23230. https://doi.org/10.1029/2000JE001355" }
+
 ];
 
 let currentFilter = 'all';
@@ -1363,133 +1672,18 @@ const fe = v => v !== null && v !== undefined ? (v >= 0 ? '+' : '') + v.toFixed(
 const fn = (v,d=3) => v !== null && v !== undefined ? v.toFixed(d) : '—';
 
 function buildStats() {
-  const credited = PUBS.filter(p => p.credit);
-  const allR  = PUBS.map(p => p.relief);
-  const maxR  = Math.max(...allR);
-  const minEl = Math.min(...PUBS.map(p => p.min));
-  const maxEl = Math.max(...PUBS.map(p => p.max));
-  const span  = maxEl - minEl;
-  const avg   = Math.round(allR.reduce((a,b)=>a+b,0)/allR.length);
-
-  const W = 1800, H = 720, PAD = 52;
-  const f = `font-family="'Helvetica Neue',Helvetica,Arial,sans-serif"`;
-  const mx = lon => PAD + (((lon%360)+360)%360)/360*(W-2*PAD);
-  const my = lat => PAD + (90-lat)/180*(H-2*PAD);
-
-  // ── TONAL MAP — clean white/gray palette ──
-  const DEEP='#e0e2e6', PLAIN='#f0f1f3', HIGH='#eaebee', POLAR='#f5f6f8';
-
-  const zones=[
-    [ 50, 95,-50,-30,DEEP],[ 305,360, 10, 55,DEEP],[  0, 50, 10, 55,DEEP],
-    [ 80,160, 30, 60,DEEP],[265,310,-17, -3,DEEP],[310,345,-45,-25,DEEP],
-    [ 80,105, 10, 30,DEEP],[165,215, 10, 35,PLAIN],[140,180,  5, 30,PLAIN],
-    [  0,180,-50,-25,HIGH],[150,215,-45,-20,HIGH],[ 10, 60,  5, 35,HIGH],
-    [220,310,-20, 40,HIGH],[  0,360, 55, 90,POLAR],[  0,360,-90,-55,POLAR],
-  ];
-  let elevZones='';
-  zones.forEach(([lon0,lon1,lat0,lat1,col])=>{
-    const x0=mx(lon0),x1=mx(lon1),y0=my(lat1),y1=my(lat0);
-    elevZones+=`<rect x="${x0.toFixed(1)}" y="${y0.toFixed(1)}" width="${(x1-x0).toFixed(1)}" height="${(y1-y0).toFixed(1)}" fill="${col}"/>`;
-  });
-  const polarN=`<rect x="${PAD}" y="${PAD}" width="${W-2*PAD}" height="${(my(70)-PAD).toFixed(1)}" fill="${POLAR}"/>`;
-  const polarS=`<rect x="${PAD}" y="${my(-70).toFixed(1)}" width="${W-2*PAD}" height="${(H-PAD-my(-70)).toFixed(1)}" fill="${POLAR}"/>`;
-
-  // ── GRID ──
-  let grid='';
-  for(let lon=0;lon<=360;lon+=30) grid+=`<line x1="${mx(lon).toFixed(1)}" y1="${PAD}" x2="${mx(lon).toFixed(1)}" y2="${H-PAD}" stroke="#d8d8d8" stroke-width="0.5"/>`;
-  for(let lat=-90;lat<=90;lat+=30) grid+=`<line x1="${PAD}" y1="${my(lat).toFixed(1)}" x2="${W-PAD}" y2="${my(lat).toFixed(1)}" stroke="${lat===0?'#aaa':'#d8d8d8'}" stroke-width="${lat===0?0.8:0.5}"/>`;
-
-  // ── AXIS LABELS ──
-  let axisLabels='';
-  [-60,-30,0,30,60].forEach(lat=>{
-    axisLabels+=`<text x="${PAD-6}" y="${my(lat)+4}" text-anchor="end" font-size="12" fill="#999" ${f}>${lat>0?'+':''}${lat}°</text>`;
-  });
-  [0,60,120,180,240,300].forEach(lon=>{
-    axisLabels+=`<text x="${mx(lon)}" y="${H-PAD+16}" text-anchor="middle" font-size="12" fill="#999" ${f}>${lon}°E</text>`;
-  });
-  axisLabels+=`<text x="${PAD-6}" y="${PAD+6}" text-anchor="end" font-size="12" fill="#bbb" ${f}>90°N</text>`;
-  axisLabels+=`<text x="${PAD-6}" y="${H-PAD+5}" text-anchor="end" font-size="12" fill="#bbb" ${f}>90°S</text>`;
-
-  // ── NAMED FEATURES ──
-  const feats=[
-    [255, 9,'THARSIS',16,'600'],[225,21,'Olympus Mons',12,'400'],[316,-11,'VALLES MARINERIS',14,'600'],
-    [ 67,-42,'HELLAS PLANITIA',14,'600'],[326,24,'CHRYSE PLANITIA',12,'400'],[345,40,'ACIDALIA PLANITIA',12,'400'],
-    [ 22,23,'ARABIA TERRA',12,'400'],[195,23,'AMAZONIS PLANITIA',12,'400'],[ 20,-47,'ARGYRE PLANITIA',12,'400'],
-    [130,-4,'TERRA CIMMERIA',12,'400'],[175,-45,'TERRA SIRENUM',12,'400'],[150,16,'ELYSIUM PLANITIA',12,'400'],
-    [ 60,48,'UTOPIA PLANITIA',12,'400'],[  5,48,'VASTITAS BOREALIS',12,'400'],[ 50,-34,'NOACHIS TERRA',12,'400'],
-    [ 80,22,'Syrtis Major',11,'400'],[130,40,'Phlegra Montes',10,'400'],[284,-1,'Hebes Chasma',10,'400'],
-  ];
-  const featLabels=feats.map(([lon,lat,name,sz,fw])=>
-    `<text x="${mx(lon).toFixed(1)}" y="${(my(lat)+2).toFixed(1)}" text-anchor="middle" font-size="${sz}" font-weight="${fw}" fill="#bbb" font-style="italic" ${f}>${name}</text>`
+  const regionColors = {
+    'South Polar':'#1d4ed8',
+    'North Polar':'#0ea5e9',
+    'Equatorial':'#111111',
+    'Mid-Latitude':'#15803d',
+    'High-Latitude':'#7c3aed'
+  };
+  const regionButtons = ['South Polar','North Polar','Equatorial','Mid-Latitude','High-Latitude'].map(r =>
+    `<button type="button" class="mars-region-btn" data-map-region="${r}"><span class="rdot" style="background:${regionColors[r]}"></span>${r}</button>`
   ).join('');
 
-  // ── BORDER ──
-  const border=`<rect x="${PAD}" y="${PAD}" width="${W-2*PAD}" height="${H-2*PAD}" fill="none" stroke="#d0d0d0" stroke-width="0.8"/>`;
-
-  // ── ELEVATION CLASS LEGEND ──
-  const legSwatchX=W-PAD-220, legSwatchY=H-PAD-38;
-  const swatches=[[DEEP,'Deep basin'],[PLAIN,'Plains'],[HIGH,'Highlands'],[POLAR,'Polar']];
-  let scaleBar=`<text x="${legSwatchX}" y="${legSwatchY-5}" font-size="9" fill="#bbb" letter-spacing="1" ${f}>ELEVATION CLASS</text>`;
-  swatches.forEach(([col,label],i)=>{
-    const sx=legSwatchX+i*55;
-    scaleBar+=`<rect x="${sx}" y="${legSwatchY}" width="12" height="9" fill="${col}" stroke="#ccc" stroke-width="0.5"/>`;
-    scaleBar+=`<text x="${sx+15}" y="${legSwatchY+8}" font-size="9" fill="#bbb" ${f}>${label}</text>`;
-  });
-
-  // ── SOURCE NOTE ──
-  const srcNote=`<text x="${PAD+2}" y="${H-PAD-8}" font-size="9" fill="#bbb" ${f}>USGS I-2782 · MOLA/MGS Smith et al. 2001 · Areocentric equirectangular · HiRISE DTM footpoints · NASA/JPL-Caltech/UArizona</text>`;
-
-  // Region colors
-  const RC={'South Polar':'#1d4ed8','North Polar':'#0ea5e9','Equatorial':'#111111','Mid-Latitude':'#15803d','High-Latitude':'#7c3aed'};
-  const SHORT=['S. Polar Dep. A','S. Polar Dep. B','N. Polar Bench','Coogoon Valles','Aram Chaos','Oxia Colles','Olympus Mons Sys.','Argyre Val.','Noachis Craters','Arcadia Planitia','Chaos Terrain','Gullies Tempe T.','Gorgonum Chaos','Uranius Mons Cr.','Aeolis Planum','Phlegra Montes V.','Pasteur Crater','Hebes Mensa Dep.','Landon Valles B.','Brain Terrain','Terra Sirenum','Cavi Angusti S.P.'];
-
-  // ── DOTS ──
-  let dots='';
-  PUBS.forEach((p,i)=>{
-    const x=mx(p.lon),y=my(p.lat),c=RC[p.region]||'#111',n=i+1,r=n<10?13:15,fs=n<10?12:11;
-    dots+=`<g style="cursor:default">
-      <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${c}"/>
-      <text x="${x.toFixed(1)}" y="${(y+fs*0.38).toFixed(1)}" text-anchor="middle" font-size="${fs}" font-weight="700" fill="white" ${f}>${n}</text>
-      <title>${n}. ${p.name}\n${Math.abs(p.lat).toFixed(1)}°${p.lat>=0?'N':'S'} · ${(((p.lon%360)+360)%360).toFixed(1)}°E\nRelief: ${p.relief.toFixed(0)} m · Elev: ${p.min.toFixed(0)}→${p.max.toFixed(0)} m\n${p.dstr}</title>
-    </g>`;
-  });
-
-  // ── REGION LEGEND ──
-  const rl=Object.entries(RC).map(([r,c],i)=>`<g transform="translate(${i*220+PAD},${H+8})">
-    <circle cx="7" cy="6" r="7" fill="${c}" opacity="0.9"/>
-    <text x="3.5" y="10" text-anchor="middle" font-size="8.5" font-weight="700" fill="white" ${f}>1</text>
-    <text x="20" y="11" font-size="10.5" fill="#444" ${f}>${r}</text>
-  </g>`).join('');
-
-  // ── INDEX TABLE — grouped by region ──
-  const legY=H+38; let legItems='';
-  const regionOrder=['South Polar','North Polar','Equatorial','Mid-Latitude','High-Latitude'];
-  const colW2=(W-2*PAD)/regionOrder.length;
-  const grouped={};
-  regionOrder.forEach(r=>{grouped[r]=[];});
-  PUBS.forEach((p,i)=>grouped[p.region]&&grouped[p.region].push({p,i}));
-  const maxRows=Math.max(...regionOrder.map(r=>grouped[r].length));
-  regionOrder.forEach((reg,ci)=>{
-    const c=RC[reg]||'#111',lx=PAD+ci*colW2,ly=legY;
-    legItems+=`<circle cx="${lx+9}" cy="${ly+7}" r="7" fill="${c}" opacity="0.9"/>`;
-    legItems+=`<text x="${lx+22}" y="${ly+11}" font-size="11" font-weight="600" fill="#333" letter-spacing="0.5" ${f}>${reg.toUpperCase()}</text>`;
-    legItems+=`<line x1="${lx}" y1="${ly+18}" x2="${lx+colW2-12}" y2="${ly+18}" stroke="#e0e0e0" stroke-width="0.8"/>`;
-  });
-  const rowH=30;
-  regionOrder.forEach((reg,ci)=>{
-    const c=RC[reg]||'#111',lx=PAD+ci*colW2;
-    grouped[reg].forEach(({p,i},ri)=>{
-      const n=i+1,ly=legY+24+ri*rowH,rr=n<10?9:10,fs=n<10?9:8.5;
-      legItems+=`<circle cx="${lx+9}" cy="${ly+7}" r="${rr}" fill="${c}" opacity="0.9"/>`;
-      legItems+=`<text x="${lx+9}" y="${ly+10.5}" text-anchor="middle" font-size="${fs}" font-weight="700" fill="white" ${f}>${n}</text>`;
-      legItems+=`<text x="${lx+24}" y="${ly+9}" font-size="11" font-weight="600" fill="#111" ${f}>${SHORT[i]}</text>`;
-      legItems+=`<text x="${lx+24}" y="${ly+20}" font-size="9" fill="#aaa" ${f}>${Math.abs(p.lat).toFixed(1)}°${p.lat>=0?'N':'S'} · ${(((p.lon%360)+360)%360).toFixed(1)}°E · ${p.relief.toFixed(0)} m · ${p.dstr}</text>`;
-      legItems+=`<line x1="${lx}" y1="${ly+26}" x2="${lx+colW2-12}" y2="${ly+26}" stroke="#f5f5f5" stroke-width="0.6"/>`;
-    });
-  });
-  const svgH=legY+26+maxRows*rowH+20;
-
-  document.getElementById('statsRow').innerHTML=`
+  document.getElementById('statsRow').innerHTML = `
     <div class="stats-left">
       <div class="stat-block">
         <div class="stat-num">2,350<span style="font-size:1.4rem;font-weight:700;color:#111">%</span></div>
@@ -1523,30 +1717,327 @@ function buildStats() {
       </div>
     </div>
     <div class="stats-right">
-      <div class="plani-wrap">
-        <div class="plani-title" style="flex-direction:column;gap:2px">
-          <div style="display:flex;justify-content:space-between;align-items:baseline">
-            <span style="font-weight:500;color:#333;letter-spacing:0.06em">Mars Planisphere — 22 HiRISE DTM Footpoints</span>
-            <span style="color:#bbb">0°–360°E · 90°S–90°N</span>
+      <div class="mars-map-shell" id="marsMapShell">
+        <div class="mars-map-head">
+          <div>
+            <div class="mars-map-kicker">Mars Planisphere — 28 HiRISE DTM Projects</div>
+            <div class="mars-map-source">NASA Mars Trek / USGS Astrogeology · MGS MOLA + Mars Express HRSC Color Hillshade Blend · 200 m/pixel · Simple Cylindrical · Planetocentric (areocentric) latitude · Positive-East longitude</div>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:baseline">
-            <span>MOLA Topographic Basemap · USGS I-2782 · Areocentric Equirectangular · hover markers for metadata</span>
-            <span style="color:#bbb">Smith et al. 2001, JGR</span>
+          <div class="mars-map-head-right">0°E → 360°E<br>90°N → 90°S</div>
+        </div>
+        <div class="mars-map-toolbar">
+          <div class="mars-map-regions" aria-label="Filter map markers by latitude class">
+            <button type="button" class="mars-region-btn active" data-map-region="all">All · 28</button>
+            ${regionButtons}
+          </div>
+          <div class="mars-map-jump">
+            <label for="marsProjectSelect">Project</label>
+            <select id="marsProjectSelect" aria-label="Jump to one of the 28 DTM projects">
+              <option value="">Jump to any of the 28 projects…</option>
+              ${PUBS.map((p,i)=>`<option value="${i}">${String(i+1).padStart(2,'0')} · ${p.name}</option>`).join('')}
+            </select>
+          </div>
+          <div class="mars-map-nav" aria-label="Map navigation">
+            <button type="button" class="mars-map-tool" id="marsZoomOut" aria-label="Zoom out">−</button>
+            <span class="mars-map-zoomread" id="marsZoomRead">1.0×</span>
+            <button type="button" class="mars-map-tool" id="marsZoomIn" aria-label="Zoom in">+</button>
+            <button type="button" class="mars-map-tool" id="marsReset">Reset</button>
           </div>
         </div>
-        <svg class="plani-svg" viewBox="0 0 ${W} ${svgH}" xmlns="http://www.w3.org/2000/svg"
-             style="border:1px solid #e0e0e0;background:#fff">
-          <rect x="${PAD}" y="${PAD}" width="${W-2*PAD}" height="${H-2*PAD}" fill="#fff"/>
-          ${elevZones}${polarN}${polarS}${grid}${border}${featLabels}${axisLabels}${scaleBar}${srcNote}${dots}
-          <text x="${W/2}" y="${PAD-14}" text-anchor="middle" font-size="9" fill="rgba(0,0,0,0.4)" letter-spacing="3" ${f}>TOPOGRAPHIC MAP OF MARS · USGS I-2782 · MOLA · AREOCENTRIC EQUIRECTANGULAR PROJECTION</text>
-          <line x1="${PAD}" y1="${H+2}" x2="${W-PAD}" y2="${H+2}" stroke="#e0e0e0" stroke-width="0.8"/>
-          ${rl}
-          <line x1="${PAD}" y1="${legY-6}" x2="${W-PAD}" y2="${legY-6}" stroke="#ebebeb" stroke-width="0.8"/>
-          ${legItems}
-        </svg>
+        <div class="mars-map-viewport" id="marsMapViewport" aria-label="Interactive MOLA map of Mars with HiRISE DTM locations">
+          <div class="mars-map-scene" id="marsMapScene">
+            <div class="mars-map-tiles" id="marsMapTiles"></div>
+            <svg class="mars-grid-overlay" viewBox="0 0 360 180" preserveAspectRatio="none" aria-hidden="true">
+              ${[30,60,90,120,150,180,210,240,270,300,330].map(x=>`<line x1="${x}" y1="0" x2="${x}" y2="180" stroke="rgba(255,255,255,.24)" stroke-width=".35"/>`).join('')}
+              ${[30,60,90,120,150].map(y=>`<line x1="0" y1="${y}" x2="360" y2="${y}" stroke="rgba(255,255,255,.24)" stroke-width=".35"/>`).join('')}
+              <line x1="0" y1="90" x2="360" y2="90" stroke="rgba(255,255,255,.48)" stroke-width=".55"/>
+              <line x1="180" y1="0" x2="180" y2="180" stroke="rgba(255,255,255,.40)" stroke-width=".45"/>
+            </svg>
+            <div class="mars-map-tint"></div>
+            <div id="marsMarkerLayer"></div>
+          </div>
+          <div class="mars-map-tooltip" id="marsMapTooltip" role="status"></div>
+          <div class="mars-map-coordbar"><span id="marsCursorCoords">Move cursor over map</span><span>·</span><span>0–360°E / planetocentric</span></div>
+          <div class="mars-map-dataset">MOLA + HRSC · 200 m/px</div>
+        </div>
+        <div class="mars-map-detail mars-map-detail-empty" id="marsMapDetail">
+          <div class="mars-detail-empty-title">Select any of the 28 HiRISE DTM projects</div>
+          <div class="mars-detail-empty-copy">Each selection shows the complete README-derived elevation range, post spacing, bundle-adjustment residuals, MOLA tie statistics, source observations, ORTHO preview, geological context, and APA reference.</div>
+        </div>
+        <div class="mars-map-foot">
+          <span>Drag to pan · wheel / ± to zoom · click any marker to lock the complete README record · overlapping markers are automatically spread while the anchor dot preserves the exact coordinate.</span>
+          <span>Basemap: NASA Mars Trek <span style="font-family:'Courier New',monospace">Mars_MOLA_blend200ppx_HRSC_ClrShade_clon0dd_200mpp_lzw</span> · MOLA 463 m fallback.</span>
+        </div>
       </div>
     </div>`;
+  initMarsMap();
 }
+
+let marsMapState = null;
+
+function initMarsMap() {
+  const viewport = document.getElementById('marsMapViewport');
+  const scene = document.getElementById('marsMapScene');
+  const tiles = document.getElementById('marsMapTiles');
+  const layer = document.getElementById('marsMarkerLayer');
+  const tooltip = document.getElementById('marsMapTooltip');
+  const coords = document.getElementById('marsCursorCoords');
+  const zoomRead = document.getElementById('marsZoomRead');
+  const detail = document.getElementById('marsMapDetail');
+  const projectSelect = document.getElementById('marsProjectSelect');
+  if (!viewport || !scene || !tiles || !layer || !tooltip || !detail) return;
+
+  const RC = {'South Polar':'#1d4ed8','North Polar':'#0ea5e9','Equatorial':'#111111','Mid-Latitude':'#15803d','High-Latitude':'#7c3aed'};
+  marsMapState = {scale:1, x:0, y:0, region:'all', selected:null, dragging:false, startX:0, startY:0, originX:0, originY:0, tileKey:''};
+  const st = marsMapState;
+  const hiBase = 'https://trek.nasa.gov/tiles/Mars/EQ/Mars_MOLA_blend200ppx_HRSC_ClrShade_clon0dd_200mpp_lzw/1.0.0/default/default028mm/';
+  const fallbackBase = 'https://trek.nasa.gov/tiles/Mars/EQ/Mars_MGS_MOLA_ClrShade_merge_global_463m/1.0.0/default/default028mm/';
+
+  function fmtCoord(p) {
+    const lon = ((p.lon % 360) + 360) % 360;
+    const lat = Math.abs(p.lat).toFixed(3) + '°' + (p.lat >= 0 ? 'N' : 'S');
+    return lon.toFixed(3) + '°E · ' + lat;
+  }
+  function fmtElev(v) { return Number.isFinite(v) ? (v >= 0 ? '+' : '') + v.toFixed(2) + ' m' : '—'; }
+  function fmtFixed(v,d=3,suffix='') { return Number.isFinite(v) ? v.toFixed(d) + suffix : '—'; }
+  function fmtSigned(v,d=3,suffix='') { return Number.isFinite(v) ? (v>=0?'+':'') + v.toFixed(d) + suffix : '—'; }
+  function fmtResidual(v) {
+    if (!Number.isFinite(v)) return '—';
+    const a=Math.abs(v);
+    if (a!==0 && a<0.001) return v.toExponential(6) + ' m';
+    return v.toFixed(a<1?6:5).replace(/0+$/,'').replace(/\.$/,'') + ' m';
+  }
+  function orthoLabel(p) {
+    if (!p.ortho) return p.img[0] + '_RED_ORTHO';
+    try { return decodeURIComponent(p.ortho.split('/').pop().replace(/\.br\.jpg$/,'')); }
+    catch (_) { return p.img[0] + '_RED_ORTHO'; }
+  }
+
+  function visibleTileWindow(z) {
+    const w=Math.max(1,viewport.clientWidth), h=Math.max(1,viewport.clientHeight);
+    const cols=Math.pow(2,z+1), rows=Math.pow(2,z);
+    const nx0=Math.max(0,Math.min(1,(-st.x)/(w*st.scale)));
+    const nx1=Math.max(0,Math.min(1,(w-st.x)/(w*st.scale)));
+    const ny0=Math.max(0,Math.min(1,(-st.y)/(h*st.scale)));
+    const ny1=Math.max(0,Math.min(1,(h-st.y)/(h*st.scale)));
+    const c0=Math.max(0,Math.floor(nx0*cols)-1), c1=Math.min(cols-1,Math.ceil(nx1*cols)+1);
+    const r0=Math.max(0,Math.floor(ny0*rows)-1), r1=Math.min(rows-1,Math.ceil(ny1*rows)+1);
+    return {cols,rows,c0,c1,r0,r1};
+  }
+
+  function renderTiles(force=false) {
+    // Start at level 2 (32 tiles globally) for a noticeably sharper full-globe view,
+    // then increase one pyramid level each time zoom roughly doubles.
+    const z = Math.max(2, Math.min(5, 2 + Math.floor(Math.log2(Math.max(1,st.scale)))));
+    const win=visibleTileWindow(z);
+    const key=[z,win.c0,win.c1,win.r0,win.r1].join(':');
+    if (!force && key===st.tileKey) return;
+    st.tileKey=key;
+    const pieces=[];
+    for(let r=win.r0;r<=win.r1;r++){
+      for(let c=win.c0;c<=win.c1;c++){
+        // Mars Trek source is -180..+180. Shift half a world to display 0..360°E.
+        const srcCol=(c+win.cols/2)%win.cols;
+        const left=c/win.cols*100, top=r/win.rows*100;
+        const width=100/win.cols, height=100/win.rows;
+        const hi=`${hiBase}${z}/${r}/${srcCol}.jpg`;
+        const fb=`${fallbackBase}${z}/${r}/${srcCol}.jpg`;
+        pieces.push(`<img class="mars-map-tile" alt="" draggable="false" src="${hi}" data-fallback="${fb}" data-stage="hi" style="left:${left}%;top:${top}%;width:${width+0.02}%;height:${height+0.02}%">`);
+      }
+    }
+    tiles.innerHTML=pieces.join('');
+    tiles.querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>{
+      if(img.dataset.stage==='hi'){
+        img.dataset.stage='fallback';
+        img.src=img.dataset.fallback;
+      } else {
+        img.style.visibility='hidden';
+      }
+    }));
+  }
+
+  function baseScreenPos(p) {
+    const lon=((p.lon%360)+360)%360;
+    return {
+      x:(lon/360*viewport.clientWidth)*st.scale+st.x,
+      y:((90-p.lat)/180*viewport.clientHeight)*st.scale+st.y,
+      xp:lon/360*100,
+      yp:(90-p.lat)/180*100
+    };
+  }
+
+  function makeMarkers() {
+    layer.innerHTML=PUBS.map((p,i)=>{
+      const lon=((p.lon%360)+360)%360;
+      const x=lon/360*100, y=(90-p.lat)/180*100;
+      const color=RC[p.region]||'#111';
+      return `<span class="mars-anchor" data-anchor-index="${i}" data-region="${p.region}" style="left:${x}%;top:${y}%"></span>`+
+             `<button type="button" class="mars-marker" data-map-index="${i}" data-region="${p.region}" aria-label="${i+1}. ${p.name}" style="left:${x}%;top:${y}%;background:${color}">${i+1}</button>`;
+    }).join('');
+
+    layer.querySelectorAll('.mars-marker').forEach(marker=>{
+      const i=Number(marker.dataset.mapIndex), p=PUBS[i];
+      marker.addEventListener('pointerenter',e=>showTip(e,p,i));
+      marker.addEventListener('pointermove',positionTip);
+      marker.addEventListener('pointerleave',hideTip);
+      marker.addEventListener('pointerdown',e=>e.stopPropagation());
+      marker.addEventListener('click',e=>{e.stopPropagation();selectProject(i);});
+      marker.addEventListener('dblclick',e=>{e.preventDefault();e.stopPropagation();focusProject(i,Math.max(3,st.scale*1.45));});
+    });
+    updateMarkerLayout();
+  }
+
+  function updateMarkerLayout() {
+    if(!layer.children.length) return;
+    const markers=[...layer.querySelectorAll('.mars-marker')].filter(m=>!m.classList.contains('map-hidden'));
+    const occupied=[];
+    const gap=31;
+    const candidates=[
+      [0,0],[0,26],[0,-26],[26,0],[-26,0],[24,24],[-24,24],[24,-24],[-24,-24],
+      [0,52],[0,-52],[52,0],[-52,0],[46,30],[-46,30],[46,-30],[-46,-30],
+      [25,55],[-25,55],[25,-55],[-25,-55],[66,0],[-66,0]
+    ];
+    markers.forEach(marker=>{
+      const i=Number(marker.dataset.mapIndex), p=PUBS[i], base=baseScreenPos(p);
+      let chosen=[0,0];
+      for(const cand of candidates){
+        const sx=base.x+cand[0], sy=base.y+cand[1];
+        if(sx<15||sx>viewport.clientWidth-15||sy<15||sy>viewport.clientHeight-15) continue;
+        const hit=occupied.some(q=>Math.hypot(sx-q.x,sy-q.y)<gap);
+        if(!hit){chosen=cand;break;}
+      }
+      occupied.push({x:base.x+chosen[0],y:base.y+chosen[1]});
+      const dxPct=(chosen[0]/Math.max(1,viewport.clientWidth*st.scale))*100;
+      const dyPct=(chosen[1]/Math.max(1,viewport.clientHeight*st.scale))*100;
+      marker.style.left=(base.xp+dxPct)+'%';
+      marker.style.top=(base.yp+dyPct)+'%';
+      marker.classList.toggle('spread',chosen[0]!==0||chosen[1]!==0);
+      marker.dataset.spreadX=chosen[0]; marker.dataset.spreadY=chosen[1];
+    });
+  }
+
+  function showTip(e,p,i) {
+    tooltip.innerHTML=`<strong>${String(i+1).padStart(2,'0')} · ${p.name}</strong>
+      <div class="mono">${fmtCoord(p)}</div>
+      <div>MIN ${fmtElev(p.min)} · MAX ${fmtElev(p.max)} · RELIEF ${fmtFixed(p.relief,2,' m')}</div>
+      <div>${p.img.join(' / ')}</div>
+      <div>Total RMS ${Number.isFinite(p.rms_px)?p.rms_px.toFixed(5)+' px':'—'} · ΔMOLA ${fmtSigned(p.mola_d,3,' m')}</div>`;
+    tooltip.style.display='block';positionTip(e);
+  }
+  function positionTip(e) {
+    const vr=viewport.getBoundingClientRect(),tw=tooltip.offsetWidth||310,th=tooltip.offsetHeight||96;
+    let x=e.clientX-vr.left+12,y=e.clientY-vr.top+12;
+    if(x+tw>vr.width-8)x=e.clientX-vr.left-tw-12;
+    if(y+th>vr.height-8)y=e.clientY-vr.top-th-12;
+    tooltip.style.left=Math.max(6,x)+'px';tooltip.style.top=Math.max(6,y)+'px';
+  }
+  function hideTip(){tooltip.style.display='none';}
+
+  function qualityChip(label,value){return `<span class="mars-quality-chip">${label}: ${value}</span>`;}
+
+  function selectProject(i) {
+    st.selected=i;
+    layer.querySelectorAll('.mars-marker').forEach(m=>m.classList.toggle('selected',Number(m.dataset.mapIndex)===i));
+    const p=PUBS[i];
+    if(projectSelect) projectSelect.value=String(i);
+    const q=[
+      qualityChip('Total RMS',Number.isFinite(p.rms_px)?p.rms_px.toFixed(5)+' px':'—'),
+      qualityChip('RMS (m)',Number.isFinite(p.rms_m)?fmtResidual(p.rms_m):'—'),
+      qualityChip('σ_x',fmtResidual(p.rms_x)),
+      qualityChip('σ_y',fmtResidual(p.rms_y)),
+      qualityChip('σ_z',fmtResidual(p.rms_z)),
+      qualityChip('Δ MOLA',fmtSigned(p.mola_d,3,' m')),
+      qualityChip('Std Dev',Number.isFinite(p.mola_s)?'±'+p.mola_s.toFixed(3)+' m':'—')
+    ].join('');
+    const ortho=p.ortho?`<div class="mars-detail-ortho"><div class="mars-detail-section-title">Orthorectified image</div><a href="${p.url}" target="_blank" rel="noopener"><img src="${p.ortho}" alt="Orthorectified HiRISE image for ${p.name}" loading="lazy" onerror="this.style.display='none'"><div class="cap">${orthoLabel(p)} · NASA/JPL-Caltech/UArizona · HiROC</div></a></div>`:'';
+    detail.classList.remove('mars-map-detail-empty');
+    detail.innerHTML=`
+      <div class="mars-detail-head">
+        <div class="mars-detail-head-main"><strong>${String(i+1).padStart(2,'0')} · ${p.name}</strong><span>${p.img.join(' · ')} · ${p.region} · ${p.dstr}</span></div>
+        <div class="mars-detail-actions"><a href="${p.url}" target="_blank" rel="noopener">HiRISE DTM ↗</a><button type="button" id="marsFocusProject">Center / zoom</button><button type="button" id="marsShowProject">Show in list</button></div>
+      </div>
+      <div class="mars-detail-grid">
+        <div class="mars-detail-cell"><div class="k">Coordinates</div><div class="v">${fmtCoord(p)}</div></div>
+        <div class="mars-detail-cell"><div class="k">Valid minimum</div><div class="v">${fmtElev(p.min)}</div></div>
+        <div class="mars-detail-cell"><div class="k">Valid maximum</div><div class="v">${fmtElev(p.max)}</div></div>
+        <div class="mars-detail-cell"><div class="k">Vertical relief</div><div class="v">${fmtFixed(p.relief,2,' m')}</div></div>
+        <div class="mars-detail-cell"><div class="k">DTM post spacing</div><div class="v">${Number.isFinite(p.post)?p.post+' m':'—'}</div></div>
+        <div class="mars-detail-cell"><div class="k">README source images</div><div class="v">${p.img.join('<br>')}</div></div>
+      </div>
+      <div class="mars-detail-quality"><div class="mars-detail-section-title">DTM Quality (Bundle Adjustment Residuals)</div><div class="mars-quality-chips">${q}</div></div>
+      <div class="mars-detail-context">
+        <div class="mars-detail-context-copy"><div class="mars-detail-section-title">Geological context</div><p>${p.geo||'—'}</p><div class="mars-detail-cite"><strong style="color:#555">APA reference</strong><br>${p.cite||'—'}</div></div>
+        ${ortho}
+      </div>`;
+    document.getElementById('marsFocusProject')?.addEventListener('click',()=>focusProject(i,Math.max(2.8,st.scale)));
+    document.getElementById('marsShowProject')?.addEventListener('click',()=>{
+      currentFilter='all';
+      const input=document.getElementById('searchInput');if(input)input.value=p.name;
+      document.querySelectorAll('.filter-btn').forEach((b,idx)=>b.classList.toggle('active',idx===0));
+      render();
+      document.getElementById('resultCount')?.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  }
+
+  function constrain(){
+    const w=viewport.clientWidth,h=viewport.clientHeight,minX=w-w*st.scale,minY=h-h*st.scale;
+    st.x=Math.min(0,Math.max(minX,st.x));st.y=Math.min(0,Math.max(minY,st.y));
+  }
+  function applyTransform(){
+    constrain();
+    scene.style.transform=`translate(${st.x}px,${st.y}px) scale(${st.scale})`;
+    scene.style.setProperty('--mars-inv',(1/st.scale).toFixed(6));
+    zoomRead.textContent=st.scale.toFixed(1)+'×';
+    renderTiles();updateMarkerLayout();
+  }
+  function zoomAtClient(clientX,clientY,newScale){
+    const vr=viewport.getBoundingClientRect(),px=clientX-vr.left,py=clientY-vr.top;
+    const wx=(px-st.x)/st.scale,wy=(py-st.y)/st.scale;
+    newScale=Math.max(1,Math.min(12,newScale));
+    st.x=px-wx*newScale;st.y=py-wy*newScale;st.scale=newScale;applyTransform();
+  }
+  function zoomCenter(factor){const vr=viewport.getBoundingClientRect();zoomAtClient(vr.left+vr.width/2,vr.top+vr.height/2,st.scale*factor);}
+  function resetMap(){st.scale=1;st.x=0;st.y=0;st.tileKey='';applyTransform();}
+  function focusProject(i,newScale=3){
+    const p=PUBS[i],lon=((p.lon%360)+360)%360,w=viewport.clientWidth,h=viewport.clientHeight;
+    st.scale=Math.max(1,Math.min(12,newScale));
+    const wx=lon/360*w,wy=(90-p.lat)/180*h;
+    st.x=w/2-wx*st.scale;st.y=h/2-wy*st.scale;st.tileKey='';applyTransform();selectProject(i);
+  }
+
+  function pointerToMars(e){
+    const vr=viewport.getBoundingClientRect(),px=e.clientX-vr.left,py=e.clientY-vr.top;
+    const wx=(px-st.x)/st.scale,wy=(py-st.y)/st.scale;
+    const lon=wx/viewport.clientWidth*360,lat=90-wy/viewport.clientHeight*180;
+    if(lon<0||lon>360||lat<-90||lat>90)return null;return {lon,lat};
+  }
+  viewport.addEventListener('pointermove',e=>{
+    if(st.dragging){st.x=st.originX+(e.clientX-st.startX);st.y=st.originY+(e.clientY-st.startY);applyTransform();}
+    const c=pointerToMars(e);if(c)coords.textContent=c.lon.toFixed(3)+'°E · '+Math.abs(c.lat).toFixed(3)+'°'+(c.lat>=0?'N':'S');
+  });
+  viewport.addEventListener('pointerleave',()=>{if(!st.dragging)coords.textContent='Move cursor over map';});
+  viewport.addEventListener('pointerdown',e=>{if(e.button!==0||e.target.closest('.mars-marker'))return;st.dragging=true;st.startX=e.clientX;st.startY=e.clientY;st.originX=st.x;st.originY=st.y;viewport.classList.add('dragging');viewport.setPointerCapture(e.pointerId);});
+  viewport.addEventListener('pointerup',e=>{st.dragging=false;viewport.classList.remove('dragging');try{viewport.releasePointerCapture(e.pointerId)}catch(_){}});
+  viewport.addEventListener('pointercancel',()=>{st.dragging=false;viewport.classList.remove('dragging');});
+  viewport.addEventListener('wheel',e=>{e.preventDefault();zoomAtClient(e.clientX,e.clientY,st.scale*(e.deltaY<0?1.24:1/1.24));},{passive:false});
+  viewport.addEventListener('dblclick',e=>{if(e.target.closest('.mars-marker'))return;e.preventDefault();zoomAtClient(e.clientX,e.clientY,st.scale*1.7);});
+
+  document.getElementById('marsZoomIn')?.addEventListener('click',()=>zoomCenter(1.4));
+  document.getElementById('marsZoomOut')?.addEventListener('click',()=>zoomCenter(1/1.4));
+  document.getElementById('marsReset')?.addEventListener('click',resetMap);
+  projectSelect?.addEventListener('change',()=>{if(projectSelect.value!==''){st.region='all';document.querySelectorAll('[data-map-region]').forEach(b=>b.classList.toggle('active',b.dataset.mapRegion==='all'));layer.querySelectorAll('.mars-marker,.mars-anchor').forEach(m=>m.classList.remove('map-hidden'));focusProject(Number(projectSelect.value),3);}});
+
+  document.querySelectorAll('[data-map-region]').forEach(btn=>btn.addEventListener('click',()=>{
+    st.region=btn.dataset.mapRegion;
+    document.querySelectorAll('[data-map-region]').forEach(b=>b.classList.toggle('active',b===btn));
+    layer.querySelectorAll('.mars-marker,.mars-anchor').forEach(m=>m.classList.toggle('map-hidden',st.region!=='all'&&m.dataset.region!==st.region));
+    updateMarkerLayout();
+  }));
+
+  if('ResizeObserver'in window){const ro=new ResizeObserver(()=>{st.tileKey='';applyTransform();});ro.observe(viewport);}
+  renderTiles(true);makeMarkers();applyTransform();
+}
+
 function getFiltered() {
   const q = document.getElementById('searchInput').value.toLowerCase();
   return PUBS.filter(p => {
@@ -1555,15 +2046,16 @@ function getFiltered() {
     if (currentFilter === 'credited')     return p.credit;
     return p.region === currentFilter;
   }).sort((a,b) => {
-    let av = currentSort === 'date' ? a.date : currentSort === 'relief' ? a.relief : Math.abs(a.lat);
-    let bv = currentSort === 'date' ? b.date : currentSort === 'relief' ? b.relief : Math.abs(b.lat);
+    let av = currentSort === 'date' ? a.date : currentSort === 'relief' ? (Number.isFinite(a.relief)?a.relief:-Infinity) : (Number.isFinite(a.lat)?Math.abs(a.lat):-Infinity);
+    let bv = currentSort === 'date' ? b.date : currentSort === 'relief' ? (Number.isFinite(b.relief)?b.relief:-Infinity) : (Number.isFinite(b.lat)?Math.abs(b.lat):-Infinity);
     return sortDir === 'desc' ? (av < bv ? 1 : -1) : (av > bv ? 1 : -1);
   });
 }
 
 function render() {
   const list = getFiltered();
-  const maxR = Math.max(...PUBS.map(p => p.relief));
+  const reliefVals = PUBS.map(p => p.relief).filter(Number.isFinite);
+  const maxR = reliefVals.length ? Math.max(...reliefVals) : 1;
 
   document.getElementById('resultCount').textContent =
     list.length + ' publication' + (list.length !== 1 ? 's' : '');
@@ -1571,25 +2063,24 @@ function render() {
   document.getElementById('pubList').innerHTML = list.map((p,i) => {
     // store index on pub for post-render cite injection
     p._renderIdx = i;
-    const latStr = Math.abs(p.lat).toFixed(1) + (p.lat >= 0 ? '°N' : '°S');
-    const lonStr = p.lon.toFixed(1) + '°E';
-    const relPct = (p.relief / maxR * 100).toFixed(1);
+    const latStr = Number.isFinite(p.lat) ? Math.abs(p.lat).toFixed(1) + (p.lat >= 0 ? '°N' : '°S') : '—';
+    const lonStr = Number.isFinite(p.lon) ? p.lon.toFixed(1) + '°E' : '—';
+    const relPct = Number.isFinite(p.relief) ? (p.relief / maxR * 100).toFixed(1) : 0;
+    const orthoLabel = p.ortho ? decodeURIComponent(p.ortho.split('/').pop().replace(/\.br\.jpg$/,'')) : '';
 
-    let rmsHtml = '';
-    if (p.rms_px !== null) {
-      rmsHtml = `<div class="dl">
-        <div class="dt">DTM Quality (Bundle Adjustment Residuals)</div>
-        <div class="rms-grid">
-          <span class="rms-chip">Total RMS: ${p.rms_px.toFixed(5)} px</span>
-          ${p.rms_m   !== null ? `<span class="rms-chip">RMS(m): ${p.rms_m.toFixed(5)}</span>` : ''}
-          ${p.rms_x   !== null ? `<span class="rms-chip">σ_x: ${p.rms_x.toFixed(6)} m</span>` : ''}
-          ${p.rms_y   !== null ? `<span class="rms-chip">σ_y: ${p.rms_y.toFixed(7)} m</span>` : ''}
-          ${p.rms_z   !== null ? `<span class="rms-chip">σ_z: ${p.rms_z.toFixed(5)} m</span>` : ''}
-          ${p.mola_d  !== null ? `<span class="rms-chip">Δ MOLA: ${p.mola_d >= 0 ? '+' : ''}${p.mola_d.toFixed(3)} m</span>` : ''}
-          ${p.mola_s  !== null ? `<span class="rms-chip">Std Dev: ±${p.mola_s.toFixed(3)} m</span>` : ''}
-        </div>
-      </div>`;
-    }
+    // Protonilus analog: render the same seven DTM-quality fields for every publication; unknown values remain visible as —.
+    const rmsHtml = `<div class="dl">
+      <div class="dt">DTM Quality (Bundle Adjustment Residuals)</div>
+      <div class="rms-grid">
+        <span class="rms-chip">Total RMS: ${Number.isFinite(p.rms_px) ? p.rms_px.toFixed(5) + ' px' : '—'}</span>
+        <span class="rms-chip">RMS (m): ${Number.isFinite(p.rms_m) ? p.rms_m.toFixed(5) + ' m' : '—'}</span>
+        <span class="rms-chip">σ_x: ${Number.isFinite(p.rms_x) ? p.rms_x.toFixed(6) + ' m' : '—'}</span>
+        <span class="rms-chip">σ_y: ${Number.isFinite(p.rms_y) ? p.rms_y.toFixed(7) + ' m' : '—'}</span>
+        <span class="rms-chip">σ_z: ${Number.isFinite(p.rms_z) ? p.rms_z.toFixed(5) + ' m' : '—'}</span>
+        <span class="rms-chip">Δ MOLA: ${Number.isFinite(p.mola_d) ? (p.mola_d >= 0 ? '+' : '') + p.mola_d.toFixed(3) + ' m' : '—'}</span>
+        <span class="rms-chip">Std Dev: ${Number.isFinite(p.mola_s) ? '±' + p.mola_s.toFixed(3) + ' m' : '—'}</span>
+      </div>
+    </div>`;
 
     return `<div class="pub-row" id="row_${i}">
       <div class="pub-row-main" onclick="toggle(${i})">
@@ -1603,7 +2094,7 @@ function render() {
         <div class="cell dim">${p.dstr}</div>
         <div class="cell" style="text-align:right">${fe(p.min)}</div>
         <div class="cell" style="text-align:right">${fe(p.max)}</div>
-        <div class="cell" style="text-align:right;font-weight:600">${p.relief.toFixed(2)}</div>
+        <div class="cell" style="text-align:right;font-weight:600">${Number.isFinite(p.relief)?p.relief.toFixed(2):'—'}</div>
         <div class="cell" style="text-align:right">
           <span style="font-size:0.65rem;color:#666;font-family:'Courier New',monospace">${lonStr}<br>${latStr}</span>
           <span class="expand-arrow" style="display:block;margin-top:2px">▾</span>
@@ -1617,14 +2108,14 @@ function render() {
           </div>
           <div class="dl">
             <div class="dt">Coordinates</div>
-            <div class="dd mono">${p.lon.toFixed(1)}°E &nbsp; ${Math.abs(p.lat).toFixed(1)}°${p.lat>=0?'N':'S'}<br>MOLA areocentric</div>
+            <div class="dd mono">${lonStr} &nbsp; ${latStr}<br>MOLA areocentric</div>
           </div>
           <div class="dl">
             <div class="dt">Elevation Range</div>
             <div class="dd mono">
               VALID_MIN &nbsp; ${fe(p.min)} m<br>
               VALID_MAX &nbsp; ${fe(p.max)} m<br>
-              RELIEF &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${p.relief.toFixed(2)} m
+              RELIEF &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${Number.isFinite(p.relief)?p.relief.toFixed(2)+' m':'—'}
             </div>
             <div class="relief-bar" style="margin-top:10px"><div class="relief-bar-fill" style="width:${relPct}%"></div></div>
           </div>
@@ -1641,9 +2132,9 @@ function render() {
             <div class="dt">Technical Contact</div>
             <div class="dd">Raymundo Olguin<br><span style="color:#aaa">University of Arizona · NASA/JPL-Caltech/UArizona</span></div>
           </div>
-          ${p.ortho ? `<div class="dl" style="grid-column:1/-1">
-            <div class="dt">Orthorectified Image (Version A) — NASA/JPL-Caltech/UArizona</div>
-            <div>
+          <div class="dl" style="grid-column:1/-1">
+            <div class="dt">Orthorectified Image — NASA/JPL-Caltech/UArizona</div>
+            ${p.ortho ? `<div>
               <a href="${p.url}" target="_blank" rel="noopener">
                 <img src="${p.ortho}" alt="HiRISE orthoimage ${p.img[0]}"
                   style="width:100%;height:auto;object-fit:contain;display:block;border-radius:4px;border:1px solid #e0e0e0;cursor:pointer;background:#000"
@@ -1653,9 +2144,9 @@ function render() {
                   Image not available — <a href="${p.url}" target="_blank" style="color:#888">view on uahirise.org</a>
                 </div>
               </a>
-              <div style="font-size:0.62rem;color:#bbb;margin-top:4px;font-family:'Courier New',monospace">${p.img[0]}_RED_ORTHO · NASA/JPL-Caltech/UArizona · HiROC</div>
-            </div>
-          </div>` : ''}
+              <div style="font-size:0.62rem;color:#bbb;margin-top:4px;font-family:'Courier New',monospace">${orthoLabel || (p.img[0] + '_RED_ORTHO')} · NASA/JPL-Caltech/UArizona · HiROC</div>
+            </div>` : `<a href="${p.url}" target="_blank" rel="noopener" style="display:block;padding:14px;background:#fafafa;border:1px solid #e8e8e8;border-radius:4px;font-size:0.7rem;color:#777;text-align:center">Open the official HiRISE DTM page for orthorectified products</a>`}
+          </div>
           <div class="dl" style="grid-column:1/-1">
             <div class="dt">Geological Context</div>
             <div class="geo-text">${p.geo}</div>
@@ -1677,15 +2168,15 @@ function render() {
 }
 
 function renderRanking() {
-  const sorted = [...PUBS].sort((a,b) => b.relief - a.relief);
-  const maxR = sorted[0].relief;
+  const sorted = [...PUBS].sort((a,b) => (Number.isFinite(b.relief)?b.relief:-Infinity) - (Number.isFinite(a.relief)?a.relief:-Infinity));
+  const vals = sorted.map(p=>p.relief).filter(Number.isFinite);
+  const maxR = vals.length ? Math.max(...vals) : 1;
   document.getElementById('rankList').innerHTML = sorted.map((p,i) => {
-    const pct = (p.relief / maxR * 100).toFixed(1);
-    const short = p.name.replace(/_/g, ' ');
+    const pct = Number.isFinite(p.relief) ? (p.relief / maxR * 100).toFixed(1) : 0;
     return `<div class="rank-item">
       <div class="rank-n">${String(i+1).padStart(2,'0')}</div>
       <div class="rank-name">${p.name}</div>
-      <div class="rank-val">${p.relief.toFixed(0)} m</div>
+      <div class="rank-val">${Number.isFinite(p.relief)?p.relief.toFixed(0)+' m':'—'}</div>
       <div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-bar-fill" style="width:${pct}%"></div></div></div>
     </div>`;
   }).join('');
