@@ -289,34 +289,37 @@ header {
 .mars-tip-images .mars-tip-k{margin-bottom:3px}
 .mars-tip-id{display:inline-block;margin:2px 4px 0 0;border:1px solid #ddd;background:#fff;padding:3px 5px;font:.58rem 'Courier New',monospace;color:#444}
 
+.mars-map-statusrow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:8px 10px 0;
+  flex-wrap:wrap;
+}
 .mars-map-coordbar {
-  position: absolute;
-  z-index: 20;
-  left: 9px;
-  bottom: 9px;
   display: flex;
   gap: 8px;
   align-items: center;
-  background: rgba(255,255,255,.91);
-  border: 1px solid rgba(210,210,210,.95);
-  padding: 5px 7px;
+  background: rgba(255,255,255,.96);
+  border: 1px solid rgba(220,220,220,.95);
+  border-radius: 10px;
+  padding: 6px 8px;
   font: 0.59rem 'Courier New', monospace;
   color: #555;
-  pointer-events: none;
+  flex:1 1 420px;
+  min-width:280px;
 }
 .mars-map-dataset {
-  position:absolute;
-  right:9px;
-  bottom:9px;
-  z-index:20;
-  background:rgba(255,255,255,.91);
-  border:1px solid rgba(210,210,210,.95);
-  padding:5px 7px;
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(220,220,220,.95);
+  border-radius:10px;
+  padding:6px 8px;
   font-size:.55rem;
   letter-spacing:.06em;
   text-transform:uppercase;
   color:#777;
-  pointer-events:none;
+  flex:0 0 auto;
 }
 
 /* ── CARTOGRAPHIC FRAME / MOLA REFERENCE ── */
@@ -426,7 +429,6 @@ header {
   .stats-left { grid-template-columns: repeat(2,1fr); }
   .mars-map-viewport { min-height: 260px; }
   .mars-map-detail { grid-template-columns:1fr 1fr; }
-  .mars-map-dataset { display:none; }
   .mars-map-foot { flex-direction:column; }
 }
 
@@ -2046,6 +2048,8 @@ function buildStats() {
           <div class="mars-map-axis-x" aria-hidden="true"><span>180°E</span><span>240°E</span><span>300°E</span><span>0° / 360°E</span><span>60°E</span><span>120°E</span><span>180°E</span></div>
           <div class="mars-map-axis-y" aria-hidden="true"><span>90°N</span><span>60°N</span><span>30°N</span><span>0°</span><span>30°S</span><span>60°S</span><span>90°S</span></div>
           <div class="mars-north-arrow" aria-label="North is up"><span class="n">N</span><span class="shaft"></span></div>
+        </div>
+        <div class="mars-map-statusrow" aria-label="Map status and dataset information">
           <div class="mars-map-coordbar"><span id="marsCursorCoords">Cursor: longitude · latitude · projected X/Y</span><span>·</span><span>north up · east right</span></div>
           <div class="mars-map-dataset">MOLA + HRSC · 200 m/px</div>
         </div>
