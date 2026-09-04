@@ -98,6 +98,27 @@ header {
 
 .stats-right { min-width: 0; }
 
+.desktop-xr-kpi-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:.9rem;
+  width:100%;
+}
+.desktop-xr-kpi-card {
+  display:flex;
+  align-items:flex-start;
+  gap:1rem;
+  border:1px solid #e0e0e0;
+  border-radius:4px;
+  padding:1rem 1.25rem;
+  background:#fff;
+  min-width:0;
+}
+@media (max-width:760px){
+  .desktop-xr-kpi-grid{grid-template-columns:1fr;}
+}
+
+
 /* planisphere */
 .plani-wrap { position: relative; }
 .plani-title {
@@ -868,6 +889,10 @@ html{scroll-behavior:smooth}
 .rv-about-shell p{margin:0 0 12px;font-size:.72rem;color:#555;line-height:1.8}
 @media(max-width:980px){.rv-arch-grid{grid-template-columns:1fr}.rv-viz-miniflow{grid-template-columns:1fr}.rv-viz-flow{gap:14px}.rv-viz-node:not(:last-child)::after{display:none}}
 
+
+@media (max-width: 980px){
+  .desktop-xr-kpi-grid{grid-template-columns:1fr!important;}
+}
 </style>
 </head>
 <body>
@@ -1074,12 +1099,13 @@ html{scroll-behavior:smooth}
           </div>
         </div>
         <div id="dexp5">
-          <div class="rv-viz-kicker">XR pipeline</div><h4>1,308-project XR terrain product system architecture</h4>
-          <p>DTMs are organized into a scalable visualization library for VR, AR, and future planetary analysis interfaces.</p>
+          <div class="rv-viz-kicker">Multiplanetary XR pipeline</div><h4>1,968-project Mars + Moon terrain visualization architecture</h4>
+          <p>The XR system organizes 1,308 HiRISE Mars DTM projects and 660 LRO NAC lunar DTM projects into scalable VR, AR, and 3D visualization libraries.</p>
           <div class="rv-viz-statgrid">
-            <div class="rv-viz-stat"><div class="lbl">Library size</div><div class="val">1,308 DTM projects</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Mars / HiRISE</div><div class="val">1,308 projects</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Moon / LRO NAC</div><div class="val">660 projects</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Combined</div><div class="val">1,968 projects</div></div>
             <div class="rv-viz-stat"><div class="lbl">Modes</div><div class="val">VR · AR · 3D viz</div></div>
-            <div class="rv-viz-stat"><div class="lbl">Goal</div><div class="val">Immersive science ops</div></div>
           </div>
         </div>
         <div id="dexp6">
@@ -1118,18 +1144,6 @@ html{scroll-behavior:smooth}
       <div style="background:#fff;padding:12px 14px;text-align:center">
         <div style="font-size:1.4rem;font-weight:700;letter-spacing:-.04em;color:#111">2</div>
         <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-top:2px">Missions</div>
-      </div>
-    </div>
-
-    <!-- XR SYSTEM ARCHITECTURE -->
-    <div style="display:flex;align-items:flex-start;gap:1rem;border:1px solid #e0e0e0;border-radius:4px;padding:1rem 1.25rem;margin-bottom:1.5rem;background:#fff">
-      <div style="flex-shrink:0;text-align:center;min-width:74px">
-        <div style="font-size:1.7rem;font-weight:700;letter-spacing:-.04em;color:#0C234B;line-height:1">1,308</div>
-        <div style="font-size:0.55rem;color:#aaa;text-transform:uppercase;letter-spacing:.07em;font-weight:600;margin-top:4px">DTM Projects</div>
-      </div>
-      <div style="flex:1;min-width:0">
-        <div style="font-size:0.6rem;color:#AB0520;text-transform:uppercase;letter-spacing:.09em;font-weight:700;margin-bottom:5px">XR System Architecture</div>
-        <div style="font-size:0.72rem;color:#555;line-height:1.65">Processed and prepared 1,308 HiRISE Digital Terrain Model projects for VR and AR visualization, creating a scalable planetary data visualization library ready for immersive exploration, scientific interpretation, and future mission&#8211;aligned research applications.</div>
       </div>
     </div>
 
@@ -2017,6 +2031,28 @@ function buildStats() {
         <div class="stat-num">&gt;25</div>
         <div class="stat-label">Hrs/Week Academic Year</div>
         <div class="stat-sub">Spring &amp; Fall 2025, 2026 · ongoing</div>
+      </div>
+    </div>
+    <div class="desktop-xr-kpi-grid" aria-label="Planetary XR terrain library metrics">
+      <div class="desktop-xr-kpi-card">
+        <div style="flex-shrink:0;text-align:center;min-width:74px">
+          <div style="font-size:1.7rem;font-weight:700;letter-spacing:-.04em;color:#0C234B;line-height:1">1,308</div>
+          <div style="font-size:0.55rem;color:#aaa;text-transform:uppercase;letter-spacing:.07em;font-weight:600;margin-top:4px">HiRISE DTM<br>Projects</div>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:0.6rem;color:#AB0520;text-transform:uppercase;letter-spacing:.09em;font-weight:700;margin-bottom:5px">Mars XR System Architecture</div>
+          <div style="font-size:0.72rem;color:#555;line-height:1.65">Processed and prepared 1,308 HiRISE Digital Terrain Model projects for VR and AR visualization, creating a scalable Mars terrain library for immersive exploration, scientific interpretation, and mission&#8211;aligned research applications.</div>
+        </div>
+      </div>
+      <div class="desktop-xr-kpi-card">
+        <div style="flex-shrink:0;text-align:center;min-width:74px">
+          <div style="font-size:1.7rem;font-weight:700;letter-spacing:-.04em;color:#0C234B;line-height:1">660</div>
+          <div style="font-size:0.55rem;color:#aaa;text-transform:uppercase;letter-spacing:.07em;font-weight:600;margin-top:4px">LRO NAC DTM<br>Projects</div>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:0.6rem;color:#AB0520;text-transform:uppercase;letter-spacing:.09em;font-weight:700;margin-bottom:5px">Lunar XR System Architecture</div>
+          <div style="font-size:0.72rem;color:#555;line-height:1.65">Processed and prepared 660 LRO NAC Digital Terrain Model projects for VR and AR visualization, extending the immersive planetary terrain library to high&#8211;resolution lunar surface exploration and scientific visualization.</div>
+        </div>
       </div>
     </div>
     <div class="stats-right">
