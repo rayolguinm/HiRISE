@@ -890,6 +890,32 @@ html{scroll-behavior:smooth}
 @media(max-width:980px){.rv-arch-grid{grid-template-columns:1fr}.rv-viz-miniflow{grid-template-columns:1fr}.rv-viz-flow{gap:14px}.rv-viz-node:not(:last-child)::after{display:none}}
 
 
+/* ── DATASET ANALYTICS ── */
+.da-wrap{border-top:1px solid #e0e0e0;padding:2rem 0 .5rem}
+.da-panel{border:1px solid #e0e0e0;border-radius:4px;overflow:hidden;margin-bottom:1rem;background:#fff}
+.da-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;background:#fafafa;border-bottom:1px solid #ececec;flex-wrap:wrap}
+.da-title{font-size:.68rem;font-weight:700;color:#111;letter-spacing:.04em;text-transform:uppercase}
+.da-meta{font-size:.58rem;color:#aaa;font-family:'Courier New',monospace}
+.da-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:#ececec}
+.da-kpi{background:#fff;padding:12px 14px;min-width:0}
+.da-val{font-size:1.25rem;font-weight:700;letter-spacing:-.03em;color:#111;line-height:1.1}
+.da-val small{font-size:.62rem;font-weight:600;color:#666;margin-left:3px;letter-spacing:0}
+.da-lbl{font-size:.56rem;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-top:5px}
+.da-sub{font-size:.6rem;color:#888;margin-top:3px;line-height:1.45;overflow-wrap:anywhere}
+.da-rows{padding:8px 14px 10px;border-top:1px solid #ececec}
+.da-row{display:grid;grid-template-columns:minmax(170px,1.3fr) 2fr 60px 96px;gap:10px;align-items:center;padding:5px 0;border-bottom:1px solid #f5f5f5;font-size:.66rem;color:#333}
+.da-row:last-child{border-bottom:0}
+.da-row-head{color:#aaa;font-size:.54rem;text-transform:uppercase;letter-spacing:.08em}
+.da-bar{height:4px;background:#f0f0f0;border-radius:2px;overflow:hidden}
+.da-bar i{display:block;height:100%}
+.da-row .n{text-align:right;font-weight:700;color:#111;font-variant-numeric:tabular-nums}
+.da-row .m{text-align:right;color:#888;font-family:'Courier New',monospace;font-size:.6rem}
+.da-chip{display:inline-flex;align-items:center;gap:4px;font-size:.55rem;color:#666;border:1px solid #e2e2e2;border-radius:999px;padding:1px 6px;margin-left:6px;white-space:nowrap;vertical-align:1px;font-weight:400;letter-spacing:0;text-transform:none}
+.da-chip i{width:6px;height:6px;border-radius:50%;display:inline-block}
+.da-cite{font-size:.62em;font-weight:600;margin-left:3px;letter-spacing:0;text-transform:none}.da-cite a{color:#AB0520;text-decoration:none}.da-refs{margin:0;padding:10px 14px 12px 34px;font-size:.62rem;color:#444;line-height:1.6}.da-refs li{margin-bottom:5px;overflow-wrap:anywhere}.da-refs a{color:#0C234B}
+.da-note{padding:8px 14px 10px;border-top:1px solid #f0f0f0;font-size:.58rem;color:#999;line-height:1.5}
+@media(max-width:900px){.da-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.da-row{grid-template-columns:1fr 1fr 44px 80px}}
+
 @media (max-width: 980px){
   .desktop-xr-kpi-grid{grid-template-columns:1fr!important;}
 }
@@ -1037,7 +1063,8 @@ html{scroll-behavior:smooth}
     <a href="#expSection">Experience</a>
     <a href="#eduSection">Education</a>
     <a href="#contextSection">E&amp;S Context</a>
-    <a href="#mapViewport">Mars DTM Map</a>
+    <a href="#marsMapShell">Mars DTM Map</a>
+    <a href="#analyticsSection">Dataset Analytics</a>
   </div>
   <!-- EXPERIENCE DASHBOARD -->
   <div style="border-top:1px solid #e0e0e0;padding:2rem 0" id="expSection">
@@ -1095,17 +1122,17 @@ html{scroll-behavior:smooth}
           <div class="rv-viz-statgrid">
             <div class="rv-viz-stat"><div class="lbl">Featured here</div><div class="val">36 projects</div></div>
             <div class="rv-viz-stat"><div class="lbl">Produced</div><div class="val">55 DTMs</div></div>
-            <div class="rv-viz-stat"><div class="lbl">HiRISE hours</div><div class="val">1,650 hrs</div></div>
+            <div class="rv-viz-stat"><div class="lbl">HiRISE hours</div><div class="val">1,750 hrs</div></div>
             <div class="rv-viz-stat"><div class="lbl">Latest release</div><div class="val">6 DTMs · Oct 6, 2026</div></div>
           </div>
         </div>
         <div id="dexp5">
-          <div class="rv-viz-kicker">Multiplanetary XR pipeline</div><h4>1,968-project Mars + Moon terrain visualization architecture</h4>
-          <p>The XR system organizes 1,308 HiRISE Mars DTM projects and 660 LRO NAC lunar DTM projects into scalable VR, AR, and 3D visualization libraries.</p>
+          <div class="rv-viz-kicker">Multiplanetary XR pipeline</div><h4>1,998-project Mars + Moon terrain visualization architecture</h4>
+          <p>The XR system organizes 1,338 HiRISE Mars DTM projects and 660 LRO NAC lunar DTM projects into scalable VR, AR, and 3D visualization libraries.</p>
           <div class="rv-viz-statgrid">
-            <div class="rv-viz-stat"><div class="lbl">Mars / HiRISE</div><div class="val">1,308 projects</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Mars / HiRISE</div><div class="val">1,338 projects</div></div>
             <div class="rv-viz-stat"><div class="lbl">Moon / LRO NAC</div><div class="val">660 projects</div></div>
-            <div class="rv-viz-stat"><div class="lbl">Combined</div><div class="val">1,968 projects</div></div>
+            <div class="rv-viz-stat"><div class="lbl">Combined</div><div class="val">1,998 projects</div></div>
             <div class="rv-viz-stat"><div class="lbl">Modes</div><div class="val">VR · AR · 3D viz</div></div>
           </div>
         </div>
@@ -1120,76 +1147,8 @@ html{scroll-behavior:smooth}
         </div>
       </div>
     </div>
-    <!-- KPI SUMMARY BAR -->
-    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:#e0e0e0;border:1px solid #e0e0e0;border-radius:4px;overflow:hidden;margin-bottom:1.5rem">
-      <div style="background:#fff;padding:12px 14px;text-align:center">
-        <div style="font-size:1.4rem;font-weight:700;letter-spacing:-.04em;color:#111">2,350<span style="font-size:.75rem">%</span></div>
-        <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-top:2px">Efficiency↑</div>
-      </div>
-      <div style="background:#fff;padding:12px 14px;text-align:center">
-        <div style="font-size:1.4rem;font-weight:700;letter-spacing:-.04em;color:#111">55</div>
-        <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-top:2px">DTMs</div>
-      </div>
-      <div style="background:#fff;padding:12px 14px;text-align:center">
-        <div style="font-size:1.4rem;font-weight:700;letter-spacing:-.04em;color:#111">1,650</div>
-        <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-top:2px">HiRISE Hrs</div>
-      </div>
-      <div style="background:#fff;padding:12px 14px;text-align:center">
-        <div style="font-size:1.4rem;font-weight:700;letter-spacing:-.04em;color:#111">300</div>
-        <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-top:2px">Europa Hrs</div>
-      </div>
-      <div style="background:#fff;padding:12px 14px;text-align:center">
-        <div style="font-size:1.4rem;font-weight:700;letter-spacing:-.04em;color:#111">$15K<span style="font-size:.75rem">+</span></div>
-        <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-top:2px">Grant Funded</div>
-      </div>
-      <div style="background:#fff;padding:12px 14px;text-align:center">
-        <div style="font-size:1.4rem;font-weight:700;letter-spacing:-.04em;color:#111">2</div>
-        <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-top:2px">Missions</div>
-      </div>
-    </div>
-
     <!-- EXP CARDS GRID -->
 
-    <div class="rv-arch-grid" style="margin-bottom:1.25rem">
-      <div class="rv-viz-panel" id="desktopEduViz">
-        <div class="rv-viz-head"><div class="rv-viz-title">Technical Education & Competency Architecture</div><div class="rv-viz-meta">EE · planetary science · computation</div></div>
-        <div class="rv-viz-flow">
-          <button class="rv-viz-node active" data-target="dedu1">B.S. EE</button>
-          <button class="rv-viz-node" data-target="dedu2">Planetary Sci.</button>
-          <button class="rv-viz-node" data-target="dedu3">Math</button>
-          <button class="rv-viz-node" data-target="dedu4">Comp. Eng.</button>
-          <button class="rv-viz-node" data-target="dedu5">Accelerated M.S.</button>
-          <button class="rv-viz-node" data-target="dedu6">46 Certs</button>
-        </div>
-        <div class="rv-viz-detail"></div>
-        <div class="rv-viz-bank" style="display:none">
-          <div id="dedu1"><div class="rv-viz-kicker">Degree core</div><h4>University of Arizona · B.S. Electrical Engineering</h4><p>Current undergraduate training centered on electrical engineering, systems thinking, and technical problem solving; the B.S. remains in progress.</p><div class="rv-viz-statgrid"><div class="rv-viz-stat"><div class="lbl">Standing</div><div class="val">Sophomore</div></div><div class="rv-viz-stat"><div class="lbl">Honors</div><div class="val">Dean’s List ×3</div></div><div class="rv-viz-stat"><div class="lbl">Clubs</div><div class="val">IEEE · AIAA · ACM</div></div></div></div>
-          <div id="dedu2"><div class="rv-viz-kicker">Planned minor track</div><h4>Planetary Science · In Progress</h4><p>Provides geologic and planetary context for terrain interpretation, surface processes, and mission relevance.</p><div class="rv-viz-miniflow"><div class="rv-viz-box"><div class="lbl">Context</div><div class="val">Mars geomorphology</div></div><div class="rv-viz-box"><div class="lbl">Products</div><div class="val">DTMs · orthos</div></div><div class="rv-viz-box"><div class="lbl">Application</div><div class="val">Mission science</div></div></div></div>
-          <div id="dedu3"><div class="rv-viz-kicker">Planned minor track</div><h4>Mathematics · In Progress</h4><p>Supports bundle adjustment theory, residual interpretation, numerical reasoning, and modeling accuracy.</p><div class="rv-viz-miniflow"><div class="rv-viz-box"><div class="lbl">Topics</div><div class="val">Linear algebra</div></div><div class="rv-viz-box"><div class="lbl">Methods</div><div class="val">Least squares</div></div><div class="rv-viz-box"><div class="lbl">Metrics</div><div class="val">RMS · std. dev.</div></div></div></div>
-          <div id="dedu4"><div class="rv-viz-kicker">Planned minor track</div><h4>Computer Engineering · Planned / In Progress</h4><p>Connects hardware logic, systems integration, and computation to XR pipelines and future instrument development.</p><div class="rv-viz-miniflow"><div class="rv-viz-box"><div class="lbl">Domains</div><div class="val">Embedded thinking</div></div><div class="rv-viz-box"><div class="lbl">Output</div><div class="val">Automation pipelines</div></div><div class="rv-viz-box"><div class="lbl">Goal</div><div class="val">Flight systems readiness</div></div></div></div>
-          <div id="dedu5"><div class="rv-viz-kicker">Future graduate objective</div><h4>Accelerated M.S. EE · Planetary instrumentation focus · Future Goal</h4><p>Long-term direction toward electrical systems engineering, electronics design, and hardware integration for flight instruments.</p><div class="rv-viz-statgrid"><div class="rv-viz-stat"><div class="lbl">Focus</div><div class="val">Planetary instrumentation</div></div><div class="rv-viz-stat"><div class="lbl">Goal</div><div class="val">Lead exploration hardware</div></div><div class="rv-viz-stat"><div class="lbl">Bridge</div><div class="val">Research + engineering</div></div></div></div>
-          <div id="dedu6"><div class="rv-viz-kicker">Credential-development roadmap</div><h4>Professional-development credentials · In Progress</h4><p>Planned and in-progress professional development spans Harvard CS50 coursework, professional memberships, institutional training, and AI/project-management study.</p><div class="rv-viz-statgrid"><div class="rv-viz-stat"><div class="lbl">Harvard CS50</div><div class="val">4-course track · In Progress</div></div><div class="rv-viz-stat"><div class="lbl">Membership pathway</div><div class="val">AIAA · IEEE · ACM · OpenPlanetary</div></div><div class="rv-viz-stat"><div class="lbl">Additional credentials</div><div class="val">37 roadmap items</div></div></div></div>
-        </div>
-      </div>
-      <div class="rv-viz-panel" id="desktopCredViz">
-        <div class="rv-viz-head"><div class="rv-viz-title">Academic &amp; Credential Development</div><div class="rv-viz-meta">sophomore · pathway in progress</div></div>
-        <div class="rv-viz-detail" style="border-top:none">
-          <div class="rv-viz-kicker">Current status / planned pathway</div><h4>Technical education &amp; credential roadmap</h4>
-          <p>Current sophomore-level academic development combines an in-progress B.S. in Electrical Engineering with planned interdisciplinary minors, a future accelerated M.S. objective, and an expanding professional-development portfolio.</p>
-          <div class="rv-viz-statgrid">
-            <div class="rv-viz-stat"><div class="lbl">Core degree</div><div class="val">B.S. EE · In Progress</div></div>
-            <div class="rv-viz-stat"><div class="lbl">Planned minors</div><div class="val">3 · In Progress</div></div>
-            <div class="rv-viz-stat"><div class="lbl">Future graduate objective</div><div class="val">Accelerated M.S. EE · Future Objective</div></div>
-            <div class="rv-viz-stat"><div class="lbl">Credential development</div><div class="val">46-item roadmap · In Progress</div></div>
-          </div>
-          <div class="rv-viz-miniflow">
-            <div class="rv-viz-box"><div class="lbl">Engineering</div><div class="val">EE current · CompE planned</div></div>
-            <div class="rv-viz-box"><div class="lbl">Science</div><div class="val">Planetary Science · planned</div></div>
-            <div class="rv-viz-box"><div class="lbl">Methods</div><div class="val">Mathematics · CS50 · PM development</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem">
 
       <!-- SE5 -->
@@ -1241,34 +1200,7 @@ html{scroll-behavior:smooth}
           <div style="font-size:0.85rem;font-weight:700;color:#111;line-height:1.3;margin-bottom:4px">Photogrammetry Technician — HiRISE &amp; CTX</div>
           <div style="font-size:0.65rem;color:#555;margin-bottom:12px">LPL · Mission: Mars Reconnaissance Orbiter (MRO) · Instruments: HiRISE &amp; CTX</div>
 
-          <!-- KPI ROW -->
-          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:#e0e0e0;border:1px solid #e0e0e0;border-radius:3px;overflow:hidden;margin-bottom:12px">
-            <div style="background:#fff;padding:10px 12px;text-align:center">
-              <div style="font-size:1.2rem;font-weight:700;letter-spacing:-.03em;color:#111">2,350<span style="font-size:.65rem">%</span></div>
-              <div style="font-size:0.56rem;color:#aaa;text-transform:uppercase;letter-spacing:.07em;margin-top:2px">Efficiency</div>
-              <div style="font-size:0.58rem;color:#bbb;margin-top:1px">Throughput gain</div>
-            </div>
-            <div style="background:#fff;padding:10px 12px;text-align:center">
-              <div style="font-size:1.2rem;font-weight:700;letter-spacing:-.03em;color:#111">55</div>
-              <div style="font-size:0.56rem;color:#aaa;text-transform:uppercase;letter-spacing:.07em;margin-top:2px">DTMs</div>
-              <div style="font-size:0.58rem;color:#bbb;margin-top:1px">NASA/HiRISE std.</div>
-            </div>
-            <div style="background:#fff;padding:10px 12px;text-align:center">
-              <div style="font-size:1.2rem;font-weight:700;letter-spacing:-.03em;color:#111">1,650</div>
-              <div style="font-size:0.56rem;color:#aaa;text-transform:uppercase;letter-spacing:.07em;margin-top:2px">HiRISE Hrs</div>
-              <div style="font-size:0.58rem;color:#bbb;margin-top:1px">2025–2026</div>
-            </div>
-            <div style="background:#fff;padding:10px 12px;text-align:center">
-              <div style="font-size:1.2rem;font-weight:700;letter-spacing:-.03em;color:#111">&gt;35</div>
-              <div style="font-size:0.56rem;color:#aaa;text-transform:uppercase;letter-spacing:.07em;margin-top:2px">Hrs/Week</div>
-              <div style="font-size:0.58rem;color:#bbb;margin-top:1px">Training peak</div>
-            </div>
-            <div style="background:#fff;padding:10px 12px;text-align:center">
-              <div style="font-size:1.2rem;font-weight:700;letter-spacing:-.03em;color:#111">&gt;50</div>
-              <div style="font-size:0.56rem;color:#aaa;text-transform:uppercase;letter-spacing:.07em;margin-top:2px">Collaborators</div>
-              <div style="font-size:0.58rem;color:#bbb;margin-top:1px">NASA/ESA/PSI</div>
-            </div>
-          </div>
+          <div style="font-size:0.65rem;color:#666;line-height:1.55;margin-bottom:12px">Coordinates with more than 50 collaborators across NASA, ESA, and PSI.</div>
 
           <!-- PROGRESS BARS -->
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
@@ -1469,47 +1401,28 @@ html{scroll-behavior:smooth}
   <!-- EDUCATION & CERTIFICATIONS -->
   <div style="border-top:1px solid #e0e0e0;padding:2rem 0" id="eduSection">
     <div class="eng-title" style="margin-bottom:1.25rem">Education</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem">
 
-      <!-- DEGREE MODULE -->
-      <div style="border:1px solid #e0e0e0;border-radius:4px;overflow:hidden">
-        <div style="background:#111;padding:10px 14px;display:flex;justify-content:space-between;align-items:center">
-          <div style="font-size:0.6rem;color:#888;text-transform:uppercase;letter-spacing:0.12em">Undergraduate Degree</div>
-          <div style="font-size:0.6rem;color:#888;font-family:'Courier New',monospace">Sophomore</div>
+          <div class="rv-viz-panel" id="desktopEduViz" style="margin-bottom:1.25rem">
+        <div class="rv-viz-head"><div class="rv-viz-title">Technical Education & Competency Architecture</div><div class="rv-viz-meta">EE · planetary science · computation</div></div>
+        <div class="rv-viz-flow">
+          <button class="rv-viz-node active" data-target="dedu1">B.S. EE</button>
+          <button class="rv-viz-node" data-target="dedu2">Planetary Sci.</button>
+          <button class="rv-viz-node" data-target="dedu3">Math</button>
+          <button class="rv-viz-node" data-target="dedu4">Comp. Eng.</button>
+          <button class="rv-viz-node" data-target="dedu5">Accelerated M.S.</button>
+          <button class="rv-viz-node" data-target="dedu6">46 Certs</button>
         </div>
-        <div style="padding:14px 16px">
-          <div style="font-size:1rem;font-weight:700;color:#111;letter-spacing:-0.02em">University of Arizona</div>
-          <div style="font-size:0.7rem;color:#555;margin-top:2px;margin-bottom:12px">B.S. Electrical Engineering (EE) · Current / In Progress</div>
-
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px">
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Planned Minor</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Planetary Science · In Progress</div>
-            </div>
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Planned Minor</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Mathematics · In Progress</div>
-            </div>
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Planned Minor</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Computer Engineering · In Progress</div>
-            </div>
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Future Goal</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Accelerated M.S. EE · Future Objective</div>
-              <div style="font-size:0.63rem;color:#888">Planetary Instrumentation</div>
-            </div>
-          </div>
-
-          <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px">
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #111;color:#111;border-radius:2px;font-weight:600">Dean's List &#215;3</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Wildcat Rocket EC</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">IEEE</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">AIAA</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">ACM</span>
-          </div>
+        <div class="rv-viz-detail"></div>
+        <div class="rv-viz-bank" style="display:none">
+          <div id="dedu1"><div class="rv-viz-kicker">Degree core</div><h4>University of Arizona · B.S. Electrical Engineering</h4><p>Current undergraduate training centered on electrical engineering, systems thinking, and technical problem solving; the B.S. remains in progress.</p><div class="rv-viz-statgrid"><div class="rv-viz-stat"><div class="lbl">Standing</div><div class="val">Sophomore</div></div><div class="rv-viz-stat"><div class="lbl">Honors</div><div class="val">Dean’s List ×3</div></div><div class="rv-viz-stat"><div class="lbl">Clubs</div><div class="val">IEEE · AIAA · ACM</div></div></div></div>
+          <div id="dedu2"><div class="rv-viz-kicker">Planned minor track</div><h4>Planetary Science · In Progress</h4><p>Provides geologic and planetary context for terrain interpretation, surface processes, and mission relevance.</p><div class="rv-viz-miniflow"><div class="rv-viz-box"><div class="lbl">Context</div><div class="val">Mars geomorphology</div></div><div class="rv-viz-box"><div class="lbl">Products</div><div class="val">DTMs · orthos</div></div><div class="rv-viz-box"><div class="lbl">Application</div><div class="val">Mission science</div></div></div></div>
+          <div id="dedu3"><div class="rv-viz-kicker">Planned minor track</div><h4>Mathematics · In Progress</h4><p>Supports bundle adjustment theory, residual interpretation, numerical reasoning, and modeling accuracy.</p><div class="rv-viz-miniflow"><div class="rv-viz-box"><div class="lbl">Topics</div><div class="val">Linear algebra</div></div><div class="rv-viz-box"><div class="lbl">Methods</div><div class="val">Least squares</div></div><div class="rv-viz-box"><div class="lbl">Metrics</div><div class="val">RMS · std. dev.</div></div></div></div>
+          <div id="dedu4"><div class="rv-viz-kicker">Planned minor track</div><h4>Computer Engineering · Planned / In Progress</h4><p>Connects hardware logic, systems integration, and computation to XR pipelines and future instrument development.</p><div class="rv-viz-miniflow"><div class="rv-viz-box"><div class="lbl">Domains</div><div class="val">Embedded thinking</div></div><div class="rv-viz-box"><div class="lbl">Output</div><div class="val">Automation pipelines</div></div><div class="rv-viz-box"><div class="lbl">Goal</div><div class="val">Flight systems readiness</div></div></div></div>
+          <div id="dedu5"><div class="rv-viz-kicker">Future graduate objective</div><h4>Accelerated M.S. EE · Planetary instrumentation focus · Future Goal</h4><p>Long-term direction toward electrical systems engineering, electronics design, and hardware integration for flight instruments.</p><div class="rv-viz-statgrid"><div class="rv-viz-stat"><div class="lbl">Focus</div><div class="val">Planetary instrumentation</div></div><div class="rv-viz-stat"><div class="lbl">Goal</div><div class="val">Lead exploration hardware</div></div><div class="rv-viz-stat"><div class="lbl">Bridge</div><div class="val">Research + engineering</div></div></div></div>
+          <div id="dedu6"><div class="rv-viz-kicker">Credential-development roadmap</div><h4>Professional-development credentials · In Progress</h4><p>Planned and in-progress professional development spans Harvard CS50 coursework, professional memberships, institutional training, and AI/project-management study.</p><div class="rv-viz-statgrid"><div class="rv-viz-stat"><div class="lbl">Harvard CS50</div><div class="val">4-course track · In Progress</div></div><div class="rv-viz-stat"><div class="lbl">Membership pathway</div><div class="val">AIAA · IEEE · ACM · OpenPlanetary</div></div><div class="rv-viz-stat"><div class="lbl">Additional credentials</div><div class="val">37 roadmap items</div></div></div></div>
         </div>
       </div>
+    <div style="display:grid;grid-template-columns:1fr;gap:1.25rem">
 
       <!-- CERTIFICATIONS MODULE -->
       <div style="border:1px solid #e0e0e0;border-radius:4px;overflow:hidden">
@@ -1583,103 +1496,6 @@ html{scroll-behavior:smooth}
         <div id="dctx3"><div class="rv-viz-kicker">Cross-disciplinary integration</div><h4>Planetary science linked to computer engineering</h4><p>Terrain categories, pipeline orchestration, and automated integration connect geomorphology to computation and future instrumentation workflows.</p><div class="rv-viz-miniflow"><div class="rv-viz-box"><div class="lbl">Coverage</div><div class="val">Polar · volcanic · chaos</div></div><div class="rv-viz-box"><div class="lbl">Pipeline</div><div class="val">Python · ISIS3 · MOLA</div></div><div class="rv-viz-box"><div class="lbl">Integration</div><div class="val">CE + geomorphology</div></div></div></div>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem">
-
-      <div style="border:1px solid #e0e0e0;border-radius:4px;overflow:hidden">
-        <div style="background:#111;padding:10px 14px">
-          <div style="font-size:0.6rem;color:#888;text-transform:uppercase;letter-spacing:0.12em">Signal Processing</div>
-          <div style="font-size:0.6rem;color:#555;font-family:'Courier New',monospace;margin-top:2px">ECE Application</div>
-        </div>
-        <div style="padding:14px 16px">
-          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Input</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">HiRISE Stereo Imagery</div>
-              <div style="font-size:0.62rem;color:#888">25–50 cm/pixel · orbital</div>
-            </div>
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Algorithm</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">SOCET SET NGATE</div>
-              <div style="font-size:0.62rem;color:#888">Least-squares image correlation</div>
-            </div>
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Output</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Sub-pixel elevation solutions</div>
-              <div style="font-size:0.62rem;color:#888">Analogous to adaptive filter convergence</div>
-            </div>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:4px">
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Stereophotogrammetry</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Discrete Estimation</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Image Processing</span>
-          </div>
-        </div>
-      </div>
-
-      <div style="border:1px solid #e0e0e0;border-radius:4px;overflow:hidden">
-        <div style="background:#111;padding:10px 14px">
-          <div style="font-size:0.6rem;color:#888;text-transform:uppercase;letter-spacing:0.12em">Mathematics</div>
-          <div style="font-size:0.6rem;color:#555;font-family:'Courier New',monospace;margin-top:2px">Least-Squares &amp; RMS</div>
-        </div>
-        <div style="padding:14px 16px">
-          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Error Budget</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">RMS x · y · z</div>
-              <div style="font-size:0.62rem;color:#888;font-family:'Courier New',monospace">residuals in meters</div>
-            </div>
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Validation</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">MOLA Reference Surface</div>
-              <div style="font-size:0.62rem;color:#888">Mean diff · std-dev · total RMS px</div>
-            </div>
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Theory</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Bundle Adjustment</div>
-              <div style="font-size:0.62rem;color:#888">Solution covariance · linear algebra</div>
-            </div>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:4px">
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Statistical Estimation</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Linear Algebra</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Geodesy Control</span>
-          </div>
-        </div>
-      </div>
-
-      <div style="border:1px solid #e0e0e0;border-radius:4px;overflow:hidden">
-        <div style="background:#111;padding:10px 14px">
-          <div style="font-size:0.6rem;color:#888;text-transform:uppercase;letter-spacing:0.12em">Planetary Science</div>
-          <div style="font-size:0.6rem;color:#555;font-family:'Courier New',monospace;margin-top:2px">Computer Engineering</div>
-        </div>
-        <div style="padding:14px 16px">
-          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Terrain Coverage</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Polar · Volcanic · Chaos</div>
-              <div style="font-size:0.62rem;color:#888">Ice deposits · valley networks</div>
-            </div>
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Pipeline</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Python · ISIS3</div>
-              <div style="font-size:0.62rem;color:#888">Coord parsing · MOLA tie-point reg.</div>
-            </div>
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Integration</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">CE + Geomorphology</div>
-              <div style="font-size:0.62rem;color:#888">Pipeline orchestration · automation</div>
-            </div>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:4px">
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Python</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">ISIS3</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">MOLA</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Geomorphology</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
   </div>
 
   <!-- ADVISORS -->
@@ -1694,84 +1510,84 @@ html{scroll-behavior:smooth}
         </div>
         <div style="padding:14px 16px">
           <div style="font-size:1rem;font-weight:700;color:#111;letter-spacing:-0.02em">Dr. Sarah S. Sutton</div>
-          <div style="font-size:0.7rem;color:#555;margin-top:2px;margin-bottom:12px">Photogrammetry Program Lead · R&amp;D Engineer/Scientist</div>
+          <div style="font-size:0.7rem;color:#555;margin-top:2px;margin-bottom:12px">Photogrammetry Program Lead, HiRISE · Researcher/Scientist · PTYS/LPL</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px">
             <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Ph.D.</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Planetary Sciences</div>
-              <div style="font-size:0.63rem;color:#888">UArizona · 2022</div>
+              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Doctorate</div>
+              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Ph.D. · 2022</div>
+              <div style="font-size:0.63rem;color:#888">The University of Arizona</div>
             </div>
             <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Award</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Pellas-Ryder</div>
-              <div style="font-size:0.63rem;color:#888">GSA/MetSoc · 2022</div>
-            </div>
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Fellowship</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">NSF GRFP</div>
-              <div style="font-size:0.63rem;color:#888">2016 – 2021</div>
-            </div>
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Mentored</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">&gt;20 Technicians</div>
-              <div style="font-size:0.63rem;color:#888">HiROC · 2011–present</div>
+              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Tenure at LPL</div>
+              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">20 years</div>
+              <div style="font-size:0.63rem;color:#888">Lunar and Planetary Laboratory</div>
             </div>
           </div>
-          <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px">
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #111;color:#111;border-radius:2px;font-weight:600">HiRISE Co-I</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Europa Clipper EIS</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">OSIRIS-APEX</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">MRO</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">LRO/LROC</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">TGO/CaSSIS</span>
+          <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Current missions</div>
+          <div style="margin-bottom:10px">
+            <div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid #f5f5f5;font-size:0.66rem"><span style="color:#111;font-weight:600">EMILIA-3D</span><span style="color:#888;font-family:'Courier New',monospace;font-size:0.6rem;text-align:right">Principal Investigator</span></div>
+            <div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid #f5f5f5;font-size:0.66rem"><span style="color:#111;font-weight:600">MRO / HiRISE</span><span style="color:#888;font-family:'Courier New',monospace;font-size:0.6rem;text-align:right">Co-Investigator</span></div>
+            <div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid #f5f5f5;font-size:0.66rem"><span style="color:#111;font-weight:500">OSIRIS-APEX</span><span style="color:#888;font-family:'Courier New',monospace;font-size:0.6rem;text-align:right">Collaborator</span></div>
+            <div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid #f5f5f5;font-size:0.66rem"><span style="color:#111;font-weight:500">TGO / CaSSIS</span><span style="color:#888;font-family:'Courier New',monospace;font-size:0.6rem;text-align:right">Science Operations</span></div>
+            <div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid #f5f5f5;font-size:0.66rem"><span style="color:#111;font-weight:500">Europa Clipper / EIS</span><span style="color:#888;font-family:'Courier New',monospace;font-size:0.6rem;text-align:right">Professional Affiliate</span></div>
+            <div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid #f5f5f5;font-size:0.66rem"><span style="color:#111;font-weight:500">LRO / LROC</span><span style="color:#888;font-family:'Courier New',monospace;font-size:0.6rem;text-align:right">Science Operations</span></div>
           </div>
-          <div style="border-top:1px solid #f0f0f0;padding-top:9px;font-size:0.6rem;color:#bbb;font-family:'Courier New',monospace;display:flex;justify-content:space-between">
-            <span>ssutton@lpl.arizona.edu</span>
-            <span>ORCID 0000-0003-4558-9712</span>
+          <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Former spacecraft involvement</div>
+          <div style="margin-bottom:12px">
+            <div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid #f5f5f5;font-size:0.66rem"><span style="color:#111;font-weight:500">Io Volcano Observer (IVO)</span><span style="color:#888;font-family:'Courier New',monospace;font-size:0.6rem;text-align:right">Phase A study · Co-I</span></div>
+            <div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid #f5f5f5;font-size:0.66rem"><span style="color:#111;font-weight:500">OSIRIS-REx / OCAMS</span><span style="color:#888;font-family:'Courier New',monospace;font-size:0.6rem;text-align:right">Collaborator</span></div>
           </div>
+          <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px">Research areas</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px">
+            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #111;color:#111;border-radius:2px;font-weight:600">Stereophotogrammetry</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #111;color:#111;border-radius:2px;font-weight:600">Digital terrain modeling</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #111;color:#111;border-radius:2px;font-weight:600">Change detection of active surfaces</span>
+            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Planetary surface processes</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Volcanology</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Aeolian processes</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Geomorphology</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Geologic mapping</span>
+            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Remote sensing</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Field geology</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Planetary analogs</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Image processing</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Optical instrumentation &amp; calibration</span>
+            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Spacecraft jitter correction</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Digital signal processing</span>
+          </div>
+          <div style="font-size:0.6rem;color:#999;line-height:1.5">Bodies studied: Mars, Earth, the Moon, Europa, and Io.</div>
+          
         </div>
       </div>
 
       <div style="border:1px solid #e0e0e0;border-radius:4px;overflow:hidden">
         <div style="background:#111;padding:10px 14px;display:flex;justify-content:space-between;align-items:center">
-          <div style="font-size:0.6rem;color:#888;text-transform:uppercase;letter-spacing:0.12em">Co-Supervisor</div>
-          <div style="font-size:0.6rem;color:#888;font-family:'Courier New',monospace">PSI · Lakewood CO</div>
+          <div style="font-size:0.6rem;color:#888;text-transform:uppercase;letter-spacing:0.12em">HiRISE Co-Investigator</div>
+          <div style="font-size:0.6rem;color:#888;font-family:'Courier New',monospace">PSI</div>
         </div>
         <div style="padding:14px 16px">
           <div style="font-size:1rem;font-weight:700;color:#111;letter-spacing:-0.02em">Dr. Matthew Chojnacki</div>
-          <div style="font-size:0.7rem;color:#555;margin-top:2px;margin-bottom:12px">Research Scientist · Planetary Science Institute</div>
+          <div style="font-size:0.7rem;color:#555;margin-top:2px;margin-bottom:12px">Senior Scientist · Planetary Science Institute · Co-Manager, HiROC Photogrammetry Lab</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px">
             <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Ph.D.</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Planetary Science</div>
-              <div style="font-size:0.63rem;color:#888">Univ. of Tennessee · 2013</div>
+              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Targets of interest</div>
+              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Mars · Earth · Asteroids</div>
+              <div style="font-size:0.63rem;color:#888">MRO Co-I since 2023</div>
             </div>
             <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">HiRISE</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Co-Investigator</div>
-              <div style="font-size:0.63rem;color:#888">2013 – present</div>
-            </div>
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">HiROC Lab</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Co-Manager</div>
-              <div style="font-size:0.63rem;color:#888">2015 – present</div>
-            </div>
-            <div style="background:#fafafa;border:1px solid #ececec;padding:7px 9px;border-radius:3px">
-              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Science Lead</div>
-              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Aeolian STL</div>
-              <div style="font-size:0.63rem;color:#888">2017 – present</div>
+              <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em">Field</div>
+              <div style="font-size:0.7rem;font-weight:500;color:#111;margin-top:1px">Planetary geologist</div>
+              <div style="font-size:0.63rem;color:#888">Over a decade in the scientific exploration of Mars</div>
             </div>
           </div>
-          <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px">
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #111;color:#111;border-radius:2px;font-weight:600">HiRISE Co-I</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">OSIRIS-REx</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">CTX DTMs</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Sand Flux</span>
-            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Dune Dynamics</span>
+          <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Missions &amp; roles</div>
+          <div style="margin-bottom:12px">
+            <div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid #f5f5f5;font-size:0.66rem"><span style="color:#111;font-weight:600">MRO / HiRISE</span><span style="color:#888;font-family:'Courier New',monospace;font-size:0.6rem;text-align:right">Co-Investigator</span></div>
+            <div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid #f5f5f5;font-size:0.66rem"><span style="color:#111;font-weight:600">HiROC Photogrammetry Lab</span><span style="color:#888;font-family:'Courier New',monospace;font-size:0.6rem;text-align:right">Co-Manager</span></div>
+            <div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid #f5f5f5;font-size:0.66rem"><span style="color:#111;font-weight:500">HiRISE operations</span><span style="color:#888;font-family:'Courier New',monospace;font-size:0.6rem;text-align:right">Targeting · initial science assessments</span></div>
+            <div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid #f5f5f5;font-size:0.66rem"><span style="color:#111;font-weight:500">OSIRIS-REx</span><span style="color:#888;font-family:'Courier New',monospace;font-size:0.6rem;text-align:right">Led stereo photogrammetry DTM production</span></div>
+            <div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid #f5f5f5;font-size:0.66rem"><span style="color:#111;font-weight:500">MER</span><span style="color:#888;font-family:'Courier New',monospace;font-size:0.6rem;text-align:right">Operations and science</span></div>
+            <div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid #f5f5f5;font-size:0.66rem"><span style="color:#111;font-weight:500">Mars Odyssey</span><span style="color:#888;font-family:'Courier New',monospace;font-size:0.6rem;text-align:right">Mission experience</span></div>
           </div>
-          <div style="border-top:1px solid #f0f0f0;padding-top:9px;font-size:0.6rem;color:#bbb;font-family:'Courier New',monospace">
-            Planetary Science Institute · 405 Urban St Suite 300, Lakewood CO 80228
+          <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px">Research areas</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px">
+            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #111;color:#111;border-radius:2px;font-weight:600">Aeolian transport &amp; sand dune dynamics</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #111;color:#111;border-radius:2px;font-weight:600">Stereo photogrammetry DTMs</span>
+            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Thermophysical &amp; spectral surface properties</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Aqueous alteration &amp; weathering of planetary crusts</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Terrestrial analog studies</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Geologic, morphologic &amp; climatic evolution of Mars</span>
           </div>
+          <div style="font-size:0.58rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em;margin:8px 0 5px">Techniques &amp; disciplines</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px">
+            <span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Geology</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Geomorphology</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Mapping</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Remote sensing</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Spectroscopy</span><span style="font-size:0.6rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px">Thermal emission spectroscopy</span>
+          </div>
+          
         </div>
       </div>
 
@@ -1779,14 +1595,20 @@ html{scroll-behavior:smooth}
   </div>
 
   <!-- RELIEF RANKING -->
+  <!-- DATASET ANALYTICS -->
+  <div class="da-wrap" id="analyticsSection">
+    <div class="section-title">Dataset Analytics · Planetary Science · Planetary Geology · Change Detection</div>
+    <div id="datasetAnalytics"></div>
+  </div>
+
   <div class="ranking-section">
-    <div class="section-title">Vertical Relief — Ranked</div>
+    <div class="section-title">Vertical Relief Ranked · tagged by geologic process class</div>
     <div id="rankList"></div>
   </div>
 
   <footer>
     <div class="footer-l">HiRISE Operations Center · Lunar and Planetary Laboratory · University of Arizona · NASA/JPL-Caltech/UArizona</div>
-    <div class="footer-r">All products tied to MOLA elevations · SOCET SET NGATE · 1m–2m post spacing</div>
+    <div class="footer-r">Author: Raymundo &quot;R@y&quot; Olguin · All products tied to MOLA elevations · SOCET SET NGATE · 1m–2m post spacing</div>
   </footer>
 
 </div><!-- /page -->
@@ -2039,7 +1861,7 @@ function buildStats() {
         <div class="stat-sub">Throughput gain</div>
       </div>
       <div class="stat-block">
-        <div class="stat-num" style="font-size:1.8rem">1,650</div>
+        <div class="stat-num" style="font-size:1.8rem">1,750</div>
         <div class="stat-label">HiRISE Hours</div>
         <div class="stat-sub">2025 – 2026</div>
       </div>
@@ -2067,12 +1889,12 @@ function buildStats() {
     <div class="desktop-xr-kpi-grid" aria-label="Planetary XR terrain library metrics">
       <div class="desktop-xr-kpi-card">
         <div style="flex-shrink:0;text-align:center;min-width:74px">
-          <div style="font-size:1.7rem;font-weight:700;letter-spacing:-.04em;color:#0C234B;line-height:1">1,308</div>
+          <div style="font-size:1.7rem;font-weight:700;letter-spacing:-.04em;color:#0C234B;line-height:1">1,338</div>
           <div style="font-size:0.55rem;color:#aaa;text-transform:uppercase;letter-spacing:.07em;font-weight:600;margin-top:4px">HiRISE DTM<br>Projects</div>
         </div>
         <div style="flex:1;min-width:0">
           <div style="font-size:0.6rem;color:#AB0520;text-transform:uppercase;letter-spacing:.09em;font-weight:700;margin-bottom:5px">Mars XR System Architecture</div>
-          <div style="font-size:0.72rem;color:#555;line-height:1.65">Processed and prepared 1,308 HiRISE Digital Terrain Model projects for VR and AR visualization, creating a scalable Mars terrain library for immersive exploration, scientific interpretation, and mission&#8211;aligned research applications.</div>
+          <div style="font-size:0.72rem;color:#555;line-height:1.65">Processed and prepared 1,338 HiRISE Digital Terrain Model projects for VR and AR visualization, creating a scalable Mars terrain library for immersive exploration, scientific interpretation, and mission&#8211;aligned research applications.</div>
         </div>
       </div>
       <div class="desktop-xr-kpi-card">
@@ -2528,7 +2350,7 @@ function render() {
         <div class="pub-name-cell">
           <div class="pub-name-text">${p.name}</div>
           <div class="pub-name-sub">
-            <span class="tag-region">${p.region}</span>
+            <span class="tag-region">${p.region}</span>${geoChip(p)}
             ${p.post ? `<span style="font-size:0.6rem;color:#bbb">${p.post}m post</span>` : ''}
           </div>
         </div>
@@ -2616,7 +2438,7 @@ function renderRanking() {
     const pct = Number.isFinite(p.relief) ? (p.relief / maxR * 100).toFixed(1) : 0;
     return `<div class="rank-item">
       <div class="rank-n">${String(i+1).padStart(2,'0')}</div>
-      <div class="rank-name">${p.name}</div>
+      <div class="rank-name">${p.name}${geoChip(p)}</div>
       <div class="rank-val">${Number.isFinite(p.relief)?p.relief.toFixed(0)+' m':'—'}</div>
       <div class="rank-bar-wrap"><div class="rank-bar"><div class="rank-bar-fill" style="width:${pct}%"></div></div></div>
     </div>`;
@@ -2642,8 +2464,197 @@ function setSort(s, btn) {
   render();
 }
 
+// ── DATASET ANALYTICS (Raymundo "R@y" Olguin) ──
+const GEO_CLASSES = {
+  'Polar & Ice':            {c:'#0ea5e9', d:'Layered polar deposits, CO2 and H2O ice'},
+  'Periglacial & Glacial':  {c:'#1d4ed8', d:'Mid-latitude ground ice, debris-covered glaciers'},
+  'Fluvial & Outflow':      {c:'#0f766e', d:'Valley networks, outflow channels, flood scour'},
+  'Chaos & Tectonic':       {c:'#b45309', d:'Collapse terrain, pit chains, extension'},
+  'Sedimentary & Aeolian':  {c:'#a16207', d:'Layered deposits, yardangs, dunes, mounds'},
+  'Volcanic':               {c:'#AB0520', d:'Shield volcanoes, calderas, cone fields'},
+  'Highland & Impact':      {c:'#57534e', d:'Noachian crust, cratered highlands'},
+  'Gullies & Mass Wasting': {c:'#7c3aed', d:'Alcove, channel, and apron slope systems'}
+};
+const GEO_BY_NAME = {
+  'South_Polar_Deposits_1416E_871S':'Polar & Ice',
+  'South_Polar_Deposits_2180E_887S':'Polar & Ice',
+  'North_Polar_Layered_Deposits_Bench_1655E_852N':'Polar & Ice',
+  'Cavil_Angusti_South_Polar_2834E_765S':'Polar & Ice',
+  'High_Latitude_Exposure_1050E_875N':'Polar & Ice',
+  'Arcadia_Planitia_1975E_406N':'Periglacial & Glacial',
+  'Phlegra_Montes_Valley_1629E_385N':'Periglacial & Glacial',
+  'Brain_Terrain_3093E_436N':'Periglacial & Glacial',
+  'Spacex_Starship_Arcadia_1901E_386N':'Periglacial & Glacial',
+  'Protonilus_Mensae_Ridges_0478E_405N':'Periglacial & Glacial',
+  'Terraced_Crater_2464E_529N':'Periglacial & Glacial',
+  'Coogoon_Valles_3357E_170N':'Fluvial & Outflow',
+  'Argyre_Planitia_Valley_3348E_297S':'Fluvial & Outflow',
+  'Landon_Valles_basin_3304E_195S':'Fluvial & Outflow',
+  'Bernard_Crater_Channels_2061E_245S':'Fluvial & Outflow',
+  'Maja_Valles_3059E_177N':'Fluvial & Outflow',
+  'Crater_Adjacent_Lunae_Mensa_2984E_240N':'Fluvial & Outflow',
+  'Flute_Casts_Ares_Vallis_3297E_159N':'Fluvial & Outflow',
+  'Aram_Chaos_3393E_293N':'Chaos & Tectonic',
+  'Chaos_Terrain_3195E_168S':'Chaos & Tectonic',
+  'Gorgonum_Chaos_1881E_369S':'Chaos & Tectonic',
+  'Pits_Sinai_Planum_2710E_089S':'Chaos & Tectonic',
+  'Aeolis_Planum_1546E_493S':'Sedimentary & Aeolian',
+  'Pasteur_Crater_2440E_192N':'Sedimentary & Aeolian',
+  'Hebes_Mensa_deposit_2848E_013S':'Sedimentary & Aeolian',
+  'Mesa_Utopia_Planitia_0892E_301N':'Sedimentary & Aeolian',
+  'USGS_Dune_2308E_692S':'Sedimentary & Aeolian',
+  'Small_Mounds_Chryse_Planitia_3227E_193N':'Sedimentary & Aeolian',
+  'Olympus_Mons_Systems_2330E_175N':'Volcanic',
+  'Uranius_Mons_Crater_2710E_278N':'Volcanic',
+  'Phlegra_Dorsa_Cone_Field_1743E_285N':'Volcanic',
+  'Oxia_Colles_3317E_188N':'Highland & Impact',
+  'Noachis_Terra_Craters_3524E_3510S':'Highland & Impact',
+  'Terra_Sirenum_2161E_468S':'Highland & Impact',
+  'Gullies_Tempe_Terra_4905E_304N':'Gullies & Mass Wasting',
+  'Guilled_Crater_2226E_438S':'Gullies & Mass Wasting'
+};
+// Sites with documented present-day surface activity (seasonal frost, gully, dune, polar scarp change)
+const ACTIVE_SURFACE = new Set([
+  'South_Polar_Deposits_1416E_871S','South_Polar_Deposits_2180E_887S',
+  'North_Polar_Layered_Deposits_Bench_1655E_852N','Cavil_Angusti_South_Polar_2834E_765S',
+  'High_Latitude_Exposure_1050E_875N','Gullies_Tempe_Terra_4905E_304N',
+  'Guilled_Crater_2226E_438S','USGS_Dune_2308E_692S'
+]);
+const MRO_ORBITS_PER_DAY = 1440 / 112;   // ~112 min MRO orbital period
+const MARS_YEAR_DAYS = 687;
+
+
+// Peer-reviewed references backing the analytics panels
+const DA_REFS = [
+ {id:'mcewen2007', t:'McEwen, A. S., et al. (2007). Mars Reconnaissance Orbiter\'s High Resolution Imaging Science Experiment (HiRISE). <em>Journal of Geophysical Research: Planets</em>, 112, E05S02.', doi:'10.1029/2005JE002605'},
+ {id:'kirk2008', t:'Kirk, R. L., et al. (2008). Ultrahigh resolution topographic mapping of Mars with MRO HiRISE stereo images: Meter-scale slopes of candidate Phoenix landing sites. <em>Journal of Geophysical Research: Planets</em>, 113, E00A24.', doi:'10.1029/2007JE003000'},
+ {id:'smith2001', t:'Smith, D. E., et al. (2001). Mars Orbiter Laser Altimeter: Experiment summary after the first year of global mapping of Mars. <em>Journal of Geophysical Research: Planets</em>, 106(E10), 23689 to 23722.', doi:'10.1029/2000JE001364'},
+ {id:'zurek2007', t:'Zurek, R. W., &amp; Smrekar, S. E. (2007). An overview of the Mars Reconnaissance Orbiter (MRO) science mission. <em>Journal of Geophysical Research: Planets</em>, 112, E05S01.', doi:'10.1029/2006JE002701'},
+ {id:'tanaka2014', t:'Tanaka, K. L., et al. (2014). Geologic map of Mars. <em>U.S. Geological Survey Scientific Investigations Map</em> 3292.', doi:'10.3133/sim3292'},
+ {id:'byrne2009', t:'Byrne, S. (2009). The polar deposits of Mars. <em>Annual Review of Earth and Planetary Sciences</em>, 37, 535 to 560.', doi:'10.1146/annurev.earth.031208.100101'},
+ {id:'holt2008', t:'Holt, J. W., et al. (2008). Radar sounding evidence for buried glaciers in the southern mid-latitudes of Mars. <em>Science</em>, 322(5905), 1235 to 1238.', doi:'10.1126/science.1164246'},
+ {id:'bramson2015', t:'Bramson, A. M., Byrne, S., Putzig, N. E., Sutton, S., Plaut, J. J., Brothers, T. C., &amp; Holt, J. W. (2015). Widespread excess ice in Arcadia Planitia, Mars. <em>Geophysical Research Letters</em>, 42(16), 6566 to 6574.', doi:'10.1002/2015GL064844'},
+ {id:'baker1974', t:'Baker, V. R., &amp; Milton, D. J. (1974). Erosion by catastrophic floods on Mars and Earth. <em>Icarus</em>, 23(1), 27 to 41.', doi:'10.1016/0019-1035(74)90101-8'},
+ {id:'carr1979', t:'Carr, M. H. (1979). Formation of Martian flood features by release of water from confined aquifers. <em>Journal of Geophysical Research</em>, 84(B6), 2995 to 3007.', doi:'10.1029/JB084iB06p02995'},
+ {id:'glotch2005', t:'Glotch, T. D., &amp; Christensen, P. R. (2005). Geologic and mineralogic mapping of Aram Chaos: Evidence for a water-rich history. <em>Journal of Geophysical Research: Planets</em>, 110, E09006.', doi:'10.1029/2004JE002389'},
+ {id:'malin2000s', t:'Malin, M. C., &amp; Edgett, K. S. (2000). Sedimentary rocks of early Mars. <em>Science</em>, 290(5498), 1927 to 1937.', doi:'10.1126/science.290.5498.1927'},
+ {id:'bridges2012', t:'Bridges, N. T., et al. (2012). Planet-wide sand motion on Mars. <em>Geology</em>, 40(1), 31 to 34.', doi:'10.1130/G32373.1'},
+ {id:'plescia2004', t:'Plescia, J. B. (2004). Morphometric properties of Martian volcanoes. <em>Journal of Geophysical Research: Planets</em>, 109, E03003.', doi:'10.1029/2002JE002031'},
+ {id:'malin2000g', t:'Malin, M. C., &amp; Edgett, K. S. (2000). Evidence for recent groundwater seepage and surface runoff on Mars. <em>Science</em>, 288(5475), 2330 to 2335.', doi:'10.1126/science.288.5475.2330'},
+ {id:'dundas2012', t:'Dundas, C. M., Diniega, S., Hansen, C. J., Byrne, S., &amp; McEwen, A. S. (2012). Seasonal activity and morphological changes in martian gullies. <em>Icarus</em>, 220(1), 124 to 143.', doi:'10.1016/j.icarus.2012.04.005'}
+];
+const DA_REF_NUM = {}; DA_REFS.forEach((r,i)=>DA_REF_NUM[r.id]=i+1);
+function cite(ids){ return '<sup class="da-cite">['+ids.map(id=>`<a href="#daref-${id}">${DA_REF_NUM[id]}</a>`).join(', ')+']</sup>'; }
+const GEO_REFS = {
+  'Polar & Ice':['byrne2009'], 'Periglacial & Glacial':['holt2008','bramson2015'],
+  'Fluvial & Outflow':['baker1974','carr1979'], 'Chaos & Tectonic':['carr1979','glotch2005'],
+  'Sedimentary & Aeolian':['malin2000s','bridges2012'], 'Volcanic':['plescia2004'],
+  'Highland & Impact':['tanaka2014'], 'Gullies & Mass Wasting':['malin2000g','dundas2012']
+};
+
+function geoOf(p){ return GEO_BY_NAME[p.name] || 'Highland & Impact'; }
+function geoChip(p){ const k = geoOf(p), c = GEO_CLASSES[k]; return `<span class="da-chip"><i style="background:${c.c}"></i>${k}</span>`; }
+function orbitOf(id){ return parseInt(String(id).split('_')[1], 10); }
+function pairGap(p){ return (p.img && p.img.length === 2) ? Math.abs(orbitOf(p.img[0]) - orbitOf(p.img[1])) : null; }
+function median(a){ const s = a.filter(Number.isFinite).sort((x,y)=>x-y); if(!s.length) return null; const m = Math.floor(s.length/2); return s.length % 2 ? s[m] : (s[m-1]+s[m])/2; }
+function shortName(p){ return p.name.split('_').slice(0,-2).join(' '); }
+function fmtDur(days){ return days >= 365.25 ? (days/365.25).toFixed(1) + ' Earth yr' : Math.round(days) + ' days'; }
+function nf(v,d=0){ return Number.isFinite(v) ? v.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d}) : 'n/a'; }
+
+function renderAnalytics(){
+  const el = document.getElementById('datasetAnalytics'); if(!el) return;
+  const N = PUBS.length;
+  const kpi = (v,l,s) => `<div class="da-kpi"><div class="da-val">${v}</div><div class="da-lbl">${l}</div><div class="da-sub">${s}</div></div>`;
+  const latTxt = v => Math.abs(v).toFixed(1) + '°' + (v >= 0 ? 'N' : 'S');
+  const panel = (title, meta, body, refs) => `<div class="da-panel"><div class="da-head"><span class="da-title">${title}${refs?cite(refs):''}</span><span class="da-meta">${meta}</span></div>${body}</div>`;
+
+  // Planetary science: topography and coverage
+  const rel = PUBS.map(p=>p.relief).filter(Number.isFinite);
+  const relSum = rel.reduce((a,b)=>a+b,0), relMean = relSum/rel.length, relMed = median(rel);
+  const lowP = PUBS.reduce((a,b)=>b.min<a.min?b:a), highP = PUBS.reduce((a,b)=>b.max>a.max?b:a);
+  const lats = PUBS.map(p=>p.lat), latMin = Math.min(...lats), latMax = Math.max(...lats);
+  const north = PUBS.filter(p=>p.lat>=0).length, south = N - north;
+  const polar = PUBS.filter(p=>Math.abs(p.lat)>=65).length;
+  const post1 = PUBS.filter(p=>p.post===1).length, post2 = PUBS.filter(p=>p.post===2).length;
+  const kmRel = PUBS.filter(p=>p.relief>=1000).length, lowRel = PUBS.filter(p=>p.relief<100).length;
+
+  const sci = panel('Planetary Science · Topography &amp; Coverage','computed from VALID_MIN / VALID_MAX and PDS raster centers',
+    `<div class="da-grid">
+      ${kpi(nf(relSum/1000,1)+'<small>km</small>','Cumulative relief','Sum of vertical relief across all '+N+' DTMs')}
+      ${kpi(nf(relMed,0)+'<small>m</small>','Median relief','Mean '+nf(relMean,0)+' m · right-skewed by canyon and polar scarps')}
+      ${kpi(nf((highP.max-lowP.min)/1000,2)+'<small>km</small>','Elevation envelope',nf(lowP.min,0)+' m ('+shortName(lowP)+') to +'+nf(highP.max,0)+' m ('+shortName(highP)+')')}
+      ${kpi(nf(latMax-latMin,1)+'<small>° lat</small>','Latitude coverage',latTxt(latMin)+' to '+latTxt(latMax)+' · '+north+' northern / '+south+' southern')}
+      ${kpi(polar+'<small>/ '+N+'</small>','Polar targets (|lat| ≥ 65°)',Math.round(polar/N*100)+'% of portfolio in polar regions')}
+      ${kpi(kmRel,'Kilometer-scale relief','DTMs with ≥ 1,000 m of vertical relief')}
+      ${kpi(lowRel,'Low-relief plains (&lt; 100 m)','Smooth plains, mounds, and terrace targets')}
+      ${kpi(post1+' / '+post2,'1 m / 2 m post spacing','1 m posts resolve meter-scale landforms')}
+    </div>`, ['mcewen2007','kirk2008','smith2001']);
+
+  // Planetary geology: process classes
+  const classes = Object.keys(GEO_CLASSES).map(k=>{
+    const ps = PUBS.filter(p=>geoOf(p)===k), r = ps.map(p=>p.relief).filter(Number.isFinite);
+    return {k, n:ps.length, mean: r.length ? r.reduce((a,b)=>a+b,0)/r.length : null};
+  }).sort((a,b)=>b.n-a.n);
+  const maxN = Math.max(...classes.map(c=>c.n));
+  const ice = PUBS.filter(p=>['Polar & Ice','Periglacial & Glacial'].includes(geoOf(p))).length;
+  const aqueous = PUBS.filter(p=>['Fluvial & Outflow','Chaos & Tectonic'].includes(geoOf(p))).length;
+  const volc = PUBS.filter(p=>geoOf(p)==='Volcanic').length;
+  const topCls = classes.filter(c=>c.mean!==null).sort((a,b)=>b.mean-a.mean)[0];
+  const geoRows = `<div class="da-rows">
+      <div class="da-row da-row-head"><span>Process class</span><span>Share of portfolio</span><span style="text-align:right">DTMs</span><span style="text-align:right">Mean relief</span></div>
+      ${classes.map(c=>`<div class="da-row"><span><span class="da-chip" style="margin-left:0"><i style="background:${GEO_CLASSES[c.k].c}"></i>${c.k}</span><br><span style="font-size:.56rem;color:#aaa">${GEO_CLASSES[c.k].d} ${cite(GEO_REFS[c.k])}</span></span><span class="da-bar"><i style="width:${(c.n/maxN*100).toFixed(1)}%;background:${GEO_CLASSES[c.k].c}"></i></span><span class="n">${c.n}</span><span class="m">${nf(c.mean,0)} m</span></div>`).join('')}
+    </div>`;
+  const geo = panel('Planetary Geology · Process Classes','8 classes · each DTM assigned one dominant process',
+    `<div class="da-grid">
+      ${kpi(ice+'<small>/ '+N+'</small>','Ice-bearing terrains','Polar + periglacial/glacial · '+Math.round(ice/N*100)+'% of portfolio')}
+      ${kpi(aqueous+'<small>/ '+N+'</small>','Aqueous history record','Fluvial, outflow, and chaos collapse sites')}
+      ${kpi(volc,'Volcanic sites','Tharsis shields, paterae, and cone fields')}
+      ${kpi(topCls.k,'Highest mean relief class',nf(topCls.mean,0)+' m mean vertical relief')}
+    </div>${geoRows}`, ['tanaka2014']);
+
+  // Change detection: stereo-pair temporal baselines
+  const gaps = PUBS.map(p=>({p, g:pairGap(p)})).filter(o=>Number.isFinite(o.g));
+  const gMed = median(gaps.map(o=>o.g));
+  const longest = [...gaps].sort((a,b)=>b.g-a.g);
+  const yrOrb = MARS_YEAR_DAYS*MRO_ORBITS_PER_DAY;
+  const overYr = gaps.filter(o=>o.g>=yrOrb).length;
+  const shortB = gaps.filter(o=>o.g<=30*MRO_ORBITS_PER_DAY).length;
+  const active = PUBS.filter(p=>ACTIVE_SURFACE.has(p.name)).length;
+  const maxG = longest[0].g;
+  const cdRows = `<div class="da-rows">
+      <div class="da-row da-row-head"><span>Longest-baseline pairs · change-detection candidates</span><span>Relative temporal baseline</span><span style="text-align:right">Orbits</span><span style="text-align:right">≈ Elapsed</span></div>
+      ${longest.slice(0,6).map(o=>`<div class="da-row"><span>${shortName(o.p)}${geoChip(o.p)}<br><span style="font-size:.56rem;color:#aaa;font-family:'Courier New',monospace">${o.p.img.join(' · ')}</span></span><span class="da-bar"><i style="width:${(o.g/maxG*100).toFixed(1)}%;background:#111"></i></span><span class="n">${nf(o.g)}</span><span class="m">${fmtDur(o.g/MRO_ORBITS_PER_DAY)}</span></div>`).join('')}
+    </div>`;
+  const cd = panel('Change Detection · Multi-Temporal Stereo','orbit gap between the two HiRISE source images',
+    `<div class="da-grid">
+      ${kpi(nf(gMed)+'<small>orbits</small>','Median stereo baseline','≈ '+fmtDur(gMed/MRO_ORBITS_PER_DAY)+' between source images')}
+      ${kpi(overYr,'Pairs ≥ 1 Mars year apart','Full seasonal cycle between images; suited to change analysis')}
+      ${kpi(shortB,'Short-baseline pairs (≤ 30 days)','Minimal surface change between stereo images')}
+      ${kpi(active+'<small>/ '+N+'</small>','Active-surface targets','Seasonal frost, polar scarp, gully, and dune activity sites')}
+    </div>${cdRows}
+    <div class="da-note">Temporal baselines are estimated from the MRO orbit numbers in each HiRISE product ID at about 12.9 orbits per Earth day (≈112 min period), so elapsed times are approximate. Long baselines flag pairs where surface change between images (frost, mass wasting, dune migration) can affect stereo correlation and are candidates for dedicated change-detection work. MRO orbit geometry follows Zurek &amp; Smrekar (2007); documented present-day activity at gully, dune, and polar sites follows Dundas et al. (2012), Bridges et al. (2012), and Byrne (2009).</div>`, ['zurek2007','dundas2012','bridges2012','byrne2009']);
+
+  // Data quality
+  const rmsP = PUBS.filter(p=>Number.isFinite(p.rms_px));
+  const best = rmsP.reduce((a,b)=>b.rms_px<a.rms_px?b:a);
+  const sub25 = rmsP.filter(p=>p.rms_px<0.25).length;
+  const molaN = PUBS.filter(p=>Number.isFinite(p.mola_d)).length;
+  const molaMed = median(PUBS.map(p=>Number.isFinite(p.mola_d)?Math.abs(p.mola_d):null));
+  const qa = panel('Geodetic Quality · Bundle Adjustment &amp; MOLA Control','README-reported residuals',
+    `<div class="da-grid">
+      ${kpi(nf(median(rmsP.map(p=>p.rms_px)),3)+'<small>px</small>','Median total RMS',rmsP.length+' of '+N+' DTMs report total RMS')}
+      ${kpi(nf(best.rms_px,3)+'<small>px</small>','Best total RMS',shortName(best))}
+      ${kpi(sub25+'<small>/ '+rmsP.length+'</small>','Sub-0.25 px solutions','Total RMS below a quarter pixel')}
+      ${kpi(nf(molaMed,2)+'<small>m</small>','Median |Δ MOLA|',molaN+' of '+N+' DTMs report MOLA offsets')}
+    </div>`, ['kirk2008','smith2001']);
+
+  const refList = `<div class="da-panel"><div class="da-head"><span class="da-title">References</span><span class="da-meta">peer-reviewed sources for the panels above</span></div><ol class="da-refs">${DA_REFS.map(r=>`<li id="daref-${r.id}">${r.t} <a href="https://doi.org/${r.doi}" target="_blank" rel="noopener">https://doi.org/${r.doi}</a></li>`).join('')}</ol></div>`;
+  el.innerHTML = sci + geo + cd + qa + refList;
+}
+
 buildStats();
 render();
+renderAnalytics();
 renderRanking();
 </script>
 
