@@ -95,7 +95,28 @@ header {
   margin-top: 5px;
 }
 .stat-sub { font-size: 0.62rem; color: #ccc; margin-top: 1px; }
+.stats-left.perf{display:block;border:none}
+.pf-grp{margin-bottom:14px}
+.pf-h{font-size:.6rem;font-weight:700;color:#0C234B;text-transform:uppercase;letter-spacing:.12em;padding:0 0 6px;border-bottom:2px solid #0C234B;margin-bottom:0}
+.pf-row{display:grid;border-bottom:1px solid #e8e8e8}
+.pf-row.c3{grid-template-columns:repeat(3,1fr)}
+.pf-row.c2{grid-template-columns:repeat(2,1fr)}
+.pf-row.cw{grid-template-columns:2fr 1fr}
+.pf-b{padding:1rem;border-right:1px solid #e8e8e8;min-width:0}
+.pf-b:last-child{border-right:none}
+.pf-b.pipe{background:#0C234B}
+.pf-b.pipe .stat-num{color:#fff}
+.pf-b.pipe .stat-label{color:rgba(255,255,255,.75);font-weight:700}
+.pf-b.pipe .stat-sub{color:rgba(255,255,255,.45)}
+.pf-title{font-size:.82rem;font-weight:700;color:#0C234B;line-height:1.3;margin-top:3px}
+.pf-tools-h{font-size:.55rem;color:#aaa;text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin:12px 0 6px}
+.pf-chips{display:flex;flex-wrap:wrap;gap:5px}
+.pf-chip{font-size:.66rem;padding:4px 9px;border:1px solid #d9dee8;border-radius:20px;color:#333;background:#f7f8fb}
+.pf-chip b{color:#AB0520;font-weight:700;margin-right:2px}
+@media (max-width:900px){.pf-row.cw{grid-template-columns:1fr}.pf-row.cw .pf-b{border-right:none;border-bottom:1px solid #e8e8e8}}
+@media (max-width:560px){.pf-row.c3{grid-template-columns:1fr 1fr}}
 
+@media (max-width: 900px) { 
 .stats-right { min-width: 0; }
 
 .desktop-xr-kpi-grid {
@@ -1122,7 +1143,7 @@ html{scroll-behavior:smooth}
           <div class="rv-viz-statgrid">
             <div class="rv-viz-stat"><div class="lbl">Featured here</div><div class="val">36 projects</div></div>
             <div class="rv-viz-stat"><div class="lbl">Produced</div><div class="val">55 DTMs</div></div>
-            <div class="rv-viz-stat"><div class="lbl">HiRISE hours</div><div class="val">1,750 hrs</div></div>
+            <div class="rv-viz-stat"><div class="lbl">HiRISE hours</div><div class="val">2,000 hrs</div></div>
             <div class="rv-viz-stat"><div class="lbl">Latest release</div><div class="val">6 DTMs · Oct 6, 2026</div></div>
           </div>
         </div>
@@ -1854,58 +1875,25 @@ function buildStats() {
   ).join('');
 
   document.getElementById('statsRow').innerHTML = `
-    <div class="stats-left">
-      <div class="stat-block">
-        <div class="stat-num">2,350<span style="font-size:1.4rem;font-weight:700;color:#111">%</span></div>
-        <div class="stat-label">Efficiency Increase</div>
-        <div class="stat-sub">Throughput gain</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-num" style="font-size:1.8rem">1,750</div>
-        <div class="stat-label">HiRISE Hours</div>
-        <div class="stat-sub">2025 – 2026</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-num">55</div>
-        <div class="stat-label">DTMs Delivered</div>
-        <div class="stat-sub">NASA/HiRISE standard</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-num">300</div>
-        <div class="stat-label">Europa Hours</div>
-        <div class="stat-sub">Feb – Sep 2026</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-num">&gt;35</div>
-        <div class="stat-label">Hrs/Week Training</div>
-        <div class="stat-sub">Summer &amp; Winter 2025–2026</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-num">&gt;25</div>
-        <div class="stat-label">Hrs/Week Academic Year</div>
-        <div class="stat-sub">Spring &amp; Fall 2025, 2026 · ongoing</div>
-      </div>
+    <div class="stats-left perf">
+      <div class="pf-grp"><div class="pf-h">HiRISE DTM Production · MRO</div>
+        <div class="pf-row c3"><div class="pf-b pipe"><div class="stat-num">2,350<span style="font-size:1.4rem;font-weight:700">%</span></div><div class="stat-label">Efficiency Increase</div><div class="stat-sub">Throughput gain</div></div><div class="pf-b "><div class="stat-num">55</div><div class="stat-label">DTMs Delivered</div><div class="stat-sub">NASA/HiRISE standard</div></div><div class="pf-b "><div class="stat-num">2,000</div><div class="stat-label">HiRISE Hours</div><div class="stat-sub">2025 – 2026</div></div></div></div>
+      <div class="pf-grp"><div class="pf-h">VR Pipelines · Designed &amp; Built</div>
+        <div class="pf-row c3"><div class="pf-b "><div class="stat-num" style="font-size:2rem">1,338<span style="font-size:1rem;font-weight:600;opacity:.75"> DTMs</span></div><div class="stat-label">HiRISE VR Pipeline</div><div class="stat-sub">Mars</div></div><div class="pf-b "><div class="stat-num" style="font-size:2rem">660<span style="font-size:1rem;font-weight:600;opacity:.75"> DTMs</span></div><div class="stat-label">LROC VR Pipeline</div><div class="stat-sub">Moon</div></div><div class="pf-b "><div class="stat-num" style="font-size:2rem">1,998<span style="font-size:1rem;font-weight:600;opacity:.75"> DTMs</span></div><div class="stat-label">XR Library</div><div class="stat-sub">Mars + Moon</div></div></div></div>
+      <div class="pf-grp"><div class="pf-h">Europa Clipper · Work&#8211;MoRE</div>
+        <div class="pf-row cw">
+          <div class="pf-b pf-wm"><div style="display:flex;align-items:center;gap:14px"><div class="stat-num" style="font-size:3rem">1</div><div><div class="stat-label" style="margin-top:0;color:#AB0520;font-weight:700">Working Model</div><div class="pf-title">Topographic Modeling to Simulate Multi&#8211;Scale Roughness for Europa Clipper Investigations and Science</div><div style="font-size:.66rem;color:#888;margin-top:3px">NASA Working Models Risk&#8211;Reduction for Europa (Work&#8211;MoRE) · Cycle A, 2025&#8211;2027</div></div></div>
+            <div class="pf-tools-h">6&#8211;Tool Terrain Toolchain · 15,700 lines of Python + Blender Geometry Nodes · 30 weeks</div><div class="pf-chips"><span class="pf-chip"><b>01</b> Preprocessing</span><span class="pf-chip"><b>02</b> DEM_Crop</span><span class="pf-chip"><b>03</b> Ridges</span><span class="pf-chip"><b>04</b> Europa&#8217;s Lenticulae</span><span class="pf-chip"><b>05</b> Plumes <i style="opacity:.6;font-style:normal">(in dev.)</i></span><span class="pf-chip"><b>06</b> Roughness</span></div></div>
+          <div class="pf-b "><div class="stat-num">300</div><div class="stat-label">Europa Hours</div><div class="stat-sub">Feb – Sep 2026</div></div></div></div>
+      <div class="pf-grp"><div class="pf-h">Time Commitment</div>
+        <div class="pf-row c2"><div class="pf-b "><div class="stat-num">&gt;35</div><div class="stat-label">Hrs/Week Training</div><div class="stat-sub">Summer &amp; Winter 2025–2026</div></div><div class="pf-b "><div class="stat-num">&gt;25</div><div class="stat-label">Hrs/Week Academic Year</div><div class="stat-sub">Spring &amp; Fall 2025, 2026 · ongoing</div></div></div></div>
     </div>
-    <div class="desktop-xr-kpi-grid" aria-label="Planetary XR terrain library metrics">
+    <div class="desktop-xr-kpi-grid" aria-label="Planetary VR pipelines and XR terrain library metrics">
       <div class="desktop-xr-kpi-card">
-        <div style="flex-shrink:0;text-align:center;min-width:74px">
-          <div style="font-size:1.7rem;font-weight:700;letter-spacing:-.04em;color:#0C234B;line-height:1">1,338</div>
-          <div style="font-size:0.55rem;color:#aaa;text-transform:uppercase;letter-spacing:.07em;font-weight:600;margin-top:4px">HiRISE DTM<br>Projects</div>
-        </div>
-        <div style="flex:1;min-width:0">
-          <div style="font-size:0.6rem;color:#AB0520;text-transform:uppercase;letter-spacing:.09em;font-weight:700;margin-bottom:5px">Mars XR System Architecture</div>
-          <div style="font-size:0.72rem;color:#555;line-height:1.65">Processed and prepared 1,338 HiRISE Digital Terrain Model projects for VR and AR visualization, creating a scalable Mars terrain library for immersive exploration, scientific interpretation, and mission&#8211;aligned research applications.</div>
-        </div>
+        <div style="flex:1;min-width:0"><div style="font-size:0.58rem;color:#AB0520;text-transform:uppercase;letter-spacing:.09em;font-weight:700;margin-bottom:4px">Designed &amp; Built · Mars</div><div style="font-size:1.15rem;font-weight:700;letter-spacing:-.02em;color:#0C234B;line-height:1.2;margin-bottom:6px">HiRISE VR Pipeline</div><div style="font-size:0.72rem;color:#555;line-height:1.65">An end&#8211;to&#8211;end automated pipeline that converts HiRISE DTM GeoTIFFs and orthoimages into textured, VR&#8211;ready 3D meshes with scientific reports, for immersive exploration, scientific interpretation, and mission&#8211;aligned research.</div></div>
       </div>
       <div class="desktop-xr-kpi-card">
-        <div style="flex-shrink:0;text-align:center;min-width:74px">
-          <div style="font-size:1.7rem;font-weight:700;letter-spacing:-.04em;color:#0C234B;line-height:1">660</div>
-          <div style="font-size:0.55rem;color:#aaa;text-transform:uppercase;letter-spacing:.07em;font-weight:600;margin-top:4px">LRO NAC DTM<br>Projects</div>
-        </div>
-        <div style="flex:1;min-width:0">
-          <div style="font-size:0.6rem;color:#AB0520;text-transform:uppercase;letter-spacing:.09em;font-weight:700;margin-bottom:5px">Lunar XR System Architecture</div>
-          <div style="font-size:0.72rem;color:#555;line-height:1.65">Processed and prepared 660 LRO NAC Digital Terrain Model projects for VR and AR visualization, extending the immersive planetary terrain library to high&#8211;resolution lunar surface exploration and scientific visualization.</div>
-        </div>
+        <div style="flex:1;min-width:0"><div style="font-size:0.58rem;color:#AB0520;text-transform:uppercase;letter-spacing:.09em;font-weight:700;margin-bottom:4px">Designed &amp; Built · Moon</div><div style="font-size:1.15rem;font-weight:700;letter-spacing:-.02em;color:#0C234B;line-height:1.2;margin-bottom:6px">LROC VR Pipeline</div><div style="font-size:0.72rem;color:#555;line-height:1.65">An end&#8211;to&#8211;end automated pipeline that converts LRO NAC DTMs and orthoimages into textured, VR&#8211;ready 3D lunar terrain meshes for high&#8211;resolution lunar surface exploration and scientific visualization.</div></div>
       </div>
     </div>
     <div class="stats-right">
