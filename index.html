@@ -1107,6 +1107,52 @@ body{font-family:'Figtree','Helvetica Neue',Helvetica,Arial,sans-serif;font-weig
 .cx-min .mb-b{right:-5px;bottom:-5px;width:clamp(60px,5.6vw,96px);height:clamp(10px,.9vw,14px);background:#0C234B;border-right:0;border-bottom:0}
 .cx-min h1,.cx-min .pl-title{position:relative}
 .cx-min .pl-title{color:#1f1f1f!important}
+
+/* ── WHO I AM · personal note (Raymundo "R@y" Olguin) ── */
+.ab-bridge{font-size:1rem;font-weight:300;line-height:1.8;color:#111a0b;max-width:860px;margin:2.2rem 0 1rem}
+.ab-note{max-width:860px;border:1px solid #e6e6e6;border-radius:6px;padding:1.6rem 1.9rem 1.5rem;background:#fff}
+.ab-note .q{font-size:1.02rem;font-weight:700;color:#0C234B;line-height:1.55;margin:0}
+.ab-note .rule{display:block;width:40px;height:2px;background:#AB0520;margin:.85rem 0 1.1rem}
+.ab-note p{font-size:.98rem;font-weight:300;line-height:1.85;color:#333;margin:0 0 1rem}
+.ab-note details summary{cursor:pointer;list-style:none;font-size:.8rem;font-weight:600;color:#888;margin:.2rem 0 1rem;display:inline-flex;align-items:center;gap:6px}
+.ab-note details summary::-webkit-details-marker{display:none}
+.ab-note details summary::after{content:'';width:6px;height:6px;border-right:1.5px solid #999;border-bottom:1.5px solid #999;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+.ab-note details[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+.ab-note details[open] summary .more{display:none}.ab-note details:not([open]) summary .less{display:none}
+.ab-note p.strong{font-weight:700;color:#111}
+.ab-note p.short{margin-bottom:.35rem}
+.ab-note .close{border-top:1px solid #ececec;margin-top:1.1rem;padding-top:1.1rem;font-size:1.02rem;font-weight:700;color:#0C234B;line-height:1.6}
+.ab-sign{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:#999;margin-top:1rem}
+
+/* ── IMPACT · VR pipeline KPI cards ── */
+.vr-kpi-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.9rem;margin:0 0 .9rem}
+.vr-kpi{display:flex;gap:1.1rem;align-items:flex-start;border:1px solid #e0e0e0;border-radius:4px;padding:1rem 1.25rem;background:#fff;min-width:0}
+.vr-kpi .num{flex-shrink:0;min-width:92px;text-align:center}
+.vr-kpi .num b{display:block;font-size:1.7rem;font-weight:700;letter-spacing:-.04em;color:#0C234B;line-height:1}
+.vr-kpi .num span{display:block;font-size:.55rem;color:#aaa;text-transform:uppercase;letter-spacing:.07em;font-weight:600;margin-top:4px}
+.vr-kpi .k{font-size:.6rem;color:#AB0520;text-transform:uppercase;letter-spacing:.09em;font-weight:700;margin-bottom:5px}
+.vr-kpi .t{font-size:.9rem;font-weight:600;color:#111;line-height:1.35}
+.vr-kpi .d{font-size:.72rem;color:#555;line-height:1.65;margin-top:3px}
+.vr-kpi .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.vr-kpi .tags span{font-size:.58rem;padding:2px 7px;border:1px solid #ddd;color:#666;border-radius:2px}
+@media(max-width:760px){.vr-kpi-grid{grid-template-columns:1fr}}
+
+/* ── READING THE DATA · vertical relief chart ── */
+.rc-tabs{display:inline-flex;border:1px solid #ddd;border-radius:3px;overflow:hidden}
+.rc-tabs button{font:inherit;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border:0;background:#fff;color:#777;cursor:pointer}
+.rc-tabs button+button{border-left:1px solid #ddd}
+.rc-tabs button.on{background:#111;color:#fff}
+.rc-body{position:relative;padding:12px 14px 4px}
+.rc-svg{display:block;width:100%;height:auto;overflow:visible}
+.rc-svg text{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+.rc-svg .bar{cursor:pointer;transition:opacity .15s}
+.rc-svg.dim .bar{opacity:.28}.rc-svg.dim .bar.hi{opacity:1}
+.rc-tip{position:absolute;pointer-events:none;background:#fff;border:1px solid #e0e0e0;border-radius:4px;box-shadow:0 6px 18px rgba(0,0,0,.08);padding:8px 10px;font-size:.66rem;color:#333;line-height:1.5;min-width:190px;opacity:0;transition:opacity .12s;z-index:5}
+.rc-tip b{display:block;font-size:.72rem;color:#111;margin-bottom:2px}
+.rc-tip .mono{font-family:'Courier New',monospace;color:#777}
+.rc-legend{display:flex;flex-wrap:wrap;gap:6px 14px;padding:6px 14px 12px}
+.rc-legend span{display:inline-flex;align-items:center;gap:5px;font-size:.6rem;color:#666;cursor:default}
+.rc-legend i{width:8px;height:8px;border-radius:2px;display:inline-block}
 </style>
 </head>
 <body>
@@ -1197,11 +1243,31 @@ body{font-family:'Figtree','Helvetica Neue',Helvetica,Arial,sans-serif;font-weig
         Goal: contribute to and ultimately lead large-scale planetary exploration programs, advancing U.S. leadership in space science hardware while enabling the exploration of new worlds across the solar system and beyond.
       </div>
     </div>
+    <div class="eng-block" style="grid-column:1/-1">
+      <p class="ab-bridge">That goal is not abstract. It was built one late night at a time, at a SOCET SET workstation, watching Mars resolve into terrain. In his own words:</p>
+      <div class="ab-note" id="aboutNote">
+        <p class="q">&ldquo;The most powerful systems I&rsquo;ve worked on don&rsquo;t run on voltage or photon flux. They run on human curiosity. And America, at its best, has always been the place that refuses to waste it.&rdquo;</p>
+        <span class="rule" aria-hidden="true"></span>
+        <p>I&rsquo;ve spent thousands of hours inside that pipeline. Extracting sub&#8209;pixel elevation data from Martian terrain, validating geodetic control against MOLA, delivering elevation models that support rover EDL targeting at NASA scale. Sitting alone at that workstation at 2am, watching a digital elevation model of Mars render line by line, I&rsquo;ve felt something that has no engineering term for it. The weight of everyone who made that moment possible. Everyone who was told they didn&rsquo;t belong in that room and showed up anyway.</p>
+        <details>
+          <summary><span class="more">Read the full note</span><span class="less">Show less</span></summary>
+          <p>Every one of them sharpened the instrument. Every perspective we almost lost made the science smaller. Every engineer we found in a place nobody thought to look moved the mission forward.</p>
+          <p>And America keeps finding them. That is not accident. That is who we are at our best.</p>
+          <p>Europa Clipper is in flight right now. Artemis is building toward the Moon. The power architectures and flight instrumentation being designed in labs like mine will define the next fifty years of planetary science and the first chapter of permanent human presence beyond this world.</p>
+          <p class="strong">That story is not finished. It is accelerating.</p>
+          <p>The next generation of American engineers will carry it forward. All of them. From every corner of this country, every background, every frequency this nation holds. Not because it is the right thing to do. Because incomplete teams produce incomplete science, and we have too much left to discover to leave anyone behind.</p>
+          <p class="short">The universe doesn&rsquo;t draw borders.</p>
+          <p>The best version of America never did either.</p>
+          <div class="close">And the most powerful thing we will ever launch into deep space is the full signal. Every one of us, pointed at the same horizon.</div>
+        </details>
+        <div class="ab-sign">Raymundo &ldquo;R@y&rdquo; Olguin &middot; HiROC, Lunar and Planetary Laboratory</div>
+      </div>
+    </div>
   </div>
 
 
 
-  <div class="st-wrap" id="aboutMore"><section class="st-block "><h3 class="st-h">Giving Back</h3><p class="st-intro">Mentoring and volunteer work, alongside research and coursework.</p><div class="st-grid c2"><div class="st-card"><div class="st-top"><b>Academic Tutor</b><span class="st-badge">Active</span></div><div class="st-meta">University of Arizona · Aug 2026 – Present</div><p>Voluntary peer mentoring focused on supporting women in the student community, online and in person, across mathematics, languages, programming (Python, JavaScript, C, C++), photogrammetry, CAD, 3D modeling, engineering simulation, and data analytics.</p></div><div class="st-card"><div class="st-top"><b>Lead Architectural Designer</b></div><div class="st-meta">Croma Arquitectura · 2022</div><p>Voluntary mentoring of architectural interns, drawing on experience across 30 residential and 20 commercial projects: concept and design development, construction documentation, Revit, and laser&#8211;cut physical models.</p></div><div class="st-card"><div class="st-top"><b>Lead Architectural &amp; Landscape Designer</b></div><div class="st-meta">Jard&iacute;n Etnobot&aacute;nico Francisco Pel&aacute;ez R. · 2022</div><p>Voluntary architectural and interior design of the garden&#8217;s outreach store: plans, 3D models, and Revit renderings supporting environmental education and cultural preservation in Puebla.</p></div><div class="st-card"><div class="st-top"><b>Library Assistant</b></div><div class="st-meta">Catalina High Magnet School</div><p>Organized educational materials and helped students find resources, sharing interests in electrical engineering, applied physics, planetary science, and languages.</p></div></div></section><section class="st-block "><h3 class="st-h">Honors &amp; Languages</h3><div class="st-grid c3"><div class="st-card"><div class="st-top"><b>UA Universe Scholarship</b><span class="st-badge">Scholarship</span></div><div class="st-meta">Academic Year 2026 – 2027 · awarded Jul 2026</div></div><div class="st-card"><div class="st-top"><b>Dean&#8217;s List</b><span class="st-badge">3&times;</span></div><div class="st-meta">Full Time, Spring 2026 · Half Time, Summer 2025 · Full Time, Spring 2025</div></div><div class="st-card"><div class="st-top"><b>Languages</b></div><div class="st-meta">English (Native) · Italian (Professional) · French (Conversational)</div><p>Italian studied through ITAL 101, 102, and 230 at the University of Arizona.</p></div></div></section></div>
+  <div class="st-wrap" id="aboutMore"><section class="st-block "><h3 class="st-h">Giving Back</h3><p class="st-intro">The full signal starts close to home: mentoring and volunteer work, alongside research and coursework.</p><div class="st-grid c2"><div class="st-card"><div class="st-top"><b>Academic Tutor</b><span class="st-badge">Active</span></div><div class="st-meta">University of Arizona · Aug 2026 – Present</div><p>Voluntary peer mentoring focused on supporting women in the student community, online and in person, across mathematics, languages, programming (Python, JavaScript, C, C++), photogrammetry, CAD, 3D modeling, engineering simulation, and data analytics.</p></div><div class="st-card"><div class="st-top"><b>Lead Architectural Designer</b></div><div class="st-meta">Croma Arquitectura · 2022</div><p>Voluntary mentoring of architectural interns, drawing on experience across 30 residential and 20 commercial projects: concept and design development, construction documentation, Revit, and laser&#8211;cut physical models.</p></div><div class="st-card"><div class="st-top"><b>Lead Architectural &amp; Landscape Designer</b></div><div class="st-meta">Jard&iacute;n Etnobot&aacute;nico Francisco Pel&aacute;ez R. · 2022</div><p>Voluntary architectural and interior design of the garden&#8217;s outreach store: plans, 3D models, and Revit renderings supporting environmental education and cultural preservation in Puebla.</p></div><div class="st-card"><div class="st-top"><b>Library Assistant</b></div><div class="st-meta">Catalina High Magnet School</div><p>Organized educational materials and helped students find resources, sharing interests in electrical engineering, applied physics, planetary science, and languages.</p></div></div></section><section class="st-block "><h3 class="st-h">Honors &amp; Languages</h3><div class="st-grid c3"><div class="st-card"><div class="st-top"><b>UA Universe Scholarship</b><span class="st-badge">Scholarship</span></div><div class="st-meta">Academic Year 2026 – 2027 · awarded Jul 2026</div></div><div class="st-card"><div class="st-top"><b>Dean&#8217;s List</b><span class="st-badge">3&times;</span></div><div class="st-meta">Full Time, Spring 2026 · Half Time, Summer 2025 · Full Time, Spring 2025</div></div><div class="st-card"><div class="st-top"><b>Languages</b></div><div class="st-meta">English (Native) · Italian (Professional) · French (Conversational)</div><p>Italian studied through ITAL 101, 102, and 230 at the University of Arizona.</p></div></div></section></div>
   <div class="rv-section-nav rv-about-shell">
     <a href="#aboutSection">About</a>
     <a href="#expSection">Experience</a>
@@ -1928,6 +1994,26 @@ function buildStats() {
           <div style="font-size:0.6rem;color:#AB0520;text-transform:uppercase;letter-spacing:.09em;font-weight:700;margin-bottom:5px">Europa Clipper · Work&#8211;MoRE</div>
           <div style="font-size:.9rem;font-weight:600;color:#111;line-height:1.35">Topographic Modeling to Simulate Multi&#8211;Scale Roughness for Europa Clipper Investigations and Science</div>
           <div style="font-size:0.72rem;color:#555;line-height:1.65;margin-top:3px">NASA Working Models Risk&#8211;Reduction for Europa (Work&#8211;MoRE), Cycle A, 2025&#8211;2027. A 6&#8211;tool terrain toolchain of 15,700 lines of Python and Blender Geometry Nodes, built over 30 weeks.</div>
+        </div>
+      </div>
+      <div class="vr-kpi-grid" id="vrKpis">
+        <div class="vr-kpi">
+          <div class="num"><b>1,338</b><span>DTMs<br>processed</span></div>
+          <div style="flex:1;min-width:0">
+            <div class="k">MRO &middot; HiRISE &middot; Mars</div>
+            <div class="t">HiRISE VR Pipeline</div>
+            <div class="d">Designed and built end to end: an automated system converting HiRISE DTM GeoTIFFs and orthoimages into textured, VR&#8209;ready 3D terrain meshes with scientific reports. Each DTM spans roughly 25,000 to 45,000 acres of Martian surface.</div>
+            <div class="tags"><span>Python</span><span>GeoTIFF &rarr; OBJ</span><span>Ortho draping</span><span>Meta Quest VR</span></div>
+          </div>
+        </div>
+        <div class="vr-kpi">
+          <div class="num"><b>660</b><span>DTMs<br>processed</span></div>
+          <div style="flex:1;min-width:0">
+            <div class="k">LRO &middot; LROC NAC &middot; Moon</div>
+            <div class="t">LROC VR Pipeline</div>
+            <div class="d">Designed and built to extend the system beyond Mars: LRO NAC DTMs become high&#8209;resolution lunar terrain for immersive exploration and comparative planetary analysis. Together with HiRISE it forms the 1,998&#8209;DTM XR Library.</div>
+            <div class="tags"><span>Python</span><span>LROC NAC DTMs</span><span>Comparative planetology</span><span>XR Library</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -2671,8 +2757,72 @@ function renderAnalytics(){
     </div>`, ['kirk2008','smith2001']);
 
   const refList = `<div class="da-panel"><div class="da-head"><span class="da-title">References</span><span class="da-meta">peer-reviewed sources for the panels above</span></div><ol class="da-refs">${DA_REFS.map(r=>`<li id="daref-${r.id}">${r.t} <a href="https://doi.org/${r.doi}" target="_blank" rel="noopener">https://doi.org/${r.doi}</a></li>`).join('')}</ol></div>`;
-  el.innerHTML = sci + geo + cd + qa + refList;
+  el.innerHTML = sci + reliefChartPanel() + geo + cd + qa + refList;
+  initReliefChart();
 }
+
+/* Vertical relief chart: all DTM projects · Raymundo "R@y" Olguin */
+function reliefChartPanel(){
+  const n = PUBS.filter(p=>Number.isFinite(p.relief)).length;
+  return `<div class="da-panel" id="reliefChart"><div class="da-head"><span class="da-title">Vertical Relief · All ${n} DTM Projects${cite(['kirk2008','smith2001'])}</span>
+    <span class="rc-tabs" role="tablist"><button type="button" class="on" data-rc="relief">Vertical relief</button><button type="button" data-rc="range">Elevation range</button></span></div>
+    <div class="rc-body"><svg class="rc-svg" viewBox="0 0 1100 430" role="img" aria-label="Column chart of vertical relief for every HiRISE DTM project"></svg><div class="rc-tip"></div></div>
+    <div class="rc-legend"></div>
+    <div class="da-note" id="rcNote"></div></div>`;
+}
+function initReliefChart(){
+  const wrap = document.getElementById('reliefChart'); if(!wrap) return;
+  const svg = wrap.querySelector('svg'), tip = wrap.querySelector('.rc-tip'), body = wrap.querySelector('.rc-body'), note = wrap.querySelector('#rcNote');
+  const data = PUBS.filter(p=>Number.isFinite(p.relief)).map(p=>({p, cls:geoOf(p)})).sort((a,b)=>b.p.relief-a.p.relief);
+  const W=1100,H=430,L=62,R=14,T=26,B=128, pw=W-L-R, ph=H-T-B, step=pw/data.length, bw=Math.max(6,step*0.62);
+  const med = median(data.map(d=>d.p.relief));
+  const nm = p => { const s = shortName(p); return s.length>24 ? s.slice(0,23)+'…' : s; };
+  const legend = wrap.querySelector('.rc-legend');
+  const used = [...new Set(data.map(d=>d.cls))];
+  legend.innerHTML = Object.keys(GEO_CLASSES).filter(c=>used.includes(c)).map(c=>`<span data-cls="${c}"><i style="background:${GEO_CLASSES[c].c}"></i>${c}</span>`).join('');
+  const notes = {
+    relief: `Relief is each DTM's maximum minus minimum elevation (VALID_MAX and VALID_MIN in the PDS label), sorted tallest to shortest. Dashed line: portfolio median of ${nf(med)} m. The tallest, ${shortName(data[0].p)}, spans ${nf(data[0].p.relief)} m; the flattest, ${shortName(data[data.length-1].p)}, spans ${nf(data[data.length-1].p.relief,1)} m.`,
+    range: `Each bar runs from the lowest to the highest elevation in the DTM, relative to the MOLA areoid, in the same order. This shows where each project sits vertically on Mars, from ${shortName(data.reduce((a,b)=>b.p.min<a.p.min?b:a).p)} near ${nf(Math.min(...data.map(d=>d.p.min)))} m to ${shortName(data.reduce((a,b)=>b.p.max>a.p.max?b:a).p)} above +${nf(Math.max(...data.map(d=>d.p.max)))} m.`
+  };
+  let mode='relief';
+  function niceMax(v){ const s=[500,1000,2000]; const st = v>2000?500:v>800?250:100; return Math.ceil(v/st)*st; }
+  function draw(){
+    let y0,y1,ticks=[],tickStep;
+    if(mode==='relief'){ y0=0; y1=niceMax(data[0].p.relief*1.05); tickStep = y1>2000?500:250; }
+    else { y0=Math.floor(Math.min(...data.map(d=>d.p.min))/1000)*1000; y1=Math.ceil(Math.max(...data.map(d=>d.p.max))/1000)*1000; tickStep=1000; }
+    for(let v=y0; v<=y1+1e-6; v+=tickStep) ticks.push(v);
+    const Y = v => T + ph - (v-y0)/(y1-y0)*ph;
+    let s = '';
+    ticks.forEach(v=>{ s += `<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="${v===0&&mode==='range'?'#bbb':'#efefef'}" stroke-width="1"/><text x="${L-8}" y="${Y(v)+3.5}" text-anchor="end" font-size="10" fill="#999">${(v>0&&mode==='range'?'+':'')+nf(v)}</text>`; });
+    s += `<text transform="translate(14,${T+ph/2}) rotate(-90)" text-anchor="middle" font-size="10" fill="#888" letter-spacing=".06em">${mode==='relief'?'VERTICAL RELIEF (m)':'ELEVATION vs MOLA AREOID (m)'}</text>`;
+    data.forEach((d,i)=>{
+      const x = L + i*step + (step-bw)/2, c = GEO_CLASSES[d.cls].c, cx = L+i*step+step/2;
+      let top, bot;
+      if(mode==='relief'){ top=Y(d.p.relief); bot=Y(0); } else { top=Y(d.p.max); bot=Y(d.p.min); }
+      const hgt = Math.max(2, bot-top); if(bot-top<2) top = bot-2;
+      s += `<rect class="bar" data-i="${i}" data-cls="${d.cls}" x="${x.toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${hgt.toFixed(1)}" rx="1.5" fill="${c}"/>`;
+      if(mode==='relief') s += `<text x="${cx.toFixed(1)}" y="${(top-5).toFixed(1)}" text-anchor="middle" font-size="${i<8?9.5:8.5}" font-weight="${i<8?700:400}" fill="${i<8?'#111':'#888'}">${nf(d.p.relief)}</text>`;
+      s += `<text transform="translate(${cx.toFixed(1)},${T+ph+10}) rotate(-55)" text-anchor="end" font-size="9.5" fill="#555">${nm(d.p)}</text>`;
+    });
+    if(mode==='relief') s += `<line x1="${L}" x2="${W-R}" y1="${Y(med)}" y2="${Y(med)}" stroke="#AB0520" stroke-width="1" stroke-dasharray="4 4"/><text x="${W-R}" y="${Y(med)-5}" text-anchor="end" font-size="10" fill="#AB0520" font-weight="600">Median ${nf(med)} m</text>`;
+    s += `<line x1="${L}" x2="${W-R}" y1="${T+ph}" y2="${T+ph}" stroke="#ccc"/>`;
+    svg.innerHTML = s; note.textContent = notes[mode];
+  }
+  wrap.querySelectorAll('[data-rc]').forEach(b=>b.addEventListener('click',()=>{ mode=b.dataset.rc; wrap.querySelectorAll('[data-rc]').forEach(x=>x.classList.toggle('on',x===b)); tip.style.opacity=0; draw(); }));
+  svg.addEventListener('mousemove',e=>{
+    const r = e.target.closest('.bar'); if(!r){ tip.style.opacity=0; return; }
+    const d = data[+r.dataset.i], p = d.p, br = body.getBoundingClientRect();
+    tip.innerHTML = `<b>${shortName(p)}</b><span class="da-chip" style="margin:0 0 4px"><i style="background:${GEO_CLASSES[d.cls].c}"></i>${d.cls}</span><br>Relief <b style="display:inline">${nf(p.relief,1)} m</b> · rank ${+r.dataset.i+1} of ${data.length}<br><span class="mono">min ${nf(p.min,1)} m · max ${nf(p.max,1)} m</span><br><span class="mono">${p.lat.toFixed(1)}°, ${p.lon.toFixed(1)}°E · ${p.dstr}</span>`;
+    let x = e.clientX-br.left+14, y = e.clientY-br.top-10;
+    if(x+210>br.width) x = e.clientX-br.left-214;
+    tip.style.left=x+'px'; tip.style.top=y+'px'; tip.style.opacity=1;
+  });
+  svg.addEventListener('mouseleave',()=>tip.style.opacity=0);
+  legend.addEventListener('mouseover',e=>{ const t=e.target.closest('[data-cls]'); if(!t) return; svg.classList.add('dim'); svg.querySelectorAll('.bar').forEach(b=>b.classList.toggle('hi',b.dataset.cls===t.dataset.cls)); });
+  legend.addEventListener('mouseout',()=>svg.classList.remove('dim'));
+  draw();
+}
+
 
 buildStats();
 render();
