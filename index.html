@@ -917,6 +917,8 @@ html{scroll-behavior:smooth}
 
 /* ── DATASET ANALYTICS ── */
 .da-wrap{border-top:1px solid #e0e0e0;padding:2rem 0 .5rem}
+#analyticsSection.da-wrap{border-top:0;padding-top:1rem}
+#photonEvidence .da-panel{margin-bottom:1rem}
 .da-panel{border:1px solid #e0e0e0;border-radius:4px;overflow:hidden;margin-bottom:1rem;background:#fff}
 .da-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;background:#fafafa;border-bottom:1px solid #ececec;flex-wrap:wrap}
 .da-title{font-size:.68rem;font-weight:700;color:#111;letter-spacing:.04em;text-transform:uppercase}
@@ -1159,7 +1161,7 @@ body{font-family:'Figtree','Helvetica Neue',Helvetica,Arial,sans-serif;font-weig
 <body>
 <nav class="cx-nav" id="cxNav" aria-label="Portfolio storyline">
   <a class="cx-brand" href="#home" data-view="home">Raymundo &ldquo;R@y&rdquo; Olguin</a>
-  <div class="cx-nav-links"><a href="#home" data-view="home"><span>01</span>Introduction</a><a href="#photon" data-view="photon"><span>02</span>The Pipeline</a><a href="#work" data-view="work"><span>03</span>The Work</a><a href="#mars" data-view="mars"><span>04</span>Mapping Mars</a><a href="#people" data-view="people"><span>05</span>Mentors</a><a href="#education" data-view="education"><span>06</span>Foundations</a></div>
+  <div class="cx-nav-links"><a href="#home" data-view="home"><span>01</span>Introduction</a><a href="#photon" data-view="photon"><span>02</span>The Pipeline</a><a href="#work" data-view="work"><span>03</span>The Work</a><a href="#mars" data-view="mars"><span>04</span>Mapping Mars</a><a href="#data" data-view="data"><span>05</span>Reading the Data</a><a href="#people" data-view="people"><span>06</span>Mentors</a><a href="#education" data-view="education"><span>07</span>Foundations</a></div>
 </nav>
 
 
@@ -1274,6 +1276,8 @@ body{font-family:'Figtree','Helvetica Neue',Helvetica,Arial,sans-serif;font-weig
   <!-- 02 PHOTON · THE PIPELINE -->
   <div id="photonSection" style="padding:2rem 0">
     <div class="rv-viz-panel" id="desktopExpViz"><div class="rv-viz-head"><div class="rv-viz-title">Photon &rarr; Pixel &rarr; Planet</div><div class="rv-viz-meta">orbital light &rarr; stereo correlation &rarr; geodetic control &rarr; science &amp; XR</div></div><div class="rv-viz-flow"><button class="rv-viz-node active" data-target="dexp1">Stereo Inputs</button><button class="rv-viz-node" data-target="dexp2">SOCET SET</button><button class="rv-viz-node" data-target="dexp3">QA + MOLA</button><button class="rv-viz-node" data-target="dexp4">DTM Production</button><button class="rv-viz-node" data-target="dexp5">XR Library</button><button class="rv-viz-node" data-target="dexp6">Mission Impact</button></div><div class="rv-viz-detail"></div><div class="rv-viz-bank" style="display:none"><div id="dexp1"><div class="rv-viz-kicker">Photon &middot; input layer</div><h4>HiRISE and CTX stereo imagery</h4><p>Every pixel is a calibrated photon measurement. Orbital stereo pairs give two views of the same surface, the raw signal from which terrain geometry is extracted.</p><div class="rv-viz-statgrid"><div class="rv-viz-stat"><div class="lbl">HiRISE</div><div class="val">25&ndash;50 cm/pixel</div></div><div class="rv-viz-stat"><div class="lbl">CTX</div><div class="val">~6 m/pixel</div></div><div class="rv-viz-stat"><div class="lbl">Use case</div><div class="val">Stereo photogrammetry</div></div></div></div><div id="dexp2"><div class="rv-viz-kicker">Signal processing &middot; correlation</div><h4>SOCET SET NGATE correlation pipeline</h4><p>Least&#8211;squares image matching solves elevation at scale, the same estimation and convergence logic used in signal processing. It is the computational heart of DTM generation.</p><div class="rv-viz-statgrid"><div class="rv-viz-stat"><div class="lbl">Algorithm</div><div class="val">NGATE</div></div><div class="rv-viz-stat"><div class="lbl">Methods</div><div class="val">Image matching &middot; bundle adj.</div></div><div class="rv-viz-stat"><div class="lbl">Output</div><div class="val">Sub&#8211;pixel elevation solutions</div></div></div></div><div id="dexp3"><div class="rv-viz-kicker">Mathematics &middot; validation</div><h4>Residual analysis against MOLA control</h4><p>Bundle&#8211;adjustment residuals (RMS x/y/z), mean MOLA difference, and standard deviation form the error budget that decides whether a terrain solution is trusted.</p><div class="rv-viz-statgrid"><div class="rv-viz-stat"><div class="lbl">Residuals</div><div class="val">RMS x &middot; y &middot; z</div></div><div class="rv-viz-stat"><div class="lbl">Reference</div><div class="val">MOLA reference surface</div></div><div class="rv-viz-stat"><div class="lbl">Theory</div><div class="val">Least squares</div></div></div></div><div id="dexp4"><div class="rv-viz-kicker">Pixel &middot; production output</div><h4>Published HiRISE DTM portfolio</h4><p>59 DTMs delivered to NASA/HiRISE standards; 40 audited projects are mapped in Chapter 04. The November 3&#8211;4, 2026 releases added four products: candidate SpaceX Starship landing terrain in Phlegra, troughs and ridges in Chryse Planitia, the Kaltain dunes in the north polar sand sea, and dark linear ridges in the southern highlands, extending coverage to both polar regions.</p><div class="rv-viz-statgrid"><div class="rv-viz-stat"><div class="lbl">Delivered</div><div class="val">59 DTMs</div></div><div class="rv-viz-stat"><div class="lbl">Mapped here</div><div class="val">40 projects</div></div><div class="rv-viz-stat"><div class="lbl">Latest release</div><div class="val">4 DTMs &middot; Nov 3&#8211;4, 2026</div></div></div></div><div id="dexp5"><div class="rv-viz-kicker">Pixel &middot; multiplanetary XR</div><h4>Mars + Moon terrain in VR</h4><p>The HiRISE and LROC VR pipelines turn Mars and lunar DTMs into textured, VR&#8211;ready 3D terrain for immersive exploration and comparative planetology.</p><div class="rv-viz-statgrid"><div class="rv-viz-stat"><div class="lbl">Mars</div><div class="val">1,338 DTMs</div></div><div class="rv-viz-stat"><div class="lbl">Moon</div><div class="val">660 DTMs</div></div><div class="rv-viz-stat"><div class="lbl">XR Library</div><div class="val">1,998 DTMs</div></div></div></div><div id="dexp6"><div class="rv-viz-kicker">Planet &middot; science operations</div><h4>Terrain products to mission science</h4><p>Validated terrain supports MRO/HiRISE science operations, rover EDL targeting, hazard assessment, and the completed Europa Clipper roughness simulations, connecting geomorphology to computation and future instrumentation.</p><div class="rv-viz-statgrid"><div class="rv-viz-stat"><div class="lbl">Missions</div><div class="val">MRO &middot; Europa Clipper</div></div><div class="rv-viz-stat"><div class="lbl">Coverage</div><div class="val">Polar &middot; volcanic &middot; chaos</div></div><div class="rv-viz-stat"><div class="lbl">Pipeline</div><div class="val">Python &middot; ISIS3 &middot; MOLA</div></div></div></div></div></div>
+    <div class="st-wrap" style="padding-bottom:0"><section class="st-block"><h3 class="st-h">Measured, Not Assumed</h3><p class="st-intro">Every DTM&#8217;s README reports how tightly the stereo solution converged and how closely it matches MOLA. These panels read those numbers across the whole portfolio, along with the time between the two photon captures in each stereo pair.</p></section></div>
+    <div id="photonEvidence"></div>
     <div class="st-wrap"><section class="st-block"><h3 class="st-h">Toolkit</h3><p class="st-intro">The software that carries each stage of the pipeline.</p><div class="st-chips"><span>SOCET SET NGATE</span><span>Python</span><span>LaTeX</span><span>HTML / CSS / JS</span><span>ISIS3</span><span>Blender / Geometry Nodes</span><span>SOLIDWORKS</span></div></section></div>
   </div>
 
@@ -1871,6 +1875,10 @@ function buildStats() {
       <div class="pf2-row">
         <div class="pf2-g"><div class="pf2-h">LPL Tenure</div><div class="pf2-cells"><div class="pf2-c word"><div class="pf2-n">Freshman</div><div class="stat-label">Hired at LPL</div><div class="stat-sub">Jun 2025 · first&#8211;year undergraduate</div></div><div class="pf2-c "><div class="pf2-n">1.6<small>yrs</small></div><div class="stat-label">At LPL</div><div class="stat-sub">HiROC · Space Imagery Center</div></div><div class="pf2-c "><div class="pf2-n">2</div><div class="stat-label">Missions</div><div class="stat-sub">MRO · Europa Clipper</div></div></div></div>
         <div class="pf2-g"><div class="pf2-h">Hours &amp; Commitment</div><div class="pf2-cells"><div class="pf2-c "><div class="pf2-n">300</div><div class="stat-label">Europa Hours</div><div class="stat-sub">Feb – Sep 2026</div></div><div class="pf2-c "><div class="pf2-n">&gt;35</div><div class="stat-label">Hrs/Week Training</div><div class="stat-sub">Summer &amp; Winter 2025–2026 · &gt;150 hrs/month</div></div><div class="pf2-c "><div class="pf2-n">&gt;25</div><div class="stat-label">Hrs/Week Academic Year</div><div class="stat-sub">Spring &amp; Fall 2025, 2026 · &gt;100 hrs/month</div></div></div></div>
+      </div>
+      <div class="pf2-row">
+        <div class="pf2-g"><div class="pf2-h">DTM Portfolio · Mapped</div><div class="pf2-cells"><div class="pf2-c "><div class="pf2-n" data-kpi="n">&ndash;</div><div class="stat-label">Projects Mapped</div><div class="stat-sub">Planet · Chapter 04</div></div><div class="pf2-c "><div class="pf2-n" data-kpi="lat">&ndash;</div><div class="stat-label">Latitude Span</div><div class="stat-sub">Pole to pole · Chapter 05</div></div><div class="pf2-c "><div class="pf2-n" data-kpi="relief">&ndash;</div><div class="stat-label">Cumulative Relief</div><div class="stat-sub">Sum of DTM relief · Chapter 05</div></div></div></div>
+        <div class="pf2-g"><div class="pf2-h">Geodetic Quality · Measured</div><div class="pf2-cells"><div class="pf2-c "><div class="pf2-n" data-kpi="rms">&ndash;</div><div class="stat-label">Median Total RMS</div><div class="stat-sub">Bundle adjustment · Chapter 02</div></div><div class="pf2-c "><div class="pf2-n" data-kpi="sub25">&ndash;</div><div class="stat-label">Sub-0.25 px</div><div class="stat-sub">Solutions · Chapter 02</div></div><div class="pf2-c "><div class="pf2-n" data-kpi="mola">&ndash;</div><div class="stat-label">Median |&Delta; MOLA|</div><div class="stat-sub">Geodetic control · Chapter 02</div></div></div></div>
       </div>
     </div>
     <div class="stats-right">
@@ -2641,7 +2649,7 @@ function initReliefChart(){
   legend.innerHTML = Object.keys(GEO_CLASSES).filter(c=>used.includes(c)).map(c=>`<span data-cls="${c}"><i style="background:${GEO_CLASSES[c].c}"></i>${c}</span>`).join('');
   const notes = {
     relief: `Relief is each DTM's maximum minus minimum elevation (VALID_MAX and VALID_MIN in the PDS label), sorted tallest to shortest. Dashed line: portfolio median of ${nf(med)} m. The tallest, ${shortName(data[0].p)}, spans ${nf(data[0].p.relief)} m; the flattest, ${shortName(data[data.length-1].p)}, spans ${nf(data[data.length-1].p.relief,1)} m.`,
-    range: `Each bar runs from the lowest to the highest elevation in the DTM, relative to the MOLA areoid, in the same order. This shows where each project sits vertically on Mars, from ${shortName(data.reduce((a,b)=>b.p.min<a.p.min?b:a).p)} near ${nf(Math.min(...data.map(d=>d.p.min)))} m to ${shortName(data.reduce((a,b)=>b.p.max>a.p.max?b:a).p)} above +${nf(Math.max(...data.map(d=>d.p.max)))} m.`
+    range: `Each bar runs from the lowest to the highest elevation in the DTM, relative to the MOLA areoid, in the same order. This shows where each project sits vertically on Mars, from ${shortName(data.reduce((a,b)=>b.p.min<a.p.min?b:a).p)} near ${nf(Math.min(...data.map(d=>d.p.min)))} m to ${shortName(data.reduce((a,b)=>b.p.max>a.p.max?b:a).p)} at ${(Math.max(...data.map(d=>d.p.max))>0?'+':'')+nf(Math.max(...data.map(d=>d.p.max)))} m.`
   };
   let mode='relief';
   function niceMax(v){ const s=[500,1000,2000]; const st = v>2000?500:v>800?250:100; return Math.ceil(v/st)*st; }
@@ -2686,6 +2694,30 @@ function initReliefChart(){
 buildStats();
 render();
 renderAnalytics();
+
+/* Storyline integration of the dataset analytics · Raymundo "R@y" Olguin */
+(function(){
+  var host=document.getElementById('datasetAnalytics'); if(!host) return;
+  var panels=[].slice.call(host.querySelectorAll('.da-panel'));
+  function find(k){ return panels.filter(function(p){ var t=p.querySelector('.da-title'); return t && t.textContent.toLowerCase().indexOf(k)>-1; })[0]; }
+  var dest=document.getElementById('photonEvidence');
+  if(dest){ [find('geodetic'), find('change detection')].forEach(function(p){ if(p) dest.appendChild(p); }); }
+  function fin(v){ return typeof v==='number' && isFinite(v); }
+  function med(a){ a=a.filter(fin).sort(function(x,y){return x-y;}); if(!a.length) return NaN; var m=Math.floor(a.length/2); return a.length%2?a[m]:(a[m-1]+a[m])/2; }
+  var rel=PUBS.map(function(p){return p.relief;}).filter(fin);
+  var lats=PUBS.map(function(p){return p.lat;}).filter(fin);
+  var rms=PUBS.map(function(p){return p.rms_px;}).filter(fin);
+  var mola=PUBS.map(function(p){return fin(p.mola_d)?Math.abs(p.mola_d):NaN;}).filter(fin);
+  var K={
+    n: String(PUBS.length),
+    relief: (rel.reduce(function(a,b){return a+b;},0)/1000).toFixed(1)+'<small>km</small>',
+    lat: (Math.max.apply(null,lats)-Math.min.apply(null,lats)).toFixed(1)+'<small>&deg;</small>',
+    rms: med(rms).toFixed(3)+'<small>px</small>',
+    sub25: rms.filter(function(v){return v<0.25;}).length+'<small>/ '+rms.length+'</small>',
+    mola: med(mola).toFixed(2)+'<small>m</small>'
+  };
+  [].forEach.call(document.querySelectorAll('[data-kpi]'),function(el){ if(K[el.dataset.kpi]!=null) el.innerHTML=K[el.dataset.kpi]; });
+})();
 renderRanking();
 </script>
 
@@ -2716,14 +2748,15 @@ renderRanking();
 <script>
 /* Storyline navigation: one view at a time · Raymundo "R@y" Olguin */
 (function(){
-  const ORDER=[["home", "Introduction"], ["photon", "Photon · The Pipeline"], ["work", "Pixel · The Work"], ["mars", "Planet · Mapping Mars"], ["people", "Mentors & Community"], ["education", "Foundations"]]; const SUBS={"home": "", "photon": "How calibrated orbital light becomes validated planetary terrain, and the engineering behind each step.", "work": "The roles, results, and projects that turn imagery into terrain.", "mars": "40 HiRISE DTM projects, placed where they were made, and what they reveal about Mars.", "people": "The scientists who guide the work, and the people it gives back to.", "education": "The education behind the work, and where it leads next."};
+  const ORDER=[["home", "Introduction"], ["photon", "Photon · The Pipeline"], ["work", "Pixel · The Work"], ["mars", "Planet · Mapping Mars"], ["data", "Planet · Reading the Data"], ["people", "Mentors & Community"], ["education", "Foundations"]]; const SUBS={"home": "", "photon": "How calibrated orbital light becomes validated planetary terrain, and the engineering behind each step.", "work": "The roles, results, and projects that turn imagery into terrain.", "mars": "40 HiRISE DTM projects, placed where they were made.", "people": "The scientists who guide the work, and the people it gives back to.", "education": "The education behind the work, and where it leads next.", "data": "What the DTMs reveal about Mars: topography, latitude coverage, and the geologic process behind each landform."};
   const q=s=>document.querySelector(s);
   function groups(){
     return {
       home:[q('.cx-hero'),q('#cxIntro'),q('#aboutSection')],
       photon:[q('#photonSection')],
       work:[q('#statsRow'),q('#statsRow .stats-left'),q('#expSection')],
-      mars:[q('#statsRow'),q('#statsRow .stats-right'),q('.page > .controls'),q('.page > .tbl-head'),q('#resultCount'),q('#pubList'),q('#analyticsSection'),q('.ranking-section')],
+      mars:[q('#statsRow'),q('#statsRow .stats-right'),q('.page > .controls'),q('.page > .tbl-head'),q('#resultCount'),q('#pubList')],
+      data:[q('#analyticsSection'),q('.ranking-section')],
       people:[q('#mentorsSection'),q('#givingBack')],
       education:[q('#eduSection')]
     };
